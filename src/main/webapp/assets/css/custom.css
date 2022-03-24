@@ -1,0 +1,83 @@
+html,body{
+	margin: 0;
+	padding: 0;
+	 background-color: #11FFFF;	
+}
+.login{
+	margin-top:160px;
+	border:2px solid white;
+	border-radius:12px;
+background-color: white;
+  height: 350px;
+  width:500px;
+  
+}
+.login-btn{
+	border:2px solid white;
+	border-radius:3px;
+	font-size:20px;
+	background-color: #11FFFF;
+	color:white;
+	height:40px;
+}
+.heading{
+   font-size:40px;
+   margin-bottom:20px;
+}
+.login-btn{
+	border:2px solid white;
+	border-radius:8px;
+	font-size:20px;
+	background-color: #11FFFF;
+	color:white;
+	height:40px;
+}
+.header{
+   font-size:40px;
+   margin-left:380px;
+   margin-bottom:30px;
+}
+.Form-Section{
+	margin-top:30px;
+	border:2px solid white;
+	border-radius:13px;
+	background-color: white;
+}
+.left-gap{
+	margin-left:30px;
+	margin-right:30px;
+}
+.uploadedimage{
+	width:200px;
+	height:200px;
+	}
+#add-design{
+	border:2px solid lightgrey;
+	border-radius:10px;
+	margin-bottom:20px;
+}
+.gap{
+	margin-top:20px;
+}
+.add-head{
+	margin-left:20px;
+}
+.right-gap{
+	margin-left:-20px;
+}
+.a-tag{
+	position:absolute;
+	margin-top:20px;
+}
+.user-gap{
+	position:relative;
+	left:100%;
+}
+.forgot-section{
+	margin-top:60px;
+	border:2px solid white;
+	border-radius:12px;
+background-color: white;
+  height: 500px;
+  width:550px;
+}
