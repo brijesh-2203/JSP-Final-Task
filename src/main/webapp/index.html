@@ -15,10 +15,18 @@
 				<h1 class="heading"><u>Login Page</u></h1>
 				<form action="LoginServlet" method="POST">
 				<div class="form-group">
-				Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email">
+				Select Role:
+						<select name="role" class="form-control" required>
+						  <option value="Select Role">Select Role</option>
+						  <option value="admin">Admin</option>
+						  <option value="user">User</option>
+						</select>
 				</div>
 				<div class="form-group">
-				Password:<input type="password" placeholder="Enter Password"  class="form-control" name="password">
+				Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email" required>
+				</div>
+				<div class="form-group">
+				Password:<input type="password" placeholder="Enter Password"  class="form-control" name="password" required>
 				</div>
 				<div class="form-group">
 				<input type="submit" class="form-control login-btn" value="Login">

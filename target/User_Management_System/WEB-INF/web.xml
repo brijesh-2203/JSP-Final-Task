@@ -3,14 +3,47 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 	  <display-name>Archetype Created Web Application</display-name>
+		<filter>
+	  	<filter-name>EncryptPwd</filter-name>
+	  	<display-name>EncryptPwd</display-name>
+	  	<filter-class>com.User.User_Management_System.Filter.EncryptPwd</filter-class>
+	  </filter>
+	  <filter-mapping>
+	  	<filter-name>EncryptPwd</filter-name>
+	  	<url-pattern>/UserRegistration</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
+	  	<filter-name>EncryptPwd</filter-name>
+	  	<url-pattern>/ValidateServlet</url-pattern>
+	  </filter-mapping>
 	  <servlet>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<display-name>ValidateServlet</display-name>
 	  	<description></description>
 	  	<servlet-class>com.User.User_Management_System.Controller.ValidateServlet</servlet-class>
 	  </servlet>
+	  <servlet>
+	  	<servlet-name>UserRegistration</servlet-name>
+	  	<display-name>UserRegistration</display-name>
+	  	<description></description>
+	  	<servlet-class>com.User.User_Management_System.Controller.UserRegistration</servlet-class>
+	  </servlet>
+	  <servlet>
+	  	<servlet-name>LoginServlet</servlet-name>
+	  	<display-name>LoginServlet</display-name>
+	  	<description></description>
+	  	<servlet-class>com.User.User_Management_System.Controller.LoginServlet</servlet-class>
+	  </servlet>
 	   <servlet-mapping>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<url-pattern>/ValidateServlet</url-pattern>
 	  </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>UserRegistration</servlet-name>
+	   	<url-pattern>/UserRegistration</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>LoginServlet</servlet-name>
+	   	<url-pattern>/LoginServlet</url-pattern>
+	   </servlet-mapping>
 </web-app>

@@ -1,30 +1,30 @@
 package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
+import com.User.User_Management_System.Service.UtilityClass.CheckValidation;
 
+@MultipartConfig
 public class ValidateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       CheckValidation  val;
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		val = new CheckValidation();
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-	//	Validation val = new Validation();
 		String fname=request.getParameter("firstname");  
 		String lname=request.getParameter("lastname");
 		String email=request.getParameter("email"); 
@@ -34,69 +34,63 @@ public class ValidateServlet extends HttpServlet {
 		String birthdate=request.getParameter("birthdate");
 		String ans1=request.getParameter("q1");
 		String ans2=request.getParameter("q2");
-		//String image[]=request.getParameterValues("photo");
 		String gender=request.getParameter("Gender");
-		String address[]=request.getParameterValues("address");
+		String address1[]=request.getParameterValues("address1");
+		String address2[]=request.getParameterValues("address2");
 		String[] pincode=request.getParameterValues("pincode");
 		String[] city=request.getParameterValues("city");
 		String[] state=request.getParameterValues("state");
 		String[] country=request.getParameterValues("country");
 		String language[]=request.getParameterValues("lang");
 		
-		out.println("fname: "+fname);
-		out.println("lname: "+lname);
-		out.println("email: "+email);
-		out.println("phone: "+phone);
-		out.println("pwd: "+pwd);
-		out.println("repwd: "+repwd);
-		out.println("Birthdate: "+birthdate);
-		out.println("Ans1: "+ans1);
-		out.println("Ans2: "+ans2);
-		//out.println("Image: "+image);
-		out.println("Gender: "+gender);
 		
-		 InputStream inputStream = null;
-		 
-	        Part filePart = request.getPart("photo");
-	  
-	        if (filePart != null) 
-	        {      
-	                filePart.getName();
-	                filePart.getSize();
-	                filePart.getContentType();
-	  
-	            inputStream = filePart.getInputStream();
-	        }
-//		for(int i=0;i<image.length;i++)
-//		{
-//			out.println("Images "+(i+1)+": "+image[i]);
-//		}
-		for(int i=0;i<language.length;i++)
-		{
-			out.println("language "+(i+1)+": "+language[i]);
-		}
-		for(int i=0;i<address.length;i++)
-		{
-			out.println("address "+(i+1)+": "+address[i]);
-		}
-		for(int i=0;i<pincode.length;i++)
-		{
-			out.println("pincode "+(i+1)+": "+pincode[i]);
-		}
-		for(int i=0;i<city.length;i++)
-		{
-			out.println("city "+(i+1)+": "+city[i]);
-		}
-		for(int i=0;i<state.length;i++)
-		{
-			out.println("state "+(i+1)+": "+state[i]);
-		}
-		for(int i=0;i<country.length;i++)
-		{
-			out.println("country "+(i+1)+": "+country[i]);
-		}
+RequestDispatcher rd=request.getRequestDispatcher("registration.jsp"); 
 		
-		//RequestDispatcher rd=request.getRequestDispatcher("index2.html"); 
+		if(fname == ""||pwd ==""||lname==""||email==""||phone==""||repwd==""||birthdate==""||ans1==""||ans2==""||gender=="")
+		{
+			rd.include(request, response);
+			out.println("<span style='color:Red'>*All Feilds are Required</span>");
+		}
+		else if(address1.length==0||address2.length==0||pincode.length==0||city.length==0||state.length==0||country.length==0||language.length==0)
+		{
+			rd.include(request, response);
+			out.println("<span style='color:Red'>*All Feilds are Required</span>");
+		}
+		else if(val.validatename(fname))
+		{
+			rd.include(request, response);
+			out.print("<span style='color:red'>*Only Alphabets are Allowed in FirstName.</span>");
+		}
+		else if(val.validatename(lname))
+		{
+			rd.include(request, response);
+			out.print("<span style='color:red'>*Only Alphabets are Allowed in LastName.</span>");
+		}
+		else if(val.validatepwd(pwd))
+		{
+			rd.include(request, response);
+			out.print("Password:<span style='color:red'>*Please Choose Strong Password.</span>"); 
+		}
+		else if(!pwd.equals(repwd))
+		{
+			rd.include(request, response);
+			out.print("Password:<span style='color:red'>*Confirm password Should be same as Password.</span>"); 
+		}
+		else if(val.validatemail(email))
+		{
+			rd.include(request, response);
+			out.print("E-mail:<span style='color:red'>*Please Enter Valid Mail-Id.</span>"); 
+		}
+		else if(phone.length()<10)
+		{
+			rd.include(request, response);
+			out.print("<span style='color:red'>*Number not less than 10 Digits.</span>");
+		}
+		else
+		{
+			RequestDispatcher rf=request.getRequestDispatcher("UserRegistration"); 
+			rf.forward(request, response);
+		}
 	}
 
 }

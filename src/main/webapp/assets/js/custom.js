@@ -1,23 +1,105 @@
 $(document).ready(function() {
-	/*
+	$('.input-images').imageUploader({
+   imagesInputName: 'image',
+});
+/*
+  $('#fileupload').fileupload({
+    dataType:'mediumblob',
+    done:function (e, data) {
+    }
+});*/
+/*
 	$("#files").on("change",function(e) {
+		 var imgPath = $(this)[0].value;
+          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
             var files = e.target.files ,
             filesLength = files.length ;
-            for (var i = 0; i < filesLength ; i++) {
-                var f = files[i]
-                var fileReader = new FileReader();
-                fileReader.onload = (function(e) {
-                    var file = e.target;
-                    $("<img></img>",{
-                        class : "uploadedimage",
-                        src : e.target.result,
-                        title : file.name
-                    }).insertAfter("#files");
+             if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg")
+             {
+            	for (var i = 0; i < filesLength ; i++) 
+            	{
+	                var f = files[i]
+	                var fileReader = new FileReader();
+	                fileReader.onload = (function(e) {
+	                var file = e.target;
+			           $("<div class='image'><img class='uploadedimage' src='" + e.target.result + "' title='" + file.name + "'/>" +
+			            "<br><a class='btn remove btn-danger'>Remove</a>" +
+			            "</div>").insertAfter("#files");
+			          $(".remove").click(function(){
+			           	 $(this).parent(".image").remove();
+			          });
                });
                fileReader.readAsDataURL(f);
+               }
            }
-      });
-   */
+           else {
+            alert("Please Select only images!");
+          }
+      });*/
+      /*
+	    let c=0;
+	   
+		$(".add-photos-btn").click(function(){
+			c++;
+		});
+		console.log(c);
+      $("#image_"+c).on("change",function(e) {
+		 var imgPath = $(this)[0].value;
+          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+            var files = e.target.files ,
+            filesLength = files.length ;
+             if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg")
+             {
+            	for (var i = 0; i < filesLength ; i++) 
+            	{
+	                var f = files[i]
+	                var fileReader = new FileReader();
+	                fileReader.onload = (function(e) {
+	                var file = e.target;
+			           $("<div class='image'><img class='uploadedimage' src='" + e.target.result + "' title='" + file.name + "'/>" +
+			            "<br>" +
+			            "</div>").insertAfter("#image_"+c);
+               });
+               fileReader.readAsDataURL(f);
+               }
+           }
+           else {
+            alert("Please Select only images!");
+          }
+      });*/
+      /*
+      	    let c=0;
+	   
+		$(".add-photos-btn").click(function(){
+			c++;
+			
+			console.log(c);
+		});
+		 var data = $("#image_"+c);
+         $("#image_0").on('change', function() {
+	console.log("hello "+data);
+	var countFiles = $(this)[0].files.length;
+         var imgPath = $(this)[0].value;
+          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+            if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg")
+             {
+				for (var i = 0; i < countFiles; i++) 
+              {
+          		  var reader = new FileReader();
+                reader.onload = function(e) {
+					var file = e.target;
+                  $("<div class='image'><img class='uploadedimage' src='" + e.target.result + "' title='" + file.name + "'/>" +
+			            "<br>" +
+			            "</div>").insertAfter("#image_"+c);
+                }
+                reader.readAsDataURL($(this)[0].files[i]);
+                }
+              }
+              else {
+            alert("Please Select only images!");
+          }
+        });*/
+   /*
 	
 	    let c=0;
 	   
@@ -26,7 +108,7 @@ $(document).ready(function() {
 			console.log(data);
 		});
 		 var data = $("#image_"+c);
-        $("#image_3").on('change', function() {
+        data.on('change', function() {
 	var countFiles = $(this)[0].files.length;
          var imgPath = $(this)[0].value;
           var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
@@ -56,7 +138,7 @@ $(document).ready(function() {
             alert("Please Select only images!");
           }
         });
-     
+     */
         $('#add-more').cloneData({
 		  mainContainerId:'main-container',
 		
@@ -84,15 +166,6 @@ $(document).ready(function() {
 			$("#remove-btn").show();
 		}
 		
-		/* 
-		$("#submit-btn").click(function(e){
-			e.preventDefault();
-		   	 
-		    var lname = $('#lastname').val();
-		    var pwd = $('#pwd').val();
-		    var repwd = $('#repwd').val();
-		    */
-		    //$(".error").remove();
 		    $("#firstname").keyup(function(e){
 			
 				e.preventDefault();
@@ -151,9 +224,9 @@ $(document).ready(function() {
 					  }
 				});
 				
-			  $("#imgUpload").change(function(e){
+			  $("#image-1648470578618").change(function(e){
 				$(".error").remove();
-				var img = $("#imgUpload").val();
+				var img = $("#image-1648470578618").val();
 				var point = img.lastIndexOf(".");
         		var extention =(img.substring(point + 1)).toLowerCase();
         		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){
@@ -161,7 +234,7 @@ $(document).ready(function() {
         			}
         			else
         			{
-						$('#imgUpload').after('<span class="error">*Please Select only images!</span>');
+						$('#image-1648470578618').after('<span class="error">*Please Select only images!</span>');
 					}
 			});
 			
@@ -183,6 +256,18 @@ $(document).ready(function() {
 					$('#phone').after('<span class="error">*Only Numbers are allowed</span>');
 				}
 			});
+			$(".pincode").keyup(function(e){
+				$(".error").remove();
+				var pincode = $(".pincode").val();
+				if(pincode.match("[^0-9]"))
+				{
+					$('.pincode').after('<span class="error">*Only Numbers are allowed</span>');
+				}
+				else if(pincode.length<6 ||pincode.length>6)
+				{
+					
+				}
+			})
 		
       });
       
