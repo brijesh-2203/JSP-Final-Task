@@ -3,6 +3,15 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 	  <display-name>Archetype Created Web Application</display-name>
+	   <taglib>
+		    <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+		    <taglib-location>/WEB-INF/c.tld</taglib-location>
+  	</taglib>
+  	<!--  
+	  <taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>tld/c-1_0.tld</taglib-location>
+	  </taglib>-->
 		<filter>
 	  	<filter-name>EncryptPwd</filter-name>
 	  	<display-name>EncryptPwd</display-name>
@@ -38,6 +47,24 @@
 	  	<description></description>
 	  	<servlet-class>com.User.User_Management_System.Controller.LoginServlet</servlet-class>
 	  </servlet>
+	 <servlet>
+	 	<servlet-name>ShowUserProfile</servlet-name>
+	 	<display-name>ShowUserProfile</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.ShowUserProfile</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>DeleteUser</servlet-name>
+	 	<display-name>DeleteUser</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.DeleteUser</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>LogOutServlet</servlet-name>
+	 	<display-name>LogOutServlet</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.LogOutServlet</servlet-class>
+	 </servlet>
 	   <servlet-mapping>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<url-pattern>/ValidateServlet</url-pattern>
@@ -49,5 +76,17 @@
 	   <servlet-mapping>
 	   	<servlet-name>LoginServlet</servlet-name>
 	   	<url-pattern>/LoginServlet</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>ShowUserProfile</servlet-name>
+	   	<url-pattern>/ShowUserProfile</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>DeleteUser</servlet-name>
+	   	<url-pattern>/DeleteUser</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>LogOutServlet</servlet-name>
+	   	<url-pattern>/LogOutServlet</url-pattern>
 	   </servlet-mapping>
 </web-app>

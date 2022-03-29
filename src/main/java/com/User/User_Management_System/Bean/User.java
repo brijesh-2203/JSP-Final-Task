@@ -16,6 +16,8 @@ public class User {
 	private String dateofbirth;
 	private String gender;
 	private String language;
+	private String role;
+	private String address;
 	public String getLanguage() {
 		return language;
 	}
@@ -78,6 +80,18 @@ public class User {
 	}
 	public void setAnswer2(String answer2) {
 		this.answer2 = answer2;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 

@@ -3,6 +3,7 @@ package com.User.User_Management_System.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.User.User_Management_System.Bean.User;
@@ -21,7 +22,7 @@ public class UserDao {
 		try
 		{
 			con=ConnectionSetup.getConnection();
-			 ps=((java.sql.Connection) con).prepareStatement("insert into UserDetails(FirstName,LastName,Phone,DateOfBirth,Gender,LanguageKnown,Email,Password,Answer1,Answer2) values(?,?,?,?,?,?,?,?,?,?);");
+			 ps=((java.sql.Connection) con).prepareStatement("insert into UserDetails(FirstName,LastName,Phone,DateOfBirth,Gender,LanguageKnown,Email,Password,Answer1,Answer2,Role) values(?,?,?,?,?,?,?,?,?,?,'user');");
 			 
 			 	ps.setString(1, user.getFirstname());
 	            ps.setString(2, user.getLastname());
@@ -153,10 +154,10 @@ public class UserDao {
         try 
         {
         	con=ConnectionSetup.getConnection();
-        	ps = con.prepareStatement("select * from UserDetails where Email = ? and Password = ?");
+        	ps = con.prepareStatement("select * from UserDetails where Email = ? and Password = ? and Role = ?");
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());
-           
+            ps.setString(3, user.getRole());
             ResultSet rs = ps.executeQuery();
             if(rs.next())
             {
@@ -193,5 +194,99 @@ public class UserDao {
 			   }
         return status;
 	}
-
+	public List<User> getUserDetails()
+	{
+		List<User> list = new ArrayList<User>();
+		 try
+		 {
+			con=ConnectionSetup.getConnection();
+		  ps=((java.sql.Connection) con).prepareStatement("select UserID,FirstName,LastName,Email,Phone,DateOfBirth,Gender,LanguageKnown from UserDetails where Role='user';"); 
+          ResultSet rs=ps.executeQuery();  
+          while(rs.next()){  
+        	  User user=new User();  
+	          	user.setUserID(rs.getInt(1));
+	        	user.setFirstname(rs.getString(2));
+	        	user.setLastname(rs.getString(3));
+	        	user.setEmail(rs.getString(4));
+	        	user.setPhone(rs.getLong(5));
+	        	user.setDateofbirth(rs.getString(6));
+	        	user.setGender(rs.getString(7));
+	        	user.setLanguage(rs.getString(8));       	 
+              list.add(user);  
+          }
+          rs.close();
+		 } catch (Exception e) {
+				e.printStackTrace();
+			}
+		 finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		return list;
+	}
+	public List<UserAddress> getUserAddress(int userid)
+	{
+		List<UserAddress> useradd = new ArrayList<UserAddress>();
+		try
+		 {
+			con=ConnectionSetup.getConnection();
+		  ps=((java.sql.Connection) con).prepareStatement("select * from AddressDetails where UserID=?;"); 
+		  ps.setInt(1,userid);
+         ResultSet rs=ps.executeQuery();  
+         while(rs.next()){  
+       	  UserAddress user=new UserAddress();
+	        	user.setAdd1(rs.getString(3));
+	        	user.setAdd2(rs.getString(4));
+	        	user.setPincode(rs.getString(5));
+	        	user.setCity(rs.getString(6));
+	        	user.setState(rs.getString(7));
+	        	user.setCountry(rs.getString(8));       	 
+	        	useradd.add(user);  
+         }
+         rs.close();
+		 } catch (Exception e) {
+				e.printStackTrace();
+			}
+		 finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		return useradd;
+	}
+	public void deleteUser(int userid)
+	{
+		try
+		{
+				con=ConnectionSetup.getConnection();
+				ps=((java.sql.Connection) con).prepareStatement("delete from UserDetails where UserID=?;");
+			 	ps.setInt(1,userid);
+	            ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+	}
 }

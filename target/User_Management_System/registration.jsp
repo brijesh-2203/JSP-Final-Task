@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +104,7 @@
 					   </div>
 					   <div class="form-group"><p class="add-head">City: </p><input type="text" class="form-control add-head" name="city" required></div>
 					    <div class="form-group"><p class="add-head"> Country: </p><input type="text" class="form-control add-head" name="country" required></div>
-					   <div class="form-group"><a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger add-head" id="remove-btn">Remove</a></div>
+					   <div class="form-group"><a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger add-head remove-data" id="remove-btn">Remove</a></div>
 			 </div>
 			<div class="col-md-2"></div>
 			<div class="col-md-5 gap right-gap">
@@ -112,13 +113,13 @@
 							<input type="text" class="form-control" name="address2" required>
 					   </div>
 				    <div class="form-group"><p>State:</p><input type="text"  class="form-control" name="state" required></div>
-				    <div class="form-group"><p>Pincode:</p><input type="text" class="form-control" name="pincode" id="pincode" required></div>
+				    <div class="form-group"><p>Pincode:</p><input type="text" class="form-control" name="pincode" id="pincode_0" required></div>
 			 </div>
 		 </div>
 		</div>
 	</div>
 		<div class="form-group">
-			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap" id="add-btn">Add More Address</a>
+			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap add-btn">Add More Address</a>
 		 </div>
 		 <div class="form-group">
 			<input type="submit" value="Submit" class="btn btn-success left-gap" id="submit-btn">

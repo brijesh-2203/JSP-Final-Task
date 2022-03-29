@@ -1,9 +1,11 @@
 package com.User.User_Management_System.Service;
 
 import com.User.User_Management_System.Bean.User;
+
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.Dao.UserDao;
+
 import java.util.*;
 public class UserService{
 		UserDao userdao = new UserDao();
@@ -29,5 +31,21 @@ public class UserService{
 	{
 		boolean status = userdao.validUser(user);
 		return status;
+	}
+	public List<User> getUsers()
+	{
+		List<User> userlist = new ArrayList<User>();
+		userlist = userdao.getUserDetails();
+		return userlist;
+	}
+	public List<UserAddress> getUserAdd(int userid)
+	{
+		List<UserAddress> userlist = new ArrayList<UserAddress>();
+		userlist = userdao.getUserAddress(userid);
+		return userlist;
+	}
+	public void deleteUser(int userid)
+	{
+		userdao.deleteUser(userid);
 	}
 }

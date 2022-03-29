@@ -71,7 +71,7 @@ public class UserRegistration extends HttpServlet {
 		
 		String s= userservice.registerUser(user);
 		out.println(s);
-		RequestDispatcher rf=request.getRequestDispatcher("/index.html"); 
+		RequestDispatcher rf=request.getRequestDispatcher("/index.jsp"); 
 		rf.include(request, response);
 		int userid=userservice.getUser(email);
 		List<UserAddress> AddressList = new ArrayList<UserAddress>();
