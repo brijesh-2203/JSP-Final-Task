@@ -29,18 +29,20 @@
 		</thead>
 		<tbody>
 		
-			<c:forEach items="${requestScope.UsersList}" var='user' >
+			<c:forEach items="${UsersList}" var='user' >
 			<tr>
-			    <td>${user.getUserID()}</td>
-			    <td>${user.getFirstname()}</td>
-			    <td>${user.getLastname()}</td>
-			    <td>${user.getEmail()}</td>
-			    <td>${user.getPhone()}</td>
-			    <td>${user.getDateofbirth()}</td>
-			    <td>${user.getGender()}</td>
-			    <td>${user.getLanguage()}</td>
-			    <td><a href="registration.jsp" class="btn btn-primary">Edit</a></td>
-			    <td><a href="DeleteUser?userid=${user.getUserID()}" class="btn btn-danger">Delete</a></td>
+			    <td>${user.userID}</td>
+			    <td>${user.firstname}</td>
+			    <td>${user.lastname}</td>
+			    <td>${user.email}</td>
+			    <td>${user.phone}</td>
+			    <td>${user.dateofbirth}</td>
+			    <td>${user.gender}</td>
+			    <td>${user.language}</td>
+			    <td>
+			    	<c:set var="user" value="${user}" scope="session" />
+			    	<a href="registration.jsp" class="btn btn-primary">Edit</a></td>
+			    <td><a href="DeleteUser?userid=${user.userID}" class="btn btn-danger">Delete</a></td>
 			 </tr>
 			</c:forEach>
 			<!--<${sessionScope.UsersList}-->

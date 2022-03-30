@@ -9,28 +9,37 @@ import com.User.User_Management_System.Dao.UserDao;
 import java.util.*;
 public class UserService{
 		UserDao userdao = new UserDao();
-	public String registerUser(User user)
+	public boolean userExist(String mail)
 	{
-		String message = userdao.registerUser(user);
-		return message;
+		boolean status = userdao.userExist(mail);
+		return status;
 	}
-	public void addUserAddress(List<UserAddress> list)
+	public void registerUser(User user)
 	{
-		userdao.addUserAddress(list);
+		userdao.registerUser(user);
+	}
+	public void addUserAddress(UserAddress useradd)
+	{
+		userdao.addUserAddress(useradd);
 	}
 	public int getUser(String mail)
 	{
 		int id = userdao.getUserId(mail);
 		return id;
 	}
-	public void addUserImg(List<UserImage> list)
+	public void addUserImg(UserImage userimg)
 	{
-		userdao.addUserImage(list);
+		userdao.addUserImage(userimg);
 	}
 	public boolean checkUser(User user)
 	{
 		boolean status = userdao.validUser(user);
 		return status;
+	}
+	public String getRole(String mail)
+	{
+		String role = userdao.getRole(mail);
+		return role;
 	}
 	public List<User> getUsers()
 	{
@@ -47,5 +56,19 @@ public class UserService{
 	public void deleteUser(int userid)
 	{
 		userdao.deleteUser(userid);
+	}
+	public List<UserImage> getUserImg(int userid)
+	{
+		List<UserImage> userlist = new ArrayList<UserImage>();
+		userlist = userdao.getUserImg(userid);
+		return userlist;
+	}
+	public void deleteImage(int imgid)
+	{
+		userdao.deleteImage(imgid);
+	}
+	public void changePwd(String pwd,String usermail) {
+		
+		userdao.changePwd(pwd,usermail);
 	}
 }

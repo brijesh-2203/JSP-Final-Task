@@ -1,4 +1,4 @@
-package com.User.User_Management_System.Service.UtilityClass;
+package com.User.User_Management_System.UtilityClass;
 
 import java.util.regex.Pattern;
 

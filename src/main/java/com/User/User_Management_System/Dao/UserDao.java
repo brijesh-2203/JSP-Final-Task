@@ -1,24 +1,60 @@
 package com.User.User_Management_System.Dao;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
+import com.mysql.cj.jdbc.Blob;
 
 
 public class UserDao {
 	Connection con = null;
 	PreparedStatement ps=null;
-	public String registerUser(User user)
+	public boolean userExist(String mail)
 	{
-		String message="";
-		
+		boolean status=false;
+		try 
+        {
+        	con=ConnectionSetup.getConnection();
+        	ps = con.prepareStatement("select * from UserDetails where Email=?");
+            ps.setString(1, mail);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+            	status=true;
+            }
+            else
+            {
+            	 status=false;
+            }
+           
+        }
+        catch(Exception e)
+        {
+        	System.out.println(e);
+        }
+        finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		return status;
+	}
+	public void registerUser(User user)
+	{
 		try
 		{
 			con=ConnectionSetup.getConnection();
@@ -34,7 +70,6 @@ public class UserDao {
 	            ps.setString(8, user.getPassword());
 	            ps.setString(9, user.getAnswer1());
 	            ps.setString(10, user.getAnswer2());
-	            message= "SuccessFully Registered";
 	            ps.executeUpdate();
 		}
 		catch(Exception e)
@@ -51,7 +86,6 @@ public class UserDao {
 					e.printStackTrace();
 				}
 			   }
-		return message;
 	}
 	public int getUserId(String mail)
 	{
@@ -85,13 +119,10 @@ public class UserDao {
 		}
 		return id;
 	}
-	public void addUserAddress(List<UserAddress> list)
+	public void addUserAddress(UserAddress add)
 	{ 
 		try
 		{
-			
-			for(UserAddress add : list)
-			{
 				con=ConnectionSetup.getConnection();
 				ps=((java.sql.Connection) con).prepareStatement("insert into AddressDetails(UserID,Addressline1,Addressline2,Pincode,City,State,Country) values(?,?,?,?,?,?,?);");
 			 	ps.setInt(1, add.getUserid());
@@ -102,7 +133,6 @@ public class UserDao {
 	            ps.setString(6, add.getState());
 	            ps.setString(7, add.getCountry());
 	            ps.executeUpdate();
-			}
 		}
 		catch(Exception e)
 		{
@@ -119,19 +149,15 @@ public class UserDao {
 				}
 			   }
 	}
-	public void addUserImage(List<UserImage> list)
+	public void addUserImage(UserImage img)
 	{
 		try
 		{
-			
-			for(UserImage img : list)
-			{
 				con=ConnectionSetup.getConnection();
 				ps=((java.sql.Connection) con).prepareStatement("insert into UserImages(UserID,Image) values(?,?);");
 			 	ps.setInt(1, img.getUserid());
 	            ps.setBlob(2, img.getImage());
 	            ps.executeUpdate();
-			}
 		}
 		catch(Exception e)
 		{
@@ -154,10 +180,8 @@ public class UserDao {
         try 
         {
         	con=ConnectionSetup.getConnection();
-        	ps = con.prepareStatement("select * from UserDetails where Email = ? and Password = ? and Role = ?");
+        	ps = con.prepareStatement("select * from UserDetails where Email = ?;");
             ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getRole());
             ResultSet rs = ps.executeQuery();
             if(rs.next())
             {
@@ -169,8 +193,10 @@ public class UserDao {
             	user.setDateofbirth(rs.getString(5));
             	user.setGender(rs.getString(6));
             	user.setLanguage(rs.getString(7));
-            	user.setPassword(rs.getString(6));
             	user.setEmail(rs.getString(8));
+            	user.setPassword(rs.getString(9));
+            	user.setAnswer1(rs.getString(10));
+            	user.setAnswer2(rs.getString(11));
             }
             else
             {
@@ -193,6 +219,36 @@ public class UserDao {
 				}
 			   }
         return status;
+	}
+	public String getRole(String mail)
+	{
+		String role="";
+		try 
+        {
+        	con=ConnectionSetup.getConnection();
+        	ps = con.prepareStatement("select Role from UserDetails where Email = ?;");
+            ps.setString(1,mail);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+            	role=rs.getString(1);
+            }
+        }
+		catch(Exception e)
+        {
+        	System.out.println(e);
+        }
+        finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		return role;
 	}
 	public List<User> getUserDetails()
 	{
@@ -265,6 +321,50 @@ public class UserDao {
 			   }
 		return useradd;
 	}
+	public List<UserImage> getUserImg(int userid)
+	{
+		List<UserImage> userimg = new ArrayList<UserImage>();
+		try
+		 {
+			java.sql.Blob image=null;
+			con=ConnectionSetup.getConnection();
+		  ps=((java.sql.Connection) con).prepareStatement("select * from UserImages where UserID=?;"); 
+		  ps.setInt(1,userid);
+         ResultSet rs=ps.executeQuery();  
+         while(rs.next()){  
+        	 image=rs.getBlob(3);
+        	 InputStream inputStream = image.getBinaryStream();
+        	 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        	 byte[] buffer = new byte[4096];
+        	 int bytesRead = -1;
+        	  
+        	 while ((bytesRead = inputStream.read(buffer)) != -1) {
+        	     outputStream.write(buffer, 0, bytesRead);
+        	 }
+        	 byte[] imageBytes = outputStream.toByteArray();
+        	  
+        	 String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        	 UserImage user=new UserImage();
+        	 user.setBase64Image(base64Image);
+        	 user.setImgid(rs.getInt(2));
+	        	userimg.add(user);  
+         }
+         rs.close();
+		 } catch (Exception e) {
+				e.printStackTrace();
+			}
+		 finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		return userimg;
+	}
 	public void deleteUser(int userid)
 	{
 		try
@@ -288,5 +388,54 @@ public class UserDao {
 					e.printStackTrace();
 				}
 			   }
+	}
+	public void deleteImage(int imgid)
+	{
+		try
+		{
+				con=ConnectionSetup.getConnection();
+				ps=((java.sql.Connection) con).prepareStatement("delete from UserImages where ImageID=?;");
+			 	ps.setInt(1,imgid);
+	            ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+	}
+	public void changePwd(String pwd, String usermail) {
+		try
+		{
+				con=ConnectionSetup.getConnection();
+				ps=((java.sql.Connection) con).prepareStatement("update UserDetails set Password=? where Email=?;");
+			 	ps.setString(1,pwd);
+			 	ps.setString(2,usermail);
+	            ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+		
 	}
 }

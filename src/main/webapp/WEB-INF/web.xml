@@ -29,6 +29,10 @@
 	  	<filter-name>EncryptPwd</filter-name>
 	  	<url-pattern>/LoginServlet</url-pattern>
 	  </filter-mapping>
+	  <filter-mapping>
+	  	<filter-name>EncryptPwd</filter-name>
+	  	<url-pattern>/ResetPassword</url-pattern>
+	  </filter-mapping>
 	  <servlet>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<display-name>ValidateServlet</display-name>
@@ -65,6 +69,24 @@
 	 	<description></description>
 	 	<servlet-class>com.User.User_Management_System.Controller.LogOutServlet</servlet-class>
 	 </servlet>
+	 <servlet>
+	 	<servlet-name>RemoveImage</servlet-name>
+	 	<display-name>RemoveImage</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.RemoveImage</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>ForgotPwd</servlet-name>
+	 	<display-name>ForgotPwd</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.ForgotPwd</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>ResetPassword</servlet-name>
+	 	<display-name>ResetPassword</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.ResetPassword</servlet-class>
+	 </servlet>
 	   <servlet-mapping>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<url-pattern>/ValidateServlet</url-pattern>
@@ -88,5 +110,17 @@
 	   <servlet-mapping>
 	   	<servlet-name>LogOutServlet</servlet-name>
 	   	<url-pattern>/LogOutServlet</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>RemoveImage</servlet-name>
+	   	<url-pattern>/RemoveImage</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>ForgotPwd</servlet-name>
+	   	<url-pattern>/ForgotPwd</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>ResetPassword</servlet-name>
+	   	<url-pattern>/ResetPassword</url-pattern>
 	   </servlet-mapping>
 </web-app>

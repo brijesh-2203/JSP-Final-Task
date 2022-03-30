@@ -16,7 +16,7 @@
 <section>
 	<div class="container Form-Section">
 	<c:choose> 
-		<c:when test="${sessionScope.User!=null}">
+		<c:when test="${user != null}">
 			<h2 class="header"><u>Edit Page</u></h2>
 		</c:when>
 		<c:otherwise> 
@@ -28,10 +28,10 @@
 			
 			 <div class="col-md-5">
 			 	<div class="form-group">
-					FirstName :<input type="text" name="firstname" value="${sessionScope.User.getFirstname()}" id="firstname" class="form-control" placeholder="Enter First Name" required>
+					FirstName :<input type="text" name="firstname" value="${user.firstname}" id="firstname" class="form-control" placeholder="Enter First Name" required>
 				</div>
 				<div class="form-group">
-					Phone:<input type="text" name="phone" maxlength="10" value="${sessionScope.User.getPhone()}" size="10" id="phone" class="form-control" placeholder="Enter Phone Number" required>
+					Phone:<input type="text" name="phone" maxlength="10" value="${user.phone}" size="10" id="phone" class="form-control" placeholder="Enter Phone Number" required>
 				</div>
 				 <div class="form-group">
 				 	 Email:<input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
@@ -46,10 +46,10 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				 <div class="form-group">
-					LastName :<input type="text" name="lastname" id="lastname" value="${sessionScope.User.getLastname()}" class="form-control" placeholder="Enter Last Name" required>
+					LastName :<input type="text" name="lastname" id="lastname" value="${userlastname}" class="form-control" placeholder="Enter Last Name" required>
 				 </div>
 				 <div class="form-group">
-				 	Date of Birth: <input type="date" id="birthday" class="form-control" value="${sessionScope.User.getDateofbirth()}" name="birthdate" required>
+				 	Date of Birth: <input type="date" id="birthday" class="form-control" value="${user.dateofbirth}" name="birthdate" required>
 				 </div>
 				 <div class="form-group">
 				  Gender:
@@ -88,8 +88,20 @@
 			   	<div class="row left-gap">
 					<div class="col-md-12">
 		    			 <div class="form-group">
-						    <label>Upload Photo:</label>
-						     <div class="input-images"></div>
+						    <div><label>Upload Photo:</label></div>
+						    <c:choose> 
+								<c:when test="${user != null}">
+									 <c:forEach items="${sessionScope.UserImages}" var='userimg' >
+									     <span class="uploadedimage"><img src="data:image/jpg;base64,${userimg.base64Image}" class="image" width="180" height="180"/>
+									     <a href="RemoveImage?imgId=${userimg.imgid}" class="delete-image"><i class="material-icons">clear</i></a></span>
+								     </c:forEach>
+								     <div class="input-images"></div>
+								</c:when>
+								<c:otherwise> 
+								 <div class="input-images"></div>
+								</c:otherwise>
+							</c:choose>
+						   
 						    <!--<input id="fileupload" type="file" name="files[]" multiple>-->
 						   <!--<input  type="file" id="files" name="files" multiple="true" required>--><!--<input type="file" name="photo" class="imgUpload" id="image_0">-->
 						 </div>
@@ -101,7 +113,9 @@
 			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap add-photos-btn">Add More Photos</a>
 		 </div>
      -->
-<c:forEach items="${sessionScope.UserAddress}" var='useradd' >
+     <c:choose> 
+		<c:when test="${user != null}">
+			<c:forEach items="${sessionScope.UserAddress}" var='useradd' >
     <div id="main-container">
 	   <div class="container-item">
 		  <div class="row left-gap" id="add-design">
@@ -128,6 +142,36 @@
 		</div>
 	</div>
 	 </c:forEach>
+	</c:when>
+		<c:otherwise> 
+		    <div id="main-container">
+			   <div class="container-item">
+				  <div class="row left-gap" id="add-design">
+				    <h3  class="head-gap">Address Field:</h3>
+					<div class="col-md-5 gap">
+							  <div class="form-group">
+								<p class="add-head">Address line1:</p>
+									<input type="text" class="form-control add-head" name="address1" required>
+							   </div>
+							   <div class="form-group"><p class="add-head">City: </p><input type="text" class="form-control add-head" name="city" required></div>
+							    <div class="form-group"><p class="add-head"> Country: </p><input type="text" class="form-control add-head" name="country" required></div>
+							   <div class="form-group"><a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger add-head remove-data" id="remove-btn">Remove</a></div>
+					 </div>
+					<div class="col-md-2"></div>
+					<div class="col-md-5 gap right-gap">
+							   <div class="form-group">
+								<p>Address line2:</p>
+									<input type="text" class="form-control" name="address2" required>
+							   </div>
+						    <div class="form-group"><p>State:</p><input type="text" class="form-control" name="state" required></div>
+						    <div class="form-group"><p>Pincode:</p><input type="text" class="form-control" name="pincode" id="pincode_0" required></div>
+					 </div>
+				 </div>
+				</div>
+			</div>
+		</c:otherwise>
+		</c:choose>
+
 		<div class="form-group">
 			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap add-btn">Add More Address</a>
 		 </div>
@@ -143,10 +187,6 @@
 </section>
 			<script src="assets/js/jquery-3.6.0.min.js"></script>
 			<script src="assets/js/cloneData.js"></script>		
-		<!--<script src="assets/js/vendor/jquery.ui.widget.js"></script>
-			<script src="assets/js/jquery.iframe-transport.js"></script>
-			<script src="assets/js/jquery.fileupload.js"></script>
-		<script src="assets/js/jquery.fileupload-image.js"></script>-->
 		<script type="text/javascript" src="assets/dist/image-uploader.min.js"></script>
 		<script src="assets/js/custom.js"></script>
 		

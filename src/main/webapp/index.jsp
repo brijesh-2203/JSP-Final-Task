@@ -20,14 +20,6 @@
 				
 					<span style='color:red'>${requestScope.message}</span>
 				<div class="form-group">
-				Select Role:
-						<select name="role" class="form-control" required>
-						  <option value="Select Role">Select Role</option>
-						  <option value="admin">Admin</option>
-						  <option value="user">User</option>
-						</select>
-				</div>
-				<div class="form-group">
 				Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email" required>
 				</div>
 				<div class="form-group">

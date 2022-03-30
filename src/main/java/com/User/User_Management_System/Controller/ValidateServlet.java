@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.User.User_Management_System.Service.UtilityClass.CheckValidation;
+import com.User.User_Management_System.UtilityClass.CheckValidation;
 
 @MultipartConfig
 public class ValidateServlet extends HttpServlet {

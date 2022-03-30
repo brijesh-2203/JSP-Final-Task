@@ -11,20 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.User.User_Management_System.Service.UserService;
 
-
-public class DeleteUser extends HttpServlet {
+public class RemoveImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    UserService userservice;
+	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserService();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		String uid=request.getParameter("userid"); 
-		int userid = Integer.parseInt(uid);
-		userservice.deleteUser(userid);
-		response.sendRedirect("adminDashBoard.jsp");
+		PrintWriter out = response.getWriter();
+		String imgid=request.getParameter("imgId"); 
+		System.out.println(imgid);
+		int imageid = Integer.parseInt(imgid);
+		System.out.println(imageid);
+		userservice.deleteImage(imageid);
+		response.sendRedirect("registration.jsp");
 	}
-
 }
+
