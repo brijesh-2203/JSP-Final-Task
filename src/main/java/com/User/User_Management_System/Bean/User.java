@@ -1,5 +1,5 @@
 package com.User.User_Management_System.Bean;
-
+import java.util.*;
 public class User {
 	private int UserID;
 	public int getUserID() {
@@ -17,8 +17,9 @@ public class User {
 	private String gender;
 	private String language;
 	private String role;
-	private String address;
-	public String getLanguage() {
+	private ArrayList<UserAddress> address;
+	private ArrayList<UserImage>  image;
+ 	public String getLanguage() {
 		return language;
 	}
 	public void setLanguage(String language) {
@@ -87,12 +88,17 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getAddress() {
+	public ArrayList<UserAddress> getAddress() {
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(ArrayList<UserAddress> address) {
 		this.address = address;
 	}
-	
+	public ArrayList<UserImage> getImage() {
+		return image;
+	}
+	public void setImage(ArrayList<UserImage> image) {
+		this.image = image;
+	}
 
 }

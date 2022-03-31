@@ -2,6 +2,7 @@ package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.User.User_Management_System.Bean.User;
+import com.User.User_Management_System.Bean.UserAddress;
 
 public class ShowUserProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +25,7 @@ public class ShowUserProfile extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession(false);
-		 User user = (User)session.getAttribute("User");
+		 User user = (User)session.getAttribute("user");
 		 int id = user.getUserID();
 		 String fname = user.getFirstname();
 		 String lname = user.getLastname();
@@ -32,6 +34,7 @@ public class ShowUserProfile extends HttpServlet {
 		 String dob = user.getDateofbirth();
 		 String gender = user.getGender();
 		 String lang = user.getLanguage();
+		 ArrayList<UserAddress> add = user.getAddress();
 		 out.println("Welcome "+fname+" "+lname+"<br>");
 		 out.println("<br>ID:"+id);
 		 out.println("<br>FirstName:"+fname);
@@ -44,6 +47,12 @@ public class ShowUserProfile extends HttpServlet {
 		 out.println("<br><a href='edit.html'>Edit Profile</a>");
 		 out.println("<br><button>\r\n"
 		 		+ " <a href=ShowOptions>Back</a></button>");
+		 out.println(add);
+		 for(UserAddress ud : add)
+		 {
+			 out.println(ud.getAdd1());
+			 
+		 }
 	}
 
 }

@@ -8,6 +8,7 @@ public class UserAddress {
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
+	private int addressid;
 	private String add1;
 	private String add2;
 	private String city;
@@ -49,5 +50,11 @@ public class UserAddress {
 	}
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+	public int getAddressid() {
+		return addressid;
+	}
+	public void setAddressid(int addressid) {
+		this.addressid = addressid;
 	}
 }

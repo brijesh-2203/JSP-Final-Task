@@ -22,9 +22,7 @@ public class RemoveImage extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String imgid=request.getParameter("imgId"); 
-		System.out.println(imgid);
 		int imageid = Integer.parseInt(imgid);
-		System.out.println(imageid);
 		userservice.deleteImage(imageid);
 		response.sendRedirect("registration.jsp");
 	}

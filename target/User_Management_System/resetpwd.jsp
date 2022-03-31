@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page isELIgnored="false"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,15 +19,15 @@
 				<h1 class="heading"><u>Reset Password</u></h1>
 				<form action="ResetPassword" method="POST">
 					<div class="form-group">
-					Password:<input type="password" placeholder="Enter Password"  class="form-control" name="password" required>
+					Password:<input type="password" placeholder="Enter Password" id="pwd" class="form-control" name="password" required>
 					</div>
 					<div class="form-group">
-					 Confirm password:<input type="password" name="repass" class="form-control" placeholder="Enter Confirm Password" required>
+					 Confirm password:<input type="password" name="repass" id="repwd" class="form-control" placeholder="Enter Confirm Password" required>
 					</div>
 					<div class="form-group">
 					<input type="submit" class="form-control login-btn" value="Reset">
 					</div>
-					
+					<input type="hidden" name="usermail" value="${requestScope.email}" required>
 				</form>
 			 </div>
 			 <div class="col-md-4"></div>
@@ -33,5 +35,7 @@
 		</div>
 	</div>
 </section>
+	<script src="assets/js/jquery-3.6.0.min.js"></script>
+		<script src="assets/js/validation.js"></script>
 </body>
 </html>

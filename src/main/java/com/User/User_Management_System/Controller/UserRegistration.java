@@ -16,6 +16,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.User.User_Management_System.Bean.User;
@@ -77,8 +78,6 @@ public class UserRegistration extends HttpServlet {
 				user.setLanguage(language);
 				
 				userservice.registerUser(user);
-				RequestDispatcher rf=request.getRequestDispatcher("/index.jsp"); 
-				rf.include(request, response);
 				int userid=userservice.getUser(email);
 				UserAddress useraddress;
 				for(int i=0;i<address1.length;i++)
@@ -110,6 +109,17 @@ public class UserRegistration extends HttpServlet {
 		                userservice.addUserImg(userimg);
 		            }
 		        }
+		        HttpSession session=request.getSession(false);
+		        if(session==null)
+		        {
+		        	RequestDispatcher rf=request.getRequestDispatcher("index.jsp");
+		        	rf.include(request, response);
+		        }
+		        else
+		        {
+		        	response.sendRedirect("AdminWork");
+		        }
+				
 			}
 		
 	}

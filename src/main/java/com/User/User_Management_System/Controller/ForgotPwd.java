@@ -24,10 +24,9 @@ public class ForgotPwd extends HttpServlet {
 		String birthdate=request.getParameter("birthdate");
 		String ans1=request.getParameter("q1");
 		String ans2=request.getParameter("q2");
-		User user = new User();
-		user.setEmail(email);
+		User user = userservice.checkUser(email);
 		RequestDispatcher r=request.getRequestDispatcher("forgotpwd.jsp");
-		if(userservice.checkUser(user))
+		if(user!=null)
 		{
 				if(birthdate.equals(user.getDateofbirth()))
 				{

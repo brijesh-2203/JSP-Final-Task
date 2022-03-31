@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page isELIgnored="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
@@ -11,9 +12,15 @@
 </head>
 <body>
 
-<h3 class="header">Welcome ${requestScope.username}</h3>
+<h3 class="header">Welcome ${user.firstname} ${user.lastname}</h3>
    <a href="ShowUserProfile" class="btn btn-default">Show Profile</a>
    <a href="registration.jsp" class="btn btn-default">EditProfile</a>
    <a href="LogOutServlet" class="btn btn-default">LogOut</a>
+   <p>${user.address}</p>
+   			<c:forEach items="${user.address}" var='userad' >
+   			<p>${userad.city}</p>
+   			<p>${userad.pincode}</p>
+   			hello
+   			</c:forEach>
 </body>
 </html>

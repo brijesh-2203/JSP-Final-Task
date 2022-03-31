@@ -10,6 +10,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.User.User_Management_System.UtilityClass.CheckValidation;
 
@@ -42,10 +43,8 @@ public class ValidateServlet extends HttpServlet {
 		String[] state=request.getParameterValues("state");
 		String[] country=request.getParameterValues("country");
 		String language[]=request.getParameterValues("lang");
-		
-		
-RequestDispatcher rd=request.getRequestDispatcher("registration.jsp"); 
-		
+
+		RequestDispatcher rd=request.getRequestDispatcher("registration.jsp"); 
 		if(fname == ""||pwd ==""||lname==""||email==""||phone==""||repwd==""||birthdate==""||ans1==""||ans2==""||gender=="")
 		{
 			rd.include(request, response);
@@ -88,8 +87,21 @@ RequestDispatcher rd=request.getRequestDispatcher("registration.jsp");
 		}
 		else
 		{
-			RequestDispatcher rf=request.getRequestDispatcher("UserRegistration"); 
-			rf.forward(request, response);
+			RequestDispatcher rf=null;
+//			 HttpSession session=request.getSession(false);
+//		        if(session==null)
+//		        {
+		        	 rf=request.getRequestDispatcher("UserRegistration"); 
+		        	 rf.forward(request, response);
+		        //}
+//		        else
+//		        {
+//		        	 rf=request.getRequestDispatcher("EditServlet");
+//		        	 rf.forward(request, response);
+//		        	//response.sendRedirect("AdminWork");
+//		        }
+			//RequestDispatcher rf=request.getRequestDispatcher("UserRegistration"); 
+			
 		}
 	}
 

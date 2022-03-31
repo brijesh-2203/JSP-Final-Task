@@ -65,7 +65,7 @@ background-color: white;
 	bottom:30%;
 	top:-40%;
 }
-.delete-image {
+.del-image {
     cursor: pointer;
     color:white;
     position:absolute;

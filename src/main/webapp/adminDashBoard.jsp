@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/library/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
+<h3 class="header">Welcome ${user.firstname}</h3>
 <div>
 	<table id="userdetails" class="display cell-border compact table-hover"> <!--Use the default css class of datatable-->
 		<thead>
@@ -39,9 +40,7 @@
 			    <td>${user.dateofbirth}</td>
 			    <td>${user.gender}</td>
 			    <td>${user.language}</td>
-			    <td>
-			    	<c:set var="user" value="${user}" scope="session" />
-			    	<a href="registration.jsp" class="btn btn-primary">Edit</a></td>
+			    <td><a href="Admin_EditUser?usermail=${user.email}" class="btn btn-primary">Edit</a></td>
 			    <td><a href="DeleteUser?userid=${user.userID}" class="btn btn-danger">Delete</a></td>
 			 </tr>
 			</c:forEach>

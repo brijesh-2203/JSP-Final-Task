@@ -21,10 +21,6 @@
 	  	<filter-name>EncryptPwd</filter-name>
 	  	<url-pattern>/UserRegistration</url-pattern>
 	  </filter-mapping>
-	  <filter-mapping>
-	  	<filter-name>EncryptPwd</filter-name>
-	  	<url-pattern>/ValidateServlet</url-pattern>
-	  </filter-mapping>
 	   <filter-mapping>
 	  	<filter-name>EncryptPwd</filter-name>
 	  	<url-pattern>/LoginServlet</url-pattern>
@@ -87,6 +83,42 @@
 	 	<description></description>
 	 	<servlet-class>com.User.User_Management_System.Controller.ResetPassword</servlet-class>
 	 </servlet>
+	 <servlet>
+	 	<servlet-name>AdminWork</servlet-name>
+	 	<display-name>AdminWork</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.AdminWork</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>EditServlet</servlet-name>
+	 	<display-name>EditServlet</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.EditServlet</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>UserData</servlet-name>
+	 	<display-name>UserData</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.UserData</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>servlet</servlet-name>
+	 	<display-name>servlet</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.servlet</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>AdminEdit</servlet-name>
+	 	<display-name>AdminEdit</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.AdminEdit</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>Admin_EditUser</servlet-name>
+	 	<display-name>Admin_EditUser</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.Admin_EditUser</servlet-class>
+	 </servlet>
 	   <servlet-mapping>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<url-pattern>/ValidateServlet</url-pattern>
@@ -122,5 +154,29 @@
 	   <servlet-mapping>
 	   	<servlet-name>ResetPassword</servlet-name>
 	   	<url-pattern>/ResetPassword</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>AdminWork</servlet-name>
+	   	<url-pattern>/AdminWork</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>EditServlet</servlet-name>
+	   	<url-pattern>/EditServlet</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>UserData</servlet-name>
+	   	<url-pattern>/UserData</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>servlet</servlet-name>
+	   	<url-pattern>/servlet</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>AdminEdit</servlet-name>
+	   	<url-pattern>/AdminEdit</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>Admin_EditUser</servlet-name>
+	   	<url-pattern>/Admin_EditUser</url-pattern>
 	   </servlet-mapping>
 </web-app>

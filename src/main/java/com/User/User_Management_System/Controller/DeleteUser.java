@@ -24,7 +24,7 @@ public class DeleteUser extends HttpServlet {
 		String uid=request.getParameter("userid"); 
 		int userid = Integer.parseInt(uid);
 		userservice.deleteUser(userid);
-		response.sendRedirect("adminDashBoard.jsp");
+		response.sendRedirect("AdminWork");
 	}
 
 }

@@ -156,6 +156,15 @@ $(document).ready(function() {
 		
 		});
 		
+		let count=0;
+		$("#add-btn").click(function(){
+			count++;
+		});
+		$("#remove-btn").hide();
+		if(count>0)
+		{
+			$("#remove-btn").show();
+		}
 		
 		    $("#firstname").keyup(function(e){
 			
@@ -220,7 +229,9 @@ $(document).ready(function() {
 				var img = $("#image-1648470578618").val();
 				var point = img.lastIndexOf(".");
         		var extention =(img.substring(point + 1)).toLowerCase();
-        		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){}
+        		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){
+						
+        			}
         			else
         			{
 						$('#image-1648470578618').after('<span class="error">*Please Select only images!</span>');
@@ -230,11 +241,17 @@ $(document).ready(function() {
 			$("#email").keyup(function(e){
 					$(".error").remove();
 					var mail = $("#email").val();
+					var message = $("#message").val();
+					console.log(message);
 					var mailFormat="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
 	        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	        
 					if(!mail.match(mailFormat)){
 						$('#email').after('<span class="error">*Please enter valid Email</span>');
+					}
+					else if(mail==message)
+					{
+						$('#email').after('<span class="error">*Email Exist</span>');
 					}
 			});
 			$("#phone").keyup(function(e){
@@ -245,35 +262,21 @@ $(document).ready(function() {
 					$('#phone').after('<span class="error">*Only Numbers are allowed</span>');
 				}
 			});
-			let count=0;
-				$(".add-btn").click(function(){
-					count++;
-					//console.log("c "+count);
-					for(let i=0;i<=count;i++)
-					{
-						$("#pincode_"+i).keyup(function(e){
-							$(".error").remove();
-							console.log("#pincode_"+i)
-							var pincode = $("#pincode_"+i).val();
-							if(pincode.match("[^0-9]"))
-							{
-								$('#pincode_'+i).after('<span class="error">*Only Numbers are allowed</span>');
-							}
-						})
-					}
-					
-				});
-				/*
-				$(".remove-data").click(function(){
-					count--;
-					console.log("cr "+count);
-					});*/
-				$("#remove-btn").hide();
-				if(count>0)
+			$(".pincode").keyup(function(e){
+				$(".error").remove();
+				var pincode = $(".pincode").val();
+				if(pincode.match("[^0-9]"))
 				{
-					$("#remove-btn").show();
+					$('.pincode').after('<span class="error">*Only Numbers are allowed</span>');
 				}
-			
+				else if(pincode.length<6 ||pincode.length>6)
+				{
+					
+				}
+			})
+			$(".material-icons").click(function(e){
+				$(".image").remove();
+			})
 		
       });
       

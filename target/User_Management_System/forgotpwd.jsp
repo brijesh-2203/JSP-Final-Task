@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page isELIgnored="false"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +17,13 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-5 forgot-section">
 				<h1 class="heading"><u>Find Your Account</u></h1>
-				<form action="resetpwd.jsp">
+				<form action="ForgotPwd" method="POST">
+				<span style='color:red'>${requestScope.message}</span>
 				<div class="form-group">
 					Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email" required>
 				</div>
 				<div class="form-group">
-				 	Date of Birth: <input type="date" id="birthday" class="form-control" name="birthday" required>
+				 	Date of Birth: <input type="date" id="birthday" class="form-control" name="birthdate" required>
 				 </div>
 				 <div class="form-group">
 			 		<fieldset>
