@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 </head>
 <body>
+<%@ include file="Header.jsp" %> 
 <section>
 	<div class="container">
 		<div class="row">
@@ -35,6 +36,7 @@
 		</div>
 	</div>
 </section>
+<%@ include file="Footer.jsp" %> 
 	<script src="assets/js/jquery-3.6.0.min.js"></script>
 		<script src="assets/js/validation.js"></script>
 </body>

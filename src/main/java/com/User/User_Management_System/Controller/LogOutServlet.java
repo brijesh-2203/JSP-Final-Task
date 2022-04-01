@@ -9,10 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	static Logger log = LogManager.getLogger(LogOutServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BasicConfigurator.configure();
 		response.setContentType("text/html");  
         PrintWriter out=response.getWriter();
         
@@ -22,6 +28,7 @@ public class LogOutServlet extends HttpServlet {
         {
 	         session.invalidate(); 
         }   
+        log.info("logged out");
         response.sendRedirect("index.jsp");
         out.close(); 
 	}

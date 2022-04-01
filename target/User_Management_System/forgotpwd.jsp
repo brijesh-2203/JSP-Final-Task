@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 </head>
 <body>
+<%@ include file="Header.jsp" %> 
 <section>
 	<div class="container">
 		<div class="row">
@@ -46,5 +47,6 @@
 		</div>
 	</div>
 </section>
+<%@ include file="Footer.jsp" %> 
 </body>
 </html>

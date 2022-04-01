@@ -119,6 +119,12 @@
 	 	<description></description>
 	 	<servlet-class>com.User.User_Management_System.Controller.Admin_EditUser</servlet-class>
 	 </servlet>
+	 <servlet>
+	 	<servlet-name>UserDetails</servlet-name>
+	 	<display-name>UserDetails</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.UserDetails</servlet-class>
+	 </servlet>
 	   <servlet-mapping>
 	  	<servlet-name>ValidateServlet</servlet-name>
 	  	<url-pattern>/ValidateServlet</url-pattern>
@@ -178,5 +184,9 @@
 	   <servlet-mapping>
 	   	<servlet-name>Admin_EditUser</servlet-name>
 	   	<url-pattern>/Admin_EditUser</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>UserDetails</servlet-name>
+	   	<url-pattern>/UserDetails</url-pattern>
 	   </servlet-mapping>
 </web-app>

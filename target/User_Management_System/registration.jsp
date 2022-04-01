@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page isELIgnored="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,14 @@
 		<h2 class="header"><u>Registration Page</u></h2>
 		</c:otherwise>
 		</c:choose>
-			<form action="EditServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
+		<c:choose> 
+		<c:when test="${user != null}">
+				<form action="EditServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
+		</c:when>
+		<c:otherwise>
+				<form action="ValidateServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
+		</c:otherwise>
+		</c:choose>
 		<div class="row left-gap">
 			<input type="hidden" name="userid" value="${user.userID}">
 			 <div class="col-md-5">
@@ -97,14 +105,53 @@
 					</div>
 				 </div>
 				 </c:if>
-				 
 				 <div class="form-group">
 				 	Language Known:
 				 	<div class="checkbox">
-						<label class="checkbox-inline"><input type="checkbox" name="lang" value="English">English</label>
-						<label class="checkbox-inline"><input type="checkbox" name="lang" value="Hindi">Hindi</label>
-						<label class="checkbox-inline"><input type="checkbox" name="lang" value="Gujarati">Gujarati</label>
-						<label class="checkbox-inline"><input type="checkbox" name="lang" value="Chinese">Chinese</label>
+				 	<label class="checkbox-inline">
+						 	<c:choose>
+							      <c:when test="${fn:contains(user.language,'English')}">
+									<input type="checkbox" name="lang" value="English" checked>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="lang" value="English">
+								</c:otherwise>
+							</c:choose>
+						English
+					</label>
+						<label class="checkbox-inline">
+							<c:choose>
+							      <c:when test="${fn:contains(user.language,'Hindi')}">
+									<input type="checkbox" name="lang" value="Hindi" checked>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="lang" value="Hindi">
+								</c:otherwise>
+							</c:choose>
+							Hindi
+						</label>
+						<label class="checkbox-inline">
+							<c:choose>
+							      <c:when test="${fn:contains(user.language,'Gujarati')}">
+									<input type="checkbox" name="lang" value="Gujarati" checked>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="lang" value="Gujarati">
+								</c:otherwise>
+							</c:choose>
+							Gujarati	
+						</label>
+						<label class="checkbox-inline">
+							<c:choose>
+							      <c:when test="${fn:contains(user.language,'Chinese')}">
+									<input type="checkbox" name="lang" value="Chinese" checked>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="lang" value="Chinese">
+								</c:otherwise>
+							</c:choose>
+							Chinese
+						</label>
 				    </div>
 				 </div>
 			</div>
@@ -132,7 +179,7 @@
 								<c:when test="${user != null}">
 									 <c:forEach items="${user.image}" var='userimg' >
 									     <span class="uploadedimage"><img src="data:image/jpg;base64,${userimg.base64Image}" class="image" width="180" height="180"/>
-									     <a href="RemoveImage?imgId=${userimg.imgid}" class="del-image"><i class="material-icons">clear</i></a></span>
+									     <a href="RemoveImage?imgId=${userimg.imgid}&userid=${user.userID}" class="del-image"><i class="material-icons">clear</i></a></span>
 								     </c:forEach>
 								     <div class="input-images"></div>
 								</c:when>
@@ -228,6 +275,6 @@
 			<script src="assets/js/cloneData.js"></script>		
 		<script type="text/javascript" src="assets/dist/image-uploader.min.js"></script>
 		<script src="assets/js/custom.js"></script>
-		
+		<script src="assets/js/validation.js"></script>
 </body>
 </html>

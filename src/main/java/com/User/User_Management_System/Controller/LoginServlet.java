@@ -1,6 +1,7 @@
 package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,18 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Service.UserService;
-
+import com.User.User_Management_System.Service.UserServiceImpl;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+	 static Logger log = LogManager.getLogger(LoginServlet.class.getName()); 
 	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
-		userservice = new UserService();
+		userservice = new UserServiceImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 BasicConfigurator.configure(); 
 		response.setContentType("text/html");
 		String pwd = (String) request.getAttribute("password");
 		String email=request.getParameter("email");
@@ -32,14 +38,16 @@ public class LoginServlet extends HttpServlet {
 				{
 					HttpSession session=request.getSession();
 					String role = userservice.getRole(email);
-					session.setAttribute("user",user);
+					session.setAttribute("USER",user);
 					if(role.equals("user"))
 					{
 			           response.sendRedirect("userDashBoard.jsp");
+			           log.info("User-logged-in");  
 					}
-					else if(role.equals("admin"))
+					else
 					{
 						response.sendRedirect("AdminWork");
+						log.info("Admin-logged-in");  
 					}
 				}
 				else
@@ -50,8 +58,9 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-			request.setAttribute("message","*Unauthorized User");
-			r.forward(request, response);
+				log.error("Login fail"); 
+				request.setAttribute("message","*Unauthorized User");
+				r.forward(request, response);
 			}
 		}
 }

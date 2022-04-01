@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
 </head>
 <body>
+<%@ include file="Header.jsp" %> 
+<main>
   <section>
 	<div class="container">
 		<div class="row">
@@ -37,8 +39,11 @@
 			 </div>
 			 <div class="col-md-4"></div>
 			 
+			 
 		</div>
 	</div>
 </section>
+</main>
+<%@ include file="Footer.jsp" %> 
 </body>
 </html>

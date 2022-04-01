@@ -179,7 +179,7 @@
 								<c:when test="${user != null}">
 									 <c:forEach items="${user.image}" var='userimg' >
 									     <span class="uploadedimage"><img src="data:image/jpg;base64,${userimg.base64Image}" class="image" width="180" height="180"/>
-									     <a href="RemoveImage?imgId=${userimg.imgid}" class="del-image"><i class="material-icons">clear</i></a></span>
+									     <a href="RemoveImage?imgId=${userimg.imgid}&userid=${user.userID}" class="del-image"><i class="material-icons">clear</i></a></span>
 								     </c:forEach>
 								     <div class="input-images"></div>
 								</c:when>
@@ -209,7 +209,7 @@
 			<div class="col-md-5 gap">
 					  <div class="form-group">
 						<p class="add-head">Address line1:</p>
-							<input type="text" class="form-control add-head" value="${useradd.add1}" name="address1" required>
+							<input type="text" class="form-control add-head" value="${useradd.add1}"  name="address1" required>
 					   </div>
 					   <div class="form-group"><p class="add-head">City: </p><input type="text" value="${useradd.city}"  class="form-control add-head" name="city" required></div>
 					    <div class="form-group"><p class="add-head"> Country: </p><input type="text" value="${useradd.country}" class="form-control add-head" name="country" required></div>

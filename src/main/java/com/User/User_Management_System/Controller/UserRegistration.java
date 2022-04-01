@@ -1,6 +1,7 @@
 package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
+
 import java.io.*;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
@@ -19,31 +20,39 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.Service.UserService;
+import com.User.User_Management_System.Service.UserServiceImpl;
 @MultipartConfig
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+	static Logger log = LogManager.getLogger(UserRegistration.class.getName());  
 	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
-		userservice = new UserService();
+		userservice = new UserServiceImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 BasicConfigurator.configure(); 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String email=request.getParameter("email");
 		if(userservice.userExist(email))
 		{
+			log.error("user already exist");
 			RequestDispatcher r=request.getRequestDispatcher("registration.jsp");
 			request.setAttribute("message",email);
 			r.forward(request, response);
 		}
 		else
 		{
+		   try {
 				String pwd = (String) request.getAttribute("password");
 				String fname=request.getParameter("firstname");  
 				String lname=request.getParameter("lastname"); 
@@ -109,6 +118,7 @@ public class UserRegistration extends HttpServlet {
 		                userservice.addUserImg(userimg);
 		            }
 		        }
+		        log.info("registration successfully");
 		        HttpSession session=request.getSession(false);
 		        if(session==null)
 		        {
@@ -119,6 +129,12 @@ public class UserRegistration extends HttpServlet {
 		        {
 		        	response.sendRedirect("AdminWork");
 		        }
+			 }
+			 catch(Exception e)
+			 {
+				 log.error(e);
+				 log.error("registration fails");
+			 }
 				
 			}
 		

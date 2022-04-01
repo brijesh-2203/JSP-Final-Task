@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<h3 class="header">Welcome ${user.firstname} ${user.lastname}</h3>
+<h3 class="header">Welcome ${USER.firstname} ${USER.lastname}</h3>
    <a href="ShowUserProfile" class="btn btn-default">Show Profile</a>
-   <a href="registration.jsp" class="btn btn-default">EditProfile</a>
+   <a href="UserDetails" class="btn btn-default">EditProfile</a>
    <a href="LogOutServlet" class="btn btn-default">LogOut</a>
 </body>
 </html>

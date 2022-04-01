@@ -21,4 +21,5 @@ public interface UserDao {
 	public void changePwd(String pwd, String usermail); 
 	public void updateUserProfile(User user,int userid);
 	public User validUser(String email);
+	public User getUserDetails(int userid); 
 }

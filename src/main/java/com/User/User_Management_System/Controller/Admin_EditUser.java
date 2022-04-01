@@ -11,23 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.User.User_Management_System.Bean.User;
-import com.User.User_Management_System.Service.UserService;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
-/**
- * Servlet implementation class Admin_EditUser
- */
+import com.User.User_Management_System.Bean.User;
+import com.User.User_Management_System.Dao.UserDao;
+import com.User.User_Management_System.Dao.UserDaoImpl;
+import com.User.User_Management_System.Service.UserService;
+import com.User.User_Management_System.Service.UserServiceImpl;
+
 public class Admin_EditUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	static Logger log = LogManager.getLogger(Admin_EditUser.class.getName());
 	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
-		userservice = new UserService();
+		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BasicConfigurator.configure();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String mail = request.getParameter("usermail");
-		User user = userservice.checkUser(mail);
+		String uid = request.getParameter("userid");
+		int userid = Integer.parseInt(uid);
+		User user = userservice.getUserDetails(userid);
+		log.info("user profile updated");
 		request.setAttribute("user", user);
 		RequestDispatcher r=request.getRequestDispatcher("registration.jsp");
 		r.forward(request, response);

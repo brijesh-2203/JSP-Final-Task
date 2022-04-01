@@ -57,17 +57,15 @@ $(document).ready(function() {
 					  }
 				});
 				
-			  $("#image-1648470578618").change(function(e){
+			  $("input[name='image[]']").change(function(e){
 				$(".error").remove();
-				var img = $("#image-1648470578618").val();
+				var img = $("input[name='image[]']").val();
 				var point = img.lastIndexOf(".");
         		var extention =(img.substring(point + 1)).toLowerCase();
-        		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){
-						
-        			}
+        		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){}
         			else
         			{
-						$('#image-1648470578618').after('<span class="error">*Please Select only images!</span>');
+						$("input[name='image[]']").after('<span class="error">*Please Select only images!</span>');
 					}
 			});
 			
@@ -95,6 +93,18 @@ $(document).ready(function() {
 					$('#phone').after('<span class="error">*Only Numbers are allowed</span>');
 				}
 			});
+			let count=0;
+			$(".add-btn").click(function(e){
+				count++;
+				console.log("ca"+count);
+			});
+			console.log(count);
+			$(".remove-data").click(function(e){
+				console.log("clicked");
+				count--;
+				console.log("crin"+count);
+			})
+			console.log("cr"+count);
 			$(".pincode").keyup(function(e){
 				$(".error").remove();
 				var pincode = $(".pincode").val();

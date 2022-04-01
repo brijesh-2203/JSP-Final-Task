@@ -5,13 +5,17 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
+import com.User.User_Management_System.Controller.Admin_EditUser;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserDaoImpl implements UserDao {
-
+	static Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
 	Connection con = null;
 	PreparedStatement ps=null;
 	public boolean userExist(String mail)
@@ -200,6 +204,57 @@ public class UserDaoImpl implements UserDao {
             	user.setPassword(rs.getString(9));
             	user.setAnswer1(rs.getString(10));
             	user.setAnswer2(rs.getString(11));
+            	user.setRole(rs.getString(12));
+            }
+           
+        }
+        catch(Exception e)
+        {
+        	System.out.println(e);
+        }
+        finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+        return user;
+	}
+	public User getUserDetails(int userid)
+	{
+		User user = null;
+		ArrayList<UserAddress> useradd = new ArrayList<UserAddress>();
+		ArrayList<UserImage> userimg = new ArrayList<UserImage>();
+		
+        try 
+        {
+        	con=ConnectionSetup.getConnection();
+        	ps = con.prepareStatement("select * from UserDetails where UserID = ?;");
+            ps.setInt(1,userid);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+            	user = new User();
+            	useradd = (ArrayList<UserAddress>) getUserAddress(rs.getInt(1));
+            	user.setAddress(useradd);
+            	userimg = (ArrayList<UserImage>) getUserImg(rs.getInt(1));
+            	user.setImage(userimg);
+            	user.setUserID(rs.getInt(1));
+            	user.setFirstname(rs.getString(2));
+            	user.setLastname(rs.getString(3));
+            	user.setPhone(rs.getLong(4));
+            	user.setDateofbirth(rs.getString(5));
+            	user.setGender(rs.getString(6));
+            	user.setLanguage(rs.getString(7));
+            	user.setEmail(rs.getString(8));
+            	user.setPassword(rs.getString(9));
+            	user.setAnswer1(rs.getString(10));
+            	user.setAnswer2(rs.getString(11));
+            	user.setRole(rs.getString(12));
             }
            
         }
