@@ -22,4 +22,6 @@ public interface UserDao {
 	public void updateUserProfile(User user,int userid);
 	public User validUser(String email);
 	public User getUserDetails(int userid); 
+	public void updateUserAddress(UserAddress add);
+	public void deleteAddress(int addid);
 }

@@ -54,6 +54,7 @@ public class UserRegistration extends HttpServlet {
 		{
 		   try {
 				String pwd = (String) request.getAttribute("password");
+				System.out.println("pwd :"+pwd);
 				String fname=request.getParameter("firstname");  
 				String lname=request.getParameter("lastname"); 
 				String phone=request.getParameter("phone");
@@ -118,9 +119,10 @@ public class UserRegistration extends HttpServlet {
 		                userservice.addUserImg(userimg);
 		            }
 		        }
-		        log.info("registration successfully");
+		       log.info("registration successfully");
 		        HttpSession session=request.getSession(false);
-		        if(session==null)
+		        System.out.println(session);
+		        if(session.getAttribute("USER") == null)
 		        {
 		        	RequestDispatcher rf=request.getRequestDispatcher("index.jsp");
 		        	rf.include(request, response);

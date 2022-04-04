@@ -42,12 +42,12 @@ public class LoginServlet extends HttpServlet {
 					if(role.equals("user"))
 					{
 			           response.sendRedirect("userDashBoard.jsp");
-			           log.info("User-logged-in");  
+			          // log.info("User-logged-in");  
 					}
 					else
 					{
 						response.sendRedirect("AdminWork");
-						log.info("Admin-logged-in");  
+						//log.info("Admin-logged-in");  
 					}
 				}
 				else

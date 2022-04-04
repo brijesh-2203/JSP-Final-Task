@@ -97,6 +97,7 @@ public class ValidateServlet extends HttpServlet {
 //			 HttpSession session=request.getSession(false);
 //		        if(session==null)
 //		        {
+			System.out.println("valid pwd:"+pwd);
 		        	 rf=request.getRequestDispatcher("UserRegistration"); 
 		        	 rf.forward(request, response);
 		        //}

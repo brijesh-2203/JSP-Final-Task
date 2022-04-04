@@ -27,7 +27,7 @@ public class ResetPassword extends HttpServlet {
 		BasicConfigurator.configure();
 		String pwd = (String) request.getAttribute("password");
 		String usermail = request.getParameter("usermail");
-		log.info("Password is changed");
+		//log.info("Password is changed");
 		userservice.changePwd(pwd,usermail);
 		response.sendRedirect("index.jsp");
 	}

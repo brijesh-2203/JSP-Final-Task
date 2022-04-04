@@ -39,7 +39,7 @@
 			    <td>${user.dateofbirth}</td>
 			    <td>${user.gender}</td>
 			    <td>${user.language}</td>
-			    <td><a href="Admin_EditUser?userid=${user.userID}" class="btn btn-primary">Edit</a></td>
+			    <td><a href="UserDetails?userid=${user.userID}"  class="btn btn-primary">Edit</a></td>
 			    <td><a href="DeleteUser?userid=${user.userID}" class="btn btn-danger">Delete</a></td>
 			 </tr>
 			</c:forEach>
@@ -51,6 +51,7 @@
 <a href="LogOutServlet" class="btn btn-danger">LogOut</a>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="assets/library/DataTables/datatables.min.js"></script>
+<script src="assets/js/validation.js"></script>
 <script src="assets/js/datatable.js"></script>
 </body>
 </html>

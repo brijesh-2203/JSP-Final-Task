@@ -1,4 +1,5 @@
 $(document).ready(function() {
+   
 	$("#firstname").keyup(function(e){
 			
 				e.preventDefault();
@@ -56,10 +57,24 @@ $(document).ready(function() {
 						 $('#repwd').after('<span class="error">*Password should be same</span>');
 					  }
 				});
-				
-			  $("input[name='image[]']").change(function(e){
+				/*
+				var values = $("input[name='image[]']").map(function(){return $(this).val();}).get();
+				 console.log(values);
+				for(var i=0;i<values.length;i++)
+				{
+					 console.log(values[i]);
+				}*/
+             
+              /*
+				$(".uploaded").click(function(){
+				var files = $("input[type='image']").val();
+				console.log(files);
+				console.log("hss");
+				});
+			  $("input[name='image']").change(function(e){
 				$(".error").remove();
-				var img = $("input[name='image[]']").val();
+				var img = $("input[name='image']").val();
+				console.log(img);
 				var point = img.lastIndexOf(".");
         		var extention =(img.substring(point + 1)).toLowerCase();
         		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){}
@@ -68,6 +83,7 @@ $(document).ready(function() {
 						$("input[name='image[]']").after('<span class="error">*Please Select only images!</span>');
 					}
 			});
+			*/
 			
 			$("#email").keyup(function(e){
 					$(".error").remove();
@@ -93,6 +109,21 @@ $(document).ready(function() {
 					$('#phone').after('<span class="error">*Only Numbers are allowed</span>');
 				}
 			});
+			$(".checked-radio").mouseover(function(){
+				$(".r-btn-error").remove();
+				if($("input[name='Gender']:checked").length == 0)
+				{
+					$(".checked-radio").after('<span class="r-btn-error">*Required Field</span>');
+				}
+			})
+			
+			$(".checked-checkbox").mouseover(function(){
+				$(".btn-error").remove();
+				if($("input[name='lang']:checked").length == 0)
+				{
+					$(".checked-checkbox").after('<span class="btn-error">*Required Field</span>');
+				}
+			})
 			let count=0;
 			$(".add-btn").click(function(e){
 				count++;

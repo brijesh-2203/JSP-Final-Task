@@ -33,7 +33,7 @@ public class AdminWork extends HttpServlet {
 		List<User> users = new ArrayList<User>();
 		users = userservice.getUsers();
 	 	request.setAttribute("UsersList",users);
-	 	log.info("userlist added");
+	 	//log.info("userlist added");
 	 	RequestDispatcher rf=request.getRequestDispatcher("adminDashBoard.jsp");
 	 	rf.forward(request, response);
 	}

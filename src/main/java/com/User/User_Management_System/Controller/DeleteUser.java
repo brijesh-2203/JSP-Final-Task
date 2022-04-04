@@ -28,9 +28,11 @@ public class DeleteUser extends HttpServlet {
 		BasicConfigurator.configure();
 		response.setContentType("text/html");
 		String uid=request.getParameter("userid"); 
+		log.info(uid);
 		int userid = Integer.parseInt(uid);
+		System.out.println(userid);
 		userservice.deleteUser(userid);
-		log.info("User deleted");
+		//log.info("User deleted");
 		response.sendRedirect("AdminWork");
 	}
 

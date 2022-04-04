@@ -1,6 +1,7 @@
 package com.User.User_Management_System.Dao;
 
 import java.io.ByteArrayOutputStream;
+
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
@@ -11,7 +12,6 @@ import org.apache.log4j.Logger;
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
-import com.User.User_Management_System.Controller.Admin_EditUser;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserDaoImpl implements UserDao {
@@ -468,6 +468,30 @@ public class UserDaoImpl implements UserDao {
 				}
 			   }
 	}
+	public void deleteAddress(int addid)
+	{
+		try
+		{
+				con=ConnectionSetup.getConnection();
+				ps=((java.sql.Connection) con).prepareStatement("delete from AddressDetails where AddressID=?;");
+			 	ps.setInt(1,addid);
+	            ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+	}
 	public void changePwd(String pwd, String usermail) {
 		try
 		{
@@ -506,6 +530,37 @@ public class UserDaoImpl implements UserDao {
 	            ps.setString(5, user.getGender());
 	            ps.setString(6, user.getLanguage());
 	            ps.setInt(7, userid);
+	            ps.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally {
+			   try {
+					   if(ps!=null)
+					   {
+					       ps.close();
+				       }
+			   }catch (Exception e) {
+					e.printStackTrace();
+				}
+			   }
+	}
+	public void updateUserAddress(UserAddress add)
+	{ 
+		try
+		{
+				con=ConnectionSetup.getConnection();
+				ps=((java.sql.Connection) con).prepareStatement("update AddressDetails set Addressline1=?,Addressline2=?,Pincode=?,City=?,State=?,Country=? where AddressID=?;");
+			 	
+	            ps.setString(1, add.getAdd1());
+	            ps.setString(2, add.getAdd2());
+	            ps.setString(3, add.getPincode());
+	            ps.setString(4, add.getCity());
+	            ps.setString(5, add.getState());
+	            ps.setString(6, add.getCountry());
+	            ps.setInt(7, add.getAddressid());
 	            ps.executeUpdate();
 		}
 		catch(Exception e)

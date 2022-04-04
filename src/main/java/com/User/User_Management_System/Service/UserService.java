@@ -22,4 +22,7 @@ public interface UserService{
 	public void changePwd(String pwd,String usermail);
 	public void updateUserProfile(User user,int userid);
 	public User getUserDetails(int userid);
+	public void updateUserAddress(UserAddress useradd);
+	public List<UserAddress> getUserAddress(int userid);
+	public void deleteAddress(int addid);
 }

@@ -67,4 +67,17 @@ public class UserServiceImpl implements UserService{
 			User user = userdao.getUserDetails(userid);
 			return user;
 		}
+		public void updateUserAddress(UserAddress useradd)
+		{
+			userdao.updateUserAddress(useradd);
+		}
+		public List<UserAddress> getUserAddress(int userid)
+		{
+			List<UserAddress> useraddlist = userdao.getUserAddress(userid);
+			return useraddlist;
+		}
+		public void deleteAddress(int addid)
+		{
+			userdao.deleteAddress(addid);
+		}
 }

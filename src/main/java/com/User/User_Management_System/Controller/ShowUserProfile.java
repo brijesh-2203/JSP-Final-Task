@@ -25,7 +25,7 @@ public class ShowUserProfile extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession(false);
-		 User user = (User)session.getAttribute("user");
+		 User user = (User)session.getAttribute("USER");
 		 int id = user.getUserID();
 		 String fname = user.getFirstname();
 		 String lname = user.getLastname();
@@ -44,7 +44,6 @@ public class ShowUserProfile extends HttpServlet {
 		 out.println("<br>DateOfBirth:"+dob);
 		 out.println("<br>Gender:"+gender);
 		 out.println("<br>Language Known:"+lang);
-		 out.println("<br><a href='edit.html'>Edit Profile</a>");
 		 out.println("<br><button>\r\n"
 		 		+ " <a href=ShowOptions>Back</a></button>");
 		 out.println(add);

@@ -24,12 +24,13 @@
 		<h2 class="header"><u>Registration Page</u></h2>
 		</c:otherwise>
 		</c:choose>
+		<span style='color:red'>${requestScope.message}</span>
 		<c:choose> 
 		<c:when test="${user != null}">
 				<form action="EditServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
 		</c:when>
 		<c:otherwise>
-				<form action="ValidateServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
+				<form action="UserRegistration" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
 		</c:otherwise>
 		</c:choose>
 		<div class="row left-gap">
@@ -97,17 +98,17 @@
 				 <c:if test="${user==null}">
 				 <div class="form-group">
 				  Gender:
-				   <div class="radio">
+				   <div class="radio checked-radio">
 				   
 						<label class="radio-inline"><input type="radio" name="Gender" value="Male">Male</label>
-						<label class="radio-inline"><input type="radio" name="Gender" value="FeMale">Female</label>
+						<label class="radio-inline"><input type="radio" name="Gender" value="Female">Female</label>
 						<label class="radio-inline"><input type="radio" name="Gender" value="Transgender">Transgender</label>
 					</div>
 				 </div>
 				 </c:if>
 				 <div class="form-group">
 				 	Language Known:
-				 	<div class="checkbox">
+				 	<div class="checkbox checked-checkbox">
 				 	<label class="checkbox-inline">
 						 	<c:choose>
 							      <c:when test="${fn:contains(user.language,'English')}">
@@ -187,26 +188,18 @@
 								 <div class="input-images"></div>
 								</c:otherwise>
 							</c:choose>
-						   
-						    <!--<input id="fileupload" type="file" name="files[]" multiple>-->
-						   <!--<input  type="file" id="files" name="files" multiple="true" required>--><!--<input type="file" name="photo" class="imgUpload" id="image_0">-->
-						 </div>
-						<!--<div class="form-group"><a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger add-head" id="remove-btn">Remove</a></div>-->
+						</div>
 					  </div>
-					</div>
-		<!--
-       <div class="form-group">
-			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap add-photos-btn">Add More Photos</a>
-		 </div>
-     -->
+				</div>
+<div id="main-container">
      <c:choose> 
 		<c:when test="${user != null}">
 			<c:forEach items="${user.address}" var='useradd' >
-    <div id="main-container">
 	   <div class="container-item">
 		  <div class="row left-gap" id="add-design">
 		    <h3  class="head-gap">Address Field:</h3>
 			<div class="col-md-5 gap">
+				<input type="hidden" name="addid" value="${useradd.addressid}">
 					  <div class="form-group">
 						<p class="add-head">Address line1:</p>
 							<input type="text" class="form-control add-head" value="${useradd.add1}"  name="address1" required>
@@ -226,11 +219,9 @@
 			 </div>
 		 </div>
 		</div>
-	</div>
 	 </c:forEach>
 	</c:when>
 		<c:otherwise> 
-		    <div id="main-container">
 			   <div class="container-item">
 				  <div class="row left-gap" id="add-design">
 				    <h3  class="head-gap">Address Field:</h3>
@@ -254,10 +245,10 @@
 					 </div>
 				 </div>
 				</div>
-			</div>
+			
 		</c:otherwise>
 		</c:choose>
-
+</div>
 		<div class="form-group">
 			<a id="add-more" href="javascript:;" class="btn btn-primary left-gap add-btn">Add More Address</a>
 		 </div>

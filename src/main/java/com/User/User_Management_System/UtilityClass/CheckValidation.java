@@ -42,5 +42,16 @@ public class CheckValidation {
 			return true;
 		}
 	}
+	public boolean validateNumber(String number)
+	{
+		if(Pattern.matches("[0-9]+",number))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 
 }

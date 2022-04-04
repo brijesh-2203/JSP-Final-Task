@@ -30,10 +30,11 @@ background-color: white;
    margin-bottom:30px;
 }
 .Form-Section{
-	margin-top:30px;
+	margin-top:80px;
 	border:2px solid white;
 	border-radius:13px;
 	background-color: white;
+	margin-bottom:80px;
 }
 .head-gap{
 	margin-left:20px;
@@ -94,7 +95,7 @@ background-color: white;
   height: 520px;
   width:550px;
 }
-.error{
+.error, .r-btn-error, .btn-error{
 	color:red;
 	font-size:10px;
 }

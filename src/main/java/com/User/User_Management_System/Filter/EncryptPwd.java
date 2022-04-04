@@ -19,6 +19,7 @@ public class EncryptPwd implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		  
 		 String password=request.getParameter("password");
+		 System.out.println("pa filter"+password);
 	        String encryptedpassword = null;  
 	        try   
 	        {  

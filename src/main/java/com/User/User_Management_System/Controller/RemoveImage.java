@@ -33,13 +33,13 @@ public class RemoveImage extends HttpServlet {
 		String imgid=request.getParameter("imgId"); 
 		int imageid = Integer.parseInt(imgid);
 		userservice.deleteImage(imageid);
-		log.info("image-deleted");
-		//response.sendRedirect("registration.jsp");
-//		String uid = request.getParameter("userid");
-//		int userid = Integer.parseInt(uid);
-//		User user = userservice.getUserDetails(userid);
-		//request.setAttribute("user", user);
-		RequestDispatcher r=request.getRequestDispatcher("Admin_EditUser");
+		//log.info("image-deleted");
+		//response.sendRedirect("UpdatedUser");
+		String uid = request.getParameter("userid");
+		int userid = Integer.parseInt(uid);
+		User user = userservice.getUserDetails(userid);
+		request.setAttribute("user", user);
+		RequestDispatcher r=request.getRequestDispatcher("registration.jsp");
 		r.forward(request, response);
 	}
 }
