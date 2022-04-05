@@ -26,21 +26,13 @@ public class RemoveImage extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BasicConfigurator.configure();
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String imgid=request.getParameter("imgId"); 
 		int imageid = Integer.parseInt(imgid);
 		userservice.deleteImage(imageid);
-		//log.info("image-deleted");
-		//response.sendRedirect("UpdatedUser");
-		String uid = request.getParameter("userid");
-		int userid = Integer.parseInt(uid);
-		User user = userservice.getUserDetails(userid);
-		request.setAttribute("user", user);
-		RequestDispatcher r=request.getRequestDispatcher("registration.jsp");
-		r.forward(request, response);
+		log.info("image-deleted of id:"+imgid);
 	}
 }
 

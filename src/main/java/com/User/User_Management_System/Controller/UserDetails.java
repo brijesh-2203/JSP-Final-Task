@@ -35,6 +35,7 @@ public class UserDetails extends HttpServlet {
 		if(user.getRole().equals("user"))
 		{
 			request.setAttribute("user",user);
+			log.info("Updated User set in Request");
 		 	rf.forward(request, response);
 		}
 		else
@@ -43,6 +44,7 @@ public class UserDetails extends HttpServlet {
 			int userid = Integer.parseInt(uid);
 			User usr = userservice.getUserDetails(userid);
 			request.setAttribute("user", usr);
+			log.info("Updated User set in Request");
 			rf.forward(request, response);
 		}
 		

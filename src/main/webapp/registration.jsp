@@ -12,8 +12,10 @@
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="assets/dist/image-uploader.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+<%@ include file="Header.jsp" %>
 <section>
 	<div class="container Form-Section">
 	<c:choose> 
@@ -34,7 +36,7 @@
 		</c:otherwise>
 		</c:choose>
 		<div class="row left-gap">
-			<input type="hidden" name="userid" value="${user.userID}">
+			<input type="hidden" name="userid" id="userid" value="${user.userID}">
 			 <div class="col-md-5">
 			 	<div class="form-group">
 					FirstName :<input type="text" name="firstname" value="${user.firstname}" id="firstname" class="form-control" placeholder="Enter First Name" required>
@@ -46,6 +48,7 @@
 				<c:when test="${user==null}">
 				 <div class="form-group">
 				 	 Email:<input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+				 	 <span id="error"></span>
 				 </div>
 				 <div class="form-group">
 				 	 Password:<input type="password" placeholder="Enter Password"  id="pwd" class="form-control" name="password" required>
@@ -169,9 +172,9 @@
 			    				 <input type="text" class="form-control"  name="q2" required><br>
     				</fieldset>
     			 </div>
-    			 </div>
+    		 </div>
     	 </div>
-</c:if>
+     </c:if>
 			   	<div class="row left-gap">
 					<div class="col-md-12">
 		    			 <div class="form-group">
@@ -179,9 +182,11 @@
 						    <c:choose> 
 								<c:when test="${user != null}">
 									 <c:forEach items="${user.image}" var='userimg' >
+									 <span id="${userimg.imgid}" class="delete-image">
 									     <span class="uploadedimage"><img src="data:image/jpg;base64,${userimg.base64Image}" class="image" width="180" height="180"/>
-									     <a href="RemoveImage?imgId=${userimg.imgid}&userid=${user.userID}" class="del-image"><i class="material-icons">clear</i></a></span>
+									     <span class="del-image"><i class="material-icons">clear</i></span></span></span>
 								     </c:forEach>
+								     <input type="hidden" name="imageslength" id="imageslength" value="${user.image.size()}">
 								     <div class="input-images"></div>
 								</c:when>
 								<c:otherwise> 
@@ -254,14 +259,13 @@
 		 </div>
 		 <div class="form-group">
 			<input type="submit" value="Submit" class="btn btn-success left-gap" id="submit-btn">
-			
 			<input type="reset" class="btn btn-info">
 		 </div>
 			
 	</form>
-</div>
-	
+</div>	
 </section>
+<%@ include file="Footer.jsp" %>
 			<script src="assets/js/jquery-3.6.0.min.js"></script>
 			<script src="assets/js/cloneData.js"></script>		
 		<script type="text/javascript" src="assets/dist/image-uploader.min.js"></script>

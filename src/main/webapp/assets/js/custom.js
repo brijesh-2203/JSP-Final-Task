@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	
+      
 	$('.input-images').imageUploader({
 		   imagesInputName: 'image',
 		});
@@ -31,6 +32,20 @@ $(document).ready(function() {
 			$("#remove-btn").show();
 		}
 		
+		$("#email").keyup(function(){
+			$.ajax({
+				url:"http://localhost:8080/User_Management_System/CheckUserExist",
+				type:'POST',
+				data:$("#myform").serialize(),
+				cache:false,
+				datatype:"html",
+				success:function(response){
+					$("#error").html(response);
+				}
+				
+			})
+		})
+      
       });
       
 

@@ -1,0 +1,20 @@
+#userdetails{
+	margin-left:10px;
+	width:99%;
+	border:2px solid black;
+	border-radius:3px;
+}
+#userdetails th{
+	font-size:16px;
+}
+.table-design{
+	margin-left:20px;
+	margin-right:20px;
+}
+.header{
+	text-align:center;
+	font-size:40px;
+}
+.buttons{
+	margin-left:30px;
+}

@@ -38,9 +38,7 @@ public class UserData extends HttpServlet {
 		{
 			user = userservice.checkUser(user.getEmail());
 			session.setAttribute("USER", user);
-//			request.setAttribute("user", user);
-//			RequestDispatcher r=request.getRequestDispatcher("userDashBoard.jsp");
-//			r.forward(request, response);
+			log.info("Updated User data stored in session");
 			response.sendRedirect("userDashBoard.jsp");
 		}
 	}

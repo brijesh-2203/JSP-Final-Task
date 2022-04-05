@@ -1,7 +1,30 @@
 $(document).ready(function() {
-   
-	$("#firstname").keyup(function(e){
-			
+	
+   var imageslength = $("#imageslength").val();
+  		 $('#myform').on('click', '.delete-image', function(){
+			var answer = confirm("Are you want to delete image?");
+			imageslength--;
+				if(answer==true && imageslength>=1)
+				{
+						var imageid = +this.id; 
+						$.ajax({
+						url: "http://localhost:8080/User_Management_System/RemoveImage",
+						type: "POST",
+						data: {
+							   imgId : imageid,
+							  }, 
+						success : function(data){
+						$("#"+imageid).remove();
+						}
+					    });
+				 }
+				 else
+				 {
+					alert("One Image is Compulsory!");
+				}
+      		});
+      		
+			$("#firstname").keyup(function(e){
 				e.preventDefault();
 				$(".error").remove();
 				var fname = $('#firstname').val();
@@ -57,34 +80,6 @@ $(document).ready(function() {
 						 $('#repwd').after('<span class="error">*Password should be same</span>');
 					  }
 				});
-				/*
-				var values = $("input[name='image[]']").map(function(){return $(this).val();}).get();
-				 console.log(values);
-				for(var i=0;i<values.length;i++)
-				{
-					 console.log(values[i]);
-				}*/
-             
-              /*
-				$(".uploaded").click(function(){
-				var files = $("input[type='image']").val();
-				console.log(files);
-				console.log("hss");
-				});
-			  $("input[name='image']").change(function(e){
-				$(".error").remove();
-				var img = $("input[name='image']").val();
-				console.log(img);
-				var point = img.lastIndexOf(".");
-        		var extention =(img.substring(point + 1)).toLowerCase();
-        		 if((extention == "jpg") || (extention == "jpeg") || (extention == "png")){}
-        			else
-        			{
-						$("input[name='image[]']").after('<span class="error">*Please Select only images!</span>');
-					}
-			});
-			*/
-			
 			$("#email").keyup(function(e){
 					$(".error").remove();
 					var mail = $("#email").val();
@@ -116,36 +111,11 @@ $(document).ready(function() {
 					$(".checked-radio").after('<span class="r-btn-error">*Required Field</span>');
 				}
 			})
-			
 			$(".checked-checkbox").mouseover(function(){
 				$(".btn-error").remove();
 				if($("input[name='lang']:checked").length == 0)
 				{
 					$(".checked-checkbox").after('<span class="btn-error">*Required Field</span>');
-				}
-			})
-			let count=0;
-			$(".add-btn").click(function(e){
-				count++;
-				console.log("ca"+count);
-			});
-			console.log(count);
-			$(".remove-data").click(function(e){
-				console.log("clicked");
-				count--;
-				console.log("crin"+count);
-			})
-			console.log("cr"+count);
-			$(".pincode").keyup(function(e){
-				$(".error").remove();
-				var pincode = $(".pincode").val();
-				if(pincode.match("[^0-9]"))
-				{
-					$('.pincode').after('<span class="error">*Only Numbers are allowed</span>');
-				}
-				else if(pincode.length<6 ||pincode.length>6)
-				{
-					
 				}
 			})
 });

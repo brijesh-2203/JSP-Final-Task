@@ -13,8 +13,9 @@
 <body>
 
 <h3 class="header">Welcome ${USER.firstname} ${USER.lastname}</h3>
-   <a href="ShowUserProfile" class="btn btn-default">Show Profile</a>
+<span class="buttons">
    <a href="UserDetails" class="btn btn-default">EditProfile</a>
    <a href="LogOutServlet" class="btn btn-default">LogOut</a>
+ </span>
 </body>
 </html>

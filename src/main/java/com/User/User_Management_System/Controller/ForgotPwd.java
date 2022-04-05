@@ -43,7 +43,6 @@ public class ForgotPwd extends HttpServlet {
 						RequestDispatcher rf=request.getRequestDispatcher("resetpwd.jsp");
 						request.setAttribute("email",user.getEmail());
 						rf.forward(request, response);
-						//response.sendRedirect("resetpwd.jsp");
 					}
 					else
 					{

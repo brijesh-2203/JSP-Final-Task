@@ -42,19 +42,11 @@ public class UserRegistration extends HttpServlet {
 		 BasicConfigurator.configure(); 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String email=request.getParameter("email");
-		if(userservice.userExist(email))
-		{
-			log.error("user already exist");
-			RequestDispatcher r=request.getRequestDispatcher("registration.jsp");
-			request.setAttribute("message",email);
-			r.forward(request, response);
-		}
-		else
-		{
+		
 		   try {
+			   	
+			   	String email=request.getParameter("email");
 				String pwd = (String) request.getAttribute("password");
-				System.out.println("pwd :"+pwd);
 				String fname=request.getParameter("firstname");  
 				String lname=request.getParameter("lastname"); 
 				String phone=request.getParameter("phone");
@@ -121,7 +113,6 @@ public class UserRegistration extends HttpServlet {
 		        }
 		       log.info("registration successfully");
 		        HttpSession session=request.getSession(false);
-		        System.out.println(session);
 		        if(session.getAttribute("USER") == null)
 		        {
 		        	RequestDispatcher rf=request.getRequestDispatcher("index.jsp");
@@ -139,7 +130,5 @@ public class UserRegistration extends HttpServlet {
 			 }
 				
 			}
-		
-	}
 
 }
