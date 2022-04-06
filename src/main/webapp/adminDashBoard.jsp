@@ -10,10 +10,11 @@
 	<link rel="stylesheet" type="text/css" href="assets/library/DataTables/datatables.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/library/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/datatable.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h3 class="header"><u>Welcome ${USER.firstname}</u></h3>
+<h3 class="title-name"><u>Welcome ${USER.firstname}</u></h3>
 <div class="table-design">
 	<table id="userdetails" class="display cell-border compact table-hover">
 		<thead>
@@ -48,7 +49,7 @@
 		</tbody>
 	</table>
 </div>
-<span class="buttons">
+<span class="admin-buttons">
 		<a href="registration.jsp" class="btn btn-info">Add New User</a>
 		<a href="LogOutServlet" class="btn btn-danger">LogOut</a>
 </span>

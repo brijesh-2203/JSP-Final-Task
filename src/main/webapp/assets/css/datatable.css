@@ -15,6 +15,11 @@
 	text-align:center;
 	font-size:40px;
 }
-.buttons{
+.admin-buttons{
 	margin-left:30px;
+}
+.title-name{
+	margin-left:470px;
+	font-size:46px;
+	margin-bottom:50px;
 }

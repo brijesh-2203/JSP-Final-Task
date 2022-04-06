@@ -34,7 +34,7 @@ $(document).ready(function() {
 		
 		$("#email").keyup(function(){
 			$.ajax({
-				url:"http://localhost:8080/User_Management_System/CheckUserExist",
+				url:"CheckUserExist",
 				type:'POST',
 				data:$("#myform").serialize(),
 				cache:false,

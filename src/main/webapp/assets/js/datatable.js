@@ -9,7 +9,7 @@ $('#userdetails').on('click', '.delete', function(){
 			var userid = +this.id; 
 			//table.row($(this).parents('tr')).remove().draw();
 				$.ajax({
-				url: "http://localhost:8080/User_Management_System/DeleteUser",
+				url: "DeleteUser",
 				type: "GET",
 				data: {
 					  userid : userid,

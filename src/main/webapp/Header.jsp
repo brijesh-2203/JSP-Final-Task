@@ -10,14 +10,14 @@
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 </head>
 <body>
-		<header>
-			<div class="default-header">
+		<nav class="navbar-fixed-top">
+			<div class="container-fluid default-header">
 			    <div class="row">
-				   <div class="col-md-10 set-data"><p class="userheading"><i>User Management System</i></p></div>
-				   <div class="col-md-1 set-data"><a href="index.jsp">Home</a></div>
-				   <div class="col-md-1 set-data"><a href="registration.jsp">Signup</a></div>
+				   <div class="col-md-10 col-sm-10 set-data"><p class="userheading"><i>User Management System</i></p></div>
+				   <div class="col-md-1 col-sm-1 set-data"><a href="index.jsp">Home</a></div>
+				   <div class="col-md-1 col-sm-1 set-data"><a href="registration.jsp">Signup</a></div>
 				</div>
-			</div>
-		</header>
+				</div>
+		</nav>
 </body>
 </html>

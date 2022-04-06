@@ -9,14 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="assets/library/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 </head>
 <body>
 <%@ include file="Header.jsp" %> 
 <section>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4 login">
+			<div class="col-md-3 col-sm-3"></div>
+			<div class="col-md-4 col-sm-4 login">
 				<h1 class="heading"><u>Reset Password</u></h1>
 				<form action="ResetPassword" method="POST">
 					<div class="form-group">
@@ -31,7 +32,7 @@
 					<input type="hidden" name="usermail" value="${requestScope.email}" required>
 				</form>
 			 </div>
-			 <div class="col-md-4"></div>
+			 <div class="col-md-5 col-sm-5"></div>
 			 
 		</div>
 	</div>

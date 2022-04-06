@@ -69,94 +69,10 @@ public class EditServlet extends HttpServlet {
 		int userid=Integer.parseInt(uid);
 		userservice.updateUserProfile(user,userid); //user profile updated
 		
-//		User usr = userservice.getUserDetails(userid);
-//		List<UserAddress> useraddresses = new ArrayList<UserAddress>();
-//		useraddresses=userservice.getUserAddress(userid);
-//		System.out.println(useraddresses);
-//		int k=0,p=0;
-//		//int add[] = new int[useraddresses.size()];
-//		//int newadd[] = new int[useraddresses.size()];
-//		ArrayList<Integer> add = new ArrayList<Integer>();
-//		ArrayList<Integer> newadd = new ArrayList<Integer>();
-//		for(UserAddress ud:useraddresses)
-//		{	
-////			for(int i=0;i< addressid.length;i++)
-////			{
-////				int addrssid=Integer.parseInt(addressid[i]);
-////				if(addrssid==ud.getAddressid())
-////				{
-////					newadd[p]=addrssid;
-////					p++;
-////					break;
-////				}
-////			}
-//			add.add(ud.getAddressid());
-//			//k++;
-//		}
-//		
-//		int addidlength= addressid.length;
-//		int count=0;
-//		//int p =0;
-//		while(count<addidlength)
-//		{
-//			System.out.println("in loop a");
-//			//if(addressid[count].length()==0)
-//			//{
-//			//	newadd[count]=0;
-//			//}
-//			int addrssid=0;
-//			if((addressid[count].length()!=0))
-//			{
-//				addrssid=Integer.parseInt(addressid[count]);
-//				System.out.println("add --"+addrssid);
-//				if(add.get(p)==addrssid)
-//				{
-//					System.out.println("in add");
-//					newadd.add(p,addrssid);
-//					count++;
-//					p++;
-//				}
-//				else
-//				{
-//					newadd.add(p,0);
-//					p++;
-//					continue;
-//				}
-//			}
-//			else
-//			{
-//				count++;
-//			}
-////			count++;
-//		}
-//		for(int i=0;i<add.size();i++)
-//		{
-//			System.out.println("a="+add.get(i));
-//		}
-//		for(int i=0;i<newadd.size();i++)
-//		{
-//			System.out.println("newadd="+newadd.get(i));
-//		}
-//		for(int i=0;i<add.size();i++)
-//		{
-//			System.out.println("add-"+add.get(i));
-//			System.out.println("neww add"+add.get(i));
-//			
-//			if((int)add.get(i) != (int)newadd.get(i))
-//			{
-//				System.out.println("deelted a="+add.get(i));
-//				userservice.deleteAddress(add.get(i));
-//			}
-//			else
-//			{
-//				System.out.println("not deletd"+add.get(i));;
-//			}
-//		}
 		List<UserAddress> useraddresses =userservice.getUserAddress(userid);
-//		useraddresses=userservice.getUserAddress(userid);
 		int index=0;
 		int current_Addressid[] = new int[useraddresses.size()];
-		int new_Addressid[] = new int[useraddresses.size()];
+		//int new_Addressid[] = new int[useraddresses.size()];
 		int address_id_length= addressid.length;
 		int count=0;
 		for(UserAddress ud:useraddresses)
@@ -168,55 +84,34 @@ public class EditServlet extends HttpServlet {
 				if(current_Addressid[index]==addrssid)
 				{
 					log.info("Address id matched"+current_Addressid[index]);
-					new_Addressid[index]=addrssid;
+					//new_Addressid[index]=addrssid;
 					count++;
 				}
 				else
 				{
-					new_Addressid[index]=0;
+					userservice.deleteAddress(current_Addressid[index]);
+					//new_Addressid[index]=0;
 				}
 			}
 			else
 			{
-				new_Addressid[index]=0;
+				userservice.deleteAddress(current_Addressid[index]);
+				//new_Addressid[index]=0;
 			}
 			index++;
 		}
-		
 //		for(int i=0;i<current_Addressid.length;i++)
 //		{
-//			if(count<address_id_length && addressid[count].length()!=0)
+//			if(current_Addressid[i] != new_Addressid[i])
 //			{
-//				int addrssid=Integer.parseInt(addressid[count]);
-//				System.out.println("add --"+addrssid);
-//				if(current_Addressid[i]==addrssid)
-//				{
-//					log.info("Address id matched"+current_Addressid[i]);
-//					new_Addressid[i]=addrssid;
-//					count++;
-//				}
-//				else
-//				{
-//					new_Addressid[i]=0;
-//				}
+//				userservice.deleteAddress(current_Addressid[i]);
+//				log.info("Address deleted of id:"+current_Addressid[i]);
 //			}
 //			else
 //			{
-//				new_Addressid[i]=0;
+//				log.info("Address not deleted of id:"+current_Addressid[i]);
 //			}
 //		}
-		for(int i=0;i<current_Addressid.length;i++)
-		{
-			if(current_Addressid[i] != new_Addressid[i])
-			{
-				userservice.deleteAddress(current_Addressid[i]);
-				log.info("Address deleted of id:"+current_Addressid[i]);
-			}
-			else
-			{
-				log.info("Address not deleted of id:"+current_Addressid[i]);
-			}
-		}
 		
 		for(int i=0;i<addressid.length;i++)
 		{	
@@ -266,7 +161,6 @@ public class EditServlet extends HttpServlet {
                 userservice.addUserImg(userimg);
             }
         }
-        
         response.sendRedirect("UserData");
 	}
 

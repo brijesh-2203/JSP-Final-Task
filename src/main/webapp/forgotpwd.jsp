@@ -9,14 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="assets/library/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 </head>
 <body>
 <%@ include file="Header.jsp" %> 
 <section>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-5 forgot-section">
+			<div class="col-sm-3 col-md-3 "></div>
+			<div class="col-sm-5 col-md-5 forgot-section">
 				<h1 class="heading"><u>Find Your Account</u></h1>
 					<form action="ForgotPwd" method="POST">
 						<span style='color:red'>${requestScope.message}</span>
@@ -40,7 +41,7 @@
 						</div>
 					</form>
 			 </div>
-			 <div class="col-md-4"></div>
+			 <div class="col-sm-4 col-md-4"></div>
 		</div>
 	</div>
 </section>

@@ -32,7 +32,6 @@ public class DeleteUser extends HttpServlet {
 		int userid = Integer.parseInt(uid);
 		userservice.deleteUser(userid);
 		log.info("User deleted of userid:"+userid);
-//		response.sendRedirect("AdminWork");
 	}
 
 }
