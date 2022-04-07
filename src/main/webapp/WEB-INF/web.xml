@@ -74,6 +74,7 @@
 	  	<filter-name>BackButton_Prevention</filter-name>
 	  	<url-pattern>/userDashBoard.jsp</url-pattern>
 	  </filter-mapping>
+	
 	  <servlet>
 	  	<servlet-name>UserRegistration</servlet-name>
 	  	<display-name>UserRegistration</display-name>

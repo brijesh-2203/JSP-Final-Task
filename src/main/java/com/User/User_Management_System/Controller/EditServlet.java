@@ -23,6 +23,10 @@ import org.apache.log4j.Logger;
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
+import com.User.User_Management_System.Service.UserAddressService;
+import com.User.User_Management_System.Service.UserAddressServiceImpl;
+import com.User.User_Management_System.Service.UserImageService;
+import com.User.User_Management_System.Service.UserImageServiceImpl;
 import com.User.User_Management_System.Service.UserService;
 import com.User.User_Management_System.Service.UserServiceImpl;
 @MultipartConfig
@@ -30,9 +34,12 @@ public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = LogManager.getLogger(EditServlet.class.getName());
 	UserService userservice;
+	UserAddressService userAddressService;
+	UserImageService userImageService;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
-		
+		userAddressService = new UserAddressServiceImpl();
+		userImageService = new UserImageServiceImpl();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BasicConfigurator.configure();
@@ -69,50 +76,33 @@ public class EditServlet extends HttpServlet {
 		int userid=Integer.parseInt(uid);
 		userservice.updateUserProfile(user,userid); //user profile updated
 		
-		List<UserAddress> useraddresses =userservice.getUserAddress(userid);
+		List<UserAddress> useraddresses =userAddressService.getUserAddress(userid);
 		int index=0;
-		int current_Addressid[] = new int[useraddresses.size()];
-		//int new_Addressid[] = new int[useraddresses.size()];
+		int old_Addressid[] = new int[useraddresses.size()];
 		int address_id_length= addressid.length;
 		int count=0;
 		for(UserAddress ud:useraddresses)
 		{	
-			current_Addressid[index]=ud.getAddressid();
+			old_Addressid[index]=ud.getAddressid();
 			if(count<address_id_length && addressid[count].length()!=0)
 			{
 				int addrssid=Integer.parseInt(addressid[count]);
-				if(current_Addressid[index]==addrssid)
+				if(old_Addressid[index]==addrssid)
 				{
-					log.info("Address id matched"+current_Addressid[index]);
-					//new_Addressid[index]=addrssid;
+					log.info("Address id matched"+old_Addressid[index]);
 					count++;
 				}
 				else
 				{
-					userservice.deleteAddress(current_Addressid[index]);
-					//new_Addressid[index]=0;
+					userAddressService.deleteAddress(old_Addressid[index]);
 				}
 			}
 			else
 			{
-				userservice.deleteAddress(current_Addressid[index]);
-				//new_Addressid[index]=0;
+				userAddressService.deleteAddress(old_Addressid[index]);
 			}
 			index++;
 		}
-//		for(int i=0;i<current_Addressid.length;i++)
-//		{
-//			if(current_Addressid[i] != new_Addressid[i])
-//			{
-//				userservice.deleteAddress(current_Addressid[i]);
-//				log.info("Address deleted of id:"+current_Addressid[i]);
-//			}
-//			else
-//			{
-//				log.info("Address not deleted of id:"+current_Addressid[i]);
-//			}
-//		}
-		
 		for(int i=0;i<addressid.length;i++)
 		{	
 			UserAddress useraddress = new UserAddress();
@@ -126,7 +116,7 @@ public class EditServlet extends HttpServlet {
 				useraddress.setCity(city[i]);
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
-				userservice.addUserAddress(useraddress);
+				userAddressService.addUserAddress(useraddress);
 			}
 			else
 			{
@@ -140,7 +130,7 @@ public class EditServlet extends HttpServlet {
 				useraddress.setCity(city[i]);
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
-				userservice.updateUserAddress(useraddress);
+				userAddressService.updateUserAddress(useraddress);
 			}
 		}
 		//Image Addition to the user
@@ -158,7 +148,7 @@ public class EditServlet extends HttpServlet {
                 inputStream = filePart.getInputStream();
                 userimg.setUserid(userid);
                 userimg.setImage(inputStream);
-                userservice.addUserImg(userimg);
+                userImageService.addUserImg(userimg);
             }
         }
         response.sendRedirect("UserData");

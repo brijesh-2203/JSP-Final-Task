@@ -9,11 +9,14 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" href="assets/library/DataTables/datatables.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/library/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/datatable.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h3 class="header">Welcome ${USER.firstname}</h3>
-<div>
-	<table id="userdetails" class="display cell-border compact table-hover"> <!--Use the default css class of datatable-->
+<h3 class="title-name"><u>Welcome ${USER.firstname}</u></h3>
+<div class="table-design">
+	<table id="userdetails" class="display cell-border compact table-hover">
 		<thead>
 			<tr>
 			<th>UserID</th>
@@ -29,9 +32,8 @@
 			</tr>
 		</thead>
 		<tbody>
-		
 			<c:forEach items="${UsersList}" var='user' >
-			<tr>
+			<tr id="delete${user.userID}" class="row-dg">
 			    <td>${user.userID}</td>
 			    <td>${user.firstname}</td>
 			    <td>${user.lastname}</td>
@@ -40,16 +42,17 @@
 			    <td>${user.dateofbirth}</td>
 			    <td>${user.gender}</td>
 			    <td>${user.language}</td>
-			    <td><a href="Admin_EditUser?userid=${user.userID}" class="btn btn-primary">Edit</a></td>
-			    <td><a href="DeleteUser?userid=${user.userID}" class="btn btn-danger">Delete</a></td>
+			    <td><a href="UserDetails?userid=${user.userID}"  class="btn btn-primary">Edit</a></td>
+			    <td><button type="button" id="${user.userID}" class="delete btn btn-danger">Delete</button></td>
 			 </tr>
 			</c:forEach>
-			<!--<${sessionScope.UsersList}-->
 		</tbody>
 	</table>
 </div>
-<a href="registration.jsp" class="btn btn-info">Add New User</a>
-<a href="LogOutServlet" class="btn btn-danger">LogOut</a>
+<span class="admin-buttons">
+		<a href="registration.jsp" class="btn btn-info">Add New User</a>
+		<a href="LogOutServlet" class="btn btn-danger">LogOut</a>
+</span>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="assets/library/DataTables/datatables.min.js"></script>
 <script src="assets/js/datatable.js"></script>

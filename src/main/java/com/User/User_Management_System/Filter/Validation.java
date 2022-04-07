@@ -8,15 +8,15 @@ import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.MultipartConfig;
 
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.UtilityClass.CheckValidation;
-
+@MultipartConfig
 public class Validation implements Filter {
 	
 	 CheckValidation  val;
@@ -43,12 +43,18 @@ public class Validation implements Filter {
 		String[] state=request.getParameterValues("state");
 		String[] country=request.getParameterValues("country");
 		String language[]=request.getParameterValues("lang");
-       System.out.println(gender);
+    
 		User user = new User();
 		user.setFirstname(fname);
 		user.setLastname(lname);
 		user.setEmail(email);
-		user.setPhone(Long.parseLong(phone));
+		if(val.validateNumber(phone))
+		{
+			request.setAttribute("phonenumber", phone);
+		}
+		else {
+		 user.setPhone(Long.parseLong(phone));
+		}
 		user.setPassword(pwd);
 		user.setDateofbirth(birthdate);
 		user.setAnswer1(ans1);
@@ -79,97 +85,90 @@ public class Validation implements Filter {
 		RequestDispatcher rd=request.getRequestDispatcher("registration.jsp"); 
 		request.setAttribute("formdata", user);
 		
-		if(fname == ""||pwd ==""||lname==""||email==""||phone==""||repwd==""||birthdate==""||ans1==""||ans2==""||gender=="")
+		if(fname.equals("")||pwd.equals("")||lname.equals("")||email.equals("")||phone.equals("")||repwd.equals("")||birthdate.equals("")||ans1.equals("")||ans2.equals("")||gender.equals(""))
 		{
-			//out.println("<span style='color:Red'>*All Feilds are Required</span>");
 			request.setAttribute("message","*All Feilds are Required");
 			rd.forward(request, response);
 		}
 		else if(address1==null||address2==null||pincode==null||city==null||state==null||country==null||language==null)
 		{
-			out.println("<span style='color:Red'>*All Feilds are Required</span>");
-			//request.setAttribute("message","*All Feilds are Required");
-			rd.forward(request, response);
-		}
-		for(int i=0;i<pincode.length;i++)
-		{
-			if(val.validateNumber(pincode[i]))
-			{
-				out.println("<span style='color:Red'>*Only Numbers are Allowed in pincode.</span>");
-				//request.setAttribute("message","*Only Numbers are Allowed in pincode.");
-				rd.forward(request, response);
-			}
-			else if(pincode[i].length()>6)
-			{
-				out.println("<span style='color:Red'>*Pincode not greater than 6 Digits.</span>");
-				//request.setAttribute("message","*Pincode not greater than 6 Digits.");
-				rd.forward(request, response);
-			}
-			else if(val.validatename(city[i]))
-			{
-				out.println("<span style='color:Red'>*Only Alphabets are Allowed in City.</span>");
-				//request.setAttribute("message","*Only Alphabets are Allowed in City.");
-				rd.forward(request, response);
-			}
-			else if(val.validatename(state[i]))
-			{
-				out.println("<span style='color:Red'>*Only Alphabets are Allowed in State.</span>");
-				//request.setAttribute("message","*Only Alphabets are Allowed in State.");
-				rd.forward(request, response);
-			}
-			else if(val.validatename(country[i]))
-			{
-				out.println("<span style='color:Red'>*Only Alphabets are Allowed in Country.</span>");
-				//request.setAttribute("message","*Only Alphabets are Allowed in Country.");
-				rd.forward(request, response);
-			}
-			
-		}
-		if(val.validatename(fname))
-		{
-			out.println("<span style='color:Red'>*Only Alphabets are Allowed in FirstName.</span>");
-			//request.setAttribute("message","*Only Alphabets are Allowed in FirstName.");
-			rd.forward(request, response);
-		}
-		else if(val.validatename(lname))
-		{
-			out.println("<span style='color:Red'>*Only Alphabets are Allowed in LastName.</span>");
-			//request.setAttribute("message","*Only Alphabets are Allowed in LastName.");
-			rd.forward(request, response);
-		}
-		else if(val.validatepwd(pwd))
-		{
-			out.println("<span style='color:Red'>*Please Choose Strong Password.</span>");
-			//request.setAttribute("message","*Please Choose Strong Password.");
-			rd.forward(request, response);
-		}
-		else if(!pwd.equals(repwd))
-		{
-			out.println("<span style='color:Red'>*Confirm password Should be same as Password.</span>");
-			//request.setAttribute("message","*Confirm password Should be same as Password.");
-			rd.forward(request, response);
-		}
-		else if(val.validatemail(email))
-		{
-			out.println("<span style='color:Red'>*Please Enter Valid Mail-Id.</span>");
-			//request.setAttribute("message","*Please Enter Valid Mail-Id.");
-			rd.forward(request, response);
-		}
-		else if(val.validateNumber(phone))
-		{
-			out.println("<span style='color:Red'>*Only Numbers are Allowed in Phone.</span>");
-			//request.setAttribute("message","*Only Numbers are Allowed in Phone.");
-			rd.forward(request, response);
-		}
-		else if(phone.length()<10)
-		{
-			out.println("<span style='color:Red'>**Number not less than 10 Digits.</span>");
-			//request.setAttribute("message","*Number not less than 10 Digits.");
+			request.setAttribute("message","*All Feilds are Required");
 			rd.forward(request, response);
 		}
 		else
 		{
-		chain.doFilter(request, response);
+		for(int i=0;i<pincode.length;i++)
+		{
+			if(address1[i].equals("") || address2[i].equals("") || city[i].equals("") || state[i].equals("") || country[i].equals(""))
+			{
+				request.setAttribute("message","*All Address Fields are Required.");
+				rd.forward(request, response);
+			}
+			else if(val.validateNumber(pincode[i]))
+			{
+				request.setAttribute("message","*Only Numbers are Allowed in pincode.");
+				rd.forward(request, response);
+			}
+			else if(pincode[i].length()>6)
+			{
+				request.setAttribute("message","*Pincode not greater than 6 Digits.");
+				rd.forward(request, response);
+			}
+			else if(val.validatename(city[i]))
+			{
+				request.setAttribute("message","*Only Alphabets are Allowed in City.");
+				rd.forward(request, response);
+			}
+			else if(val.validatename(state[i]))
+			{
+				request.setAttribute("message","*Only Alphabets are Allowed in State.");
+				rd.forward(request, response);
+			}
+			else if(val.validatename(country[i]))
+			{
+				request.setAttribute("message","*Only Alphabets are Allowed in Country.");
+				rd.forward(request, response);
+			}
+		}
+		}
+		if(val.validatename(fname))
+		{
+			request.setAttribute("message","*Only Alphabets are Allowed in FirstName.");
+			rd.forward(request, response);
+		}
+		else if(val.validatename(lname))
+		{
+			request.setAttribute("message","*Only Alphabets are Allowed in LastName.");
+			rd.forward(request, response);
+		}
+		else if(val.validatepwd(pwd))
+		{
+			request.setAttribute("message","*Please Choose Strong Password.");
+			rd.forward(request, response);
+		}
+		else if(!pwd.equals(repwd))
+		{
+			request.setAttribute("message","*Confirm password Should be same as Password.");
+			rd.forward(request, response);
+		}
+		else if(val.validateNumber(phone))
+		{
+			request.setAttribute("message","*Only Numbers are Allowed in Phone.");
+			rd.forward(request, response);
+		}
+		else if(phone.length()<10)
+		{
+			request.setAttribute("message","*Number not less than 10 Digits.");
+			rd.forward(request, response);
+		}
+		else if(val.validatemail(email))
+		{
+			request.setAttribute("message","*Please Enter Valid Mail-Id.");
+			rd.forward(request, response);
+		}
+		else
+		{
+			chain.doFilter(request, response);
 		}
 	}
 	public void destroy() {

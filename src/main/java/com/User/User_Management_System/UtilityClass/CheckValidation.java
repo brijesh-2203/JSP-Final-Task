@@ -44,12 +44,15 @@ public class CheckValidation {
 	}
 	public boolean validateNumber(String number)
 	{
-		if(Pattern.matches("[0-9]+",number))
+		 String numbers = "^[0-9]+$";
+		if(number.matches(numbers))
 		{
+			System.out.println("in if not num");
 			return false;
 		}
 		else
 		{
+			System.out.println("in else num");
 			return true;
 		}
 	}

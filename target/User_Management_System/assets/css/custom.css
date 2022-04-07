@@ -4,13 +4,12 @@ html,body{
 	 background-color: #50E5FC;	
 }
 .login{
-	margin-top:120px;
+	margin-top:180px;
 	border:2px solid white;
 	border-radius:12px;
 background-color: white;
   height: 360px;
   width:500px;
-  
 }
 .heading{
    font-size:40px;
@@ -24,16 +23,22 @@ background-color: white;
 	color:white;
 	height:40px;
 }
+.edit-header{
+	 font-size:40px;
+   margin-left:370px;
+   margin-bottom:30px;
+}
 .header{
    font-size:40px;
-   margin-left:380px;
+   margin-left:300px;
    margin-bottom:30px;
 }
 .Form-Section{
-	margin-top:30px;
+	margin-top:122px;
 	border:2px solid white;
 	border-radius:13px;
 	background-color: white;
+	margin-bottom:80px;
 }
 .head-gap{
 	margin-left:20px;
@@ -87,22 +92,26 @@ background-color: white;
 	left:100%;
 }
 .forgot-section{
-	margin-top:60px;
+	margin-top:130px;
 	border:2px solid white;
 	border-radius:12px;
 background-color: white;
   height: 520px;
   width:550px;
 }
-.error{
+.error, .r-btn-error, .btn-error, #error{
 	color:red;
 	font-size:10px;
 }
-.default-header{
+div.default-header{
 	background-color: #00DEFF;
 	font-size:25px;
 	height:68px;
 	width:100%;
+}
+div.row{
+	margin-right:0px;
+	margin-left:0px;
 }
 .set-data{
 	margin-top:15px;
@@ -111,13 +120,17 @@ background-color: white;
 	margin-left:20px;
 	font-size:29px;
 }
-.footer-position{
+div.footer-position{
 	height:30px;
-  position: relative;
-  left: 0;
-  top:126px;
-  bottom: 0;
   width: 100%;
 background-color: #00DEFF;
   text-align: center;
+}
+.buttons{
+	margin-left:550px;
+}
+.title-name{
+	margin-left:470px;
+	font-size:46px;
+	margin-bottom:60px;
 }

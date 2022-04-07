@@ -33,7 +33,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${UsersList}" var='user' >
-			<tr id="delete${user.userID}" class="row-dg">
+			<tr id="delete${user.userID}">
 			    <td>${user.userID}</td>
 			    <td>${user.firstname}</td>
 			    <td>${user.lastname}</td>

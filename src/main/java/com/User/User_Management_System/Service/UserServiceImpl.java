@@ -17,18 +17,10 @@ public class UserServiceImpl implements UserService{
 		{
 			userdao.registerUser(user);
 		}
-		public void addUserAddress(UserAddress useradd)
-		{
-			userdao.addUserAddress(useradd);
-		}
 		public int getUser(String mail)
 		{
 			int id = userdao.getUserId(mail);
 			return id;
-		}
-		public void addUserImg(UserImage userimg)
-		{
-			userdao.addUserImage(userimg);
 		}
 		public User checkUser(String email)
 		{
@@ -43,16 +35,12 @@ public class UserServiceImpl implements UserService{
 		public List<User> getUsers()
 		{
 			List<User> userlist = new ArrayList<User>();
-			userlist = userdao.getUserDetails();
+			userlist = userdao.getUserList();
 			return userlist;
 		}
 		public void deleteUser(int userid)
 		{
 			userdao.deleteUser(userid);
-		}
-		public void deleteImage(int imgid)
-		{
-			userdao.deleteImage(imgid);
 		}
 		public void changePwd(String pwd,String usermail) {
 			
@@ -66,18 +54,5 @@ public class UserServiceImpl implements UserService{
 		{
 			User user = userdao.getUserDetails(userid);
 			return user;
-		}
-		public void updateUserAddress(UserAddress useradd)
-		{
-			userdao.updateUserAddress(useradd);
-		}
-		public List<UserAddress> getUserAddress(int userid)
-		{
-			List<UserAddress> useraddlist = userdao.getUserAddress(userid);
-			return useraddlist;
-		}
-		public void deleteAddress(int addid)
-		{
-			userdao.deleteAddress(addid);
 		}
 }

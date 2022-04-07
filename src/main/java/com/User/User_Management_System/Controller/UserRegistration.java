@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import java.io.*;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +25,10 @@ import org.apache.log4j.Logger;
 import com.User.User_Management_System.Bean.User;
 import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.Bean.UserImage;
+import com.User.User_Management_System.Service.UserAddressService;
+import com.User.User_Management_System.Service.UserAddressServiceImpl;
+import com.User.User_Management_System.Service.UserImageService;
+import com.User.User_Management_System.Service.UserImageServiceImpl;
 import com.User.User_Management_System.Service.UserService;
 import com.User.User_Management_System.Service.UserServiceImpl;
 @MultipartConfig
@@ -34,15 +36,17 @@ public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static Logger log = LogManager.getLogger(UserRegistration.class.getName());  
 	UserService userservice;
+	UserAddressService userAddressService;
+	UserImageService userImageService;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
+		userAddressService = new UserAddressServiceImpl();
+		userImageService = new UserImageServiceImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 BasicConfigurator.configure(); 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
+		response.setContentType("text/html");		
 		   try {
 			   	
 			   	String email=request.getParameter("email");
@@ -92,7 +96,7 @@ public class UserRegistration extends HttpServlet {
 						useraddress.setCity(city[i]);
 						useraddress.setState(state[i]);
 						useraddress.setCountry(country[i]);
-						userservice.addUserAddress(useraddress);
+						userAddressService.addUserAddress(useraddress);
 				}
 				@SuppressWarnings("unchecked")
 				ArrayList<Part> fileParts = (ArrayList) request.getParts().stream().filter(new Predicate<Part>() {
@@ -108,7 +112,7 @@ public class UserRegistration extends HttpServlet {
 		                inputStream = filePart.getInputStream();
 		                userimg.setUserid(userid);
 		                userimg.setImage(inputStream);
-		                userservice.addUserImg(userimg);
+		                userImageService.addUserImg(userimg);
 		            }
 		        }
 		       log.info("registration successfully");

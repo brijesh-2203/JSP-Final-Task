@@ -24,18 +24,15 @@ public class BackButton_Prevention implements Filter {
 		 HttpSession session=req.getSession(false);
 		 if(session.getAttribute("USER")==null)
 		 {
-			 System.out.println("if part");
 			res.sendRedirect("index.jsp");
 		 }
 		 else
 		 {
-			 System.out.println("else");
 			 	res.setHeader("Cache-Control","no-chache,no-store,must-revalidate");
 				res.setHeader("Pragma", "no-chache");
 				res.setDateHeader("Expires", 0);
 				chain.doFilter(request, response);
 		 }
-		//chain.doFilter(request, response);
 	}
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
