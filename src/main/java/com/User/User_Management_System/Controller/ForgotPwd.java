@@ -25,7 +25,6 @@ public class ForgotPwd extends HttpServlet {
 		userservice = new UserServiceImpl();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicConfigurator.configure();
 		response.setContentType("text/html");
 		String email=request.getParameter("email");
 		String birthdate=request.getParameter("birthdate");
@@ -39,26 +38,28 @@ public class ForgotPwd extends HttpServlet {
 				{
 					if(ans1.equals(user.getAnswer1()) && ans2.equals(user.getAnswer2()))
 					{
-						log.info("All details are correct");
+						log.debug("All details are correct");
 						RequestDispatcher rf=request.getRequestDispatcher("resetpwd.jsp");
 						request.setAttribute("email",user.getEmail());
 						rf.forward(request, response);
 					}
 					else
 					{
+						log.error("Security Answers are wrong");
 						request.setAttribute("message","*Security Answers are wrong");
 						r.forward(request, response);
 					}
 				}
 				else
 				{
+					log.error("Invalid BirthDate");
 					request.setAttribute("message","*Invalid BirthDate");
 					r.forward(request, response);
 				}
 		}
 		else
 		{
-			log.error("invalid user");
+			log.error("Invalid user");
 			request.setAttribute("message","*Invalid User");
 			r.forward(request, response);
 		}

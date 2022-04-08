@@ -27,15 +27,13 @@ public class UserDetails extends HttpServlet {
 		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		BasicConfigurator.configure();
 		HttpSession session=request.getSession(false);
 		User user = (User) session.getAttribute("USER");
 		RequestDispatcher rf=request.getRequestDispatcher("registration.jsp");
 		if(user.getRole().equals("user"))
 		{
 			request.setAttribute("user",user);
-			log.info("Updated User set in Request");
+			log.info("Updated User stored in Request");
 		 	rf.forward(request, response);
 		}
 		else
@@ -44,7 +42,7 @@ public class UserDetails extends HttpServlet {
 			int userid = Integer.parseInt(uid);
 			User usr = userservice.getUserDetails(userid);
 			request.setAttribute("user", usr);
-			log.info("Updated User set in Request");
+			log.info("Updated User stored in Request");
 			rf.forward(request, response);
 		}
 		

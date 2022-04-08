@@ -123,48 +123,6 @@ $(document).ready(function() {
 	                }
 			});
 			
-			$("#city_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var city = $('#city_0').val();
-			    for(let i=0;i < city.length;i++)
-			    {
-			     var ch = city.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#city_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
-			  $("#state_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var state = $('#state_0').val();
-			    for(let i=0;i < state.length;i++)
-			    {
-			     var ch = state.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#state_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
-			  $("#country_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var country = $('#country_0').val();
-			    for(let i=0;i < country.length;i++)
-			    {
-			     var ch = country.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#country_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
 			     $("#pincode_0").keyup(function(){
 					$(".error").remove();
 							var pincode = $("#pincode_0").val();
@@ -179,48 +137,6 @@ $(document).ready(function() {
 					count++;
 					for(let i=1;i<=count;i++)
 					{
-							$("#city_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var city = $('#city_'+i).val();
-							    for(let j=0;j < city.length;j++)
-							    {
-							     var ch = city.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#city_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
-							  $("#state_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var state = $('#state_'+i).val();
-							    for(let j=0;j < state.length;j++)
-							    {
-							     var ch = state.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#state_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
-							  $("#country_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var country = $('#country_'+i).val();
-							    for(let j=0;j < country.length;j++)
-							    {
-							     var ch = country.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#country_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
 						$("#pincode_"+i).keyup(function(e){
 							$(".error").remove();
 							console.log("#pincode_"+i)

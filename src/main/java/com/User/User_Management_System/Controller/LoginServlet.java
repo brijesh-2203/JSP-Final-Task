@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 BasicConfigurator.configure(); 
 		response.setContentType("text/html");
 		String pwd = (String) request.getAttribute("password");
 		String email=request.getParameter("email");
@@ -42,12 +41,12 @@ public class LoginServlet extends HttpServlet {
 					if(role.equals("user"))
 					{
 			           response.sendRedirect("userDashBoard.jsp");
-			           log.info("User-logged-in");  
+			           log.debug("User-logged-in");  
 					}
 					else
 					{
 						response.sendRedirect("AdminWork");
-						log.info("Admin-logged-in");  
+						log.debug("Admin-logged-in");  
 					}
 				}
 				else
@@ -58,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-				log.error("Login fail"); 
+				log.error("Login fails"); 
 				request.setAttribute("message","*Unauthorized User");
 				r.forward(request, response);
 			}

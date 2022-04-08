@@ -12,11 +12,11 @@
      <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 </head>
 <body>
-
+<%@ include file="Header.jsp" %>
 <h3 class="title-name">Welcome ${USER.firstname} ${USER.lastname}</h3>
 <span class="buttons">
-   <a href="UserDetails" class="btn btn-default">EditProfile</a>
-   <a href="LogOutServlet" class="btn btn-default">LogOut</a>
+   <a href="UserDetails" class="btn button-dg">EditProfile</a>
  </span>
+ <%@ include file="Footer.jsp" %> 
 </body>
 </html>

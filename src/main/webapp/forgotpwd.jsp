@@ -22,7 +22,7 @@
 					<form action="ForgotPwd" method="POST">
 						<span style='color:red'>${requestScope.message}</span>
 						<div class="form-group">
-							Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email" required>
+							Email :<input type="email" placeholder="Enter Email-ID"  class="form-control" name="email" required>
 						</div>
 						<div class="form-group">
 						 	Date of Birth: <input type="date" id="birthday" class="form-control" name="birthdate" required>
@@ -31,9 +31,9 @@
 					 		<fieldset>
 		    					<legend>Security Questions:</legend>
 					    			1.Who was your childhood super hero?<br>
-					    				 <input type="text"  class="form-control" name="q1" required><br>
+					    				 <input type="text" placeholder="Spider-man" class="form-control" name="q1" required><br>
 					    			2.What was your childhood nickname?<br>
-					    				 <input type="text" class="form-control"  name="q2" required><br>
+					    				 <input type="text" placeholder="Tom" class="form-control"  name="q2" required><br>
 		    				</fieldset>
 		    			 </div>
 						<div class="form-group">

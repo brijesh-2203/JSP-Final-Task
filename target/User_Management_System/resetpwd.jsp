@@ -27,13 +27,12 @@
 					 Confirm password:<input type="password" name="repass" id="repwd" class="form-control" placeholder="Enter Confirm Password" required>
 					</div>
 					<div class="form-group">
-					<input type="submit" class="form-control login-btn" value="Reset">
+						<input type="submit" class="form-control login-btn" value="Reset">
 					</div>
-					<input type="hidden" name="usermail" value="${requestScope.email}" required>
+						<input type="hidden" name="usermail" value="${requestScope.email}" required>
 				</form>
 			 </div>
 			 <div class="col-md-5 col-sm-5"></div>
-			 
 		</div>
 	</div>
 </section>

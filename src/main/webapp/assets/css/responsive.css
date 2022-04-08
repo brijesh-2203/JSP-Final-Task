@@ -44,9 +44,11 @@
     .buttons{
 	margin-left:410px;
    }
+   .button-dg{
+   margin-left:10px;
+   }
     
 }
-
 @media (max-width: 575px){
 }
 

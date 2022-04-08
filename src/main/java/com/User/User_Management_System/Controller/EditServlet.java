@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.log4j.BasicConfigurator;
@@ -42,10 +42,8 @@ public class EditServlet extends HttpServlet {
 		userImageService = new UserImageServiceImpl();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicConfigurator.configure();
 		response.setContentType("text/html");
 		String fname=request.getParameter("firstname");  
-		
 		String lname=request.getParameter("lastname"); 
 		String phone=request.getParameter("phone");
 		String birthdate=request.getParameter("birthdate");
@@ -60,8 +58,11 @@ public class EditServlet extends HttpServlet {
 		String addressid[]=request.getParameterValues("addid");
 		
 		String language="";
-		for(int i=0;i< lang.length;i++){
-			language+=lang[i]+" ";
+		if(lang!=null)
+		{
+			for(int i=0;i< lang.length;i++){
+				language+=lang[i]+" ";
+			}
 		}
 		long number = Long.parseLong(phone); 
 		
@@ -89,16 +90,17 @@ public class EditServlet extends HttpServlet {
 				int addrssid=Integer.parseInt(addressid[count]);
 				if(old_Addressid[index]==addrssid)
 				{
-					log.info("Address id matched"+old_Addressid[index]);
 					count++;
 				}
 				else
 				{
+					log.debug("Address deleted");
 					userAddressService.deleteAddress(old_Addressid[index]);
 				}
 			}
 			else
 			{
+				log.debug("Address deleted");
 				userAddressService.deleteAddress(old_Addressid[index]);
 			}
 			index++;
@@ -117,6 +119,7 @@ public class EditServlet extends HttpServlet {
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
 				userAddressService.addUserAddress(useraddress);
+				log.debug("New Address added");
 			}
 			else
 			{
@@ -131,6 +134,7 @@ public class EditServlet extends HttpServlet {
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
 				userAddressService.updateUserAddress(useraddress);
+				log.debug("Address Updated");
 			}
 		}
 		//Image Addition to the user
@@ -149,9 +153,10 @@ public class EditServlet extends HttpServlet {
                 userimg.setUserid(userid);
                 userimg.setImage(inputStream);
                 userImageService.addUserImg(userimg);
+                log.debug("New Images added");
             }
         }
-        response.sendRedirect("UserData");
+       response.sendRedirect("UserData");   
 	}
 
 }

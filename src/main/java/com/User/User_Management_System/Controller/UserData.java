@@ -27,18 +27,19 @@ public class UserData extends HttpServlet {
 		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicConfigurator.configure();
+		log.debug("Enter in userdata servlet");
 		HttpSession session=request.getSession(false);
 		User user = (User) session.getAttribute("USER");
 		if(user.getRole().equals("admin"))
 		{
+			log.info("Admin is in Session");
 			response.sendRedirect("AdminWork");
 		}
 		else
 		{
 			user = userservice.checkUser(user.getEmail());
 			session.setAttribute("USER", user);
-			log.info("Updated User data stored in session");
+			log.info("Updated User - stored in session");
 			response.sendRedirect("userDashBoard.jsp");
 		}
 	}

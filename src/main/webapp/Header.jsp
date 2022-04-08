@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ page isELIgnored="false"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +16,16 @@
 			<div class="container-fluid default-header">
 			    <div class="row">
 				   <div class="col-md-10 col-sm-10 set-data"><p class="userheading"><i>User Management System</i></p></div>
-				   <div class="col-md-1 col-sm-1 set-data"><a href="index.jsp">Home</a></div>
-				   <div class="col-md-1 col-sm-1 set-data"><a href="registration.jsp">Signup</a></div>
+				   <c:choose>
+				   <c:when test="${sessionScope.USER == null }">
+				   <div class="col-md-1 col-sm-1 set-data"><a href="index.jsp" class="header-tag">Home</a></div>
+				   <div class="col-md-1 col-sm-1 set-data"><a href="registration.jsp" class="header-tag">Signup</a></div>
+				   </c:when>
+				   <c:otherwise>
+				   <div class="col-md-1 col-sm-1 set-data"></div>
+				   <div class="col-md-1 col-sm-1 set-data"><a href="LogOutServlet" class="btn btn-danger">LogOut</a></div>
+				   </c:otherwise>
+				   </c:choose>
 				</div>
 				</div>
 		</nav>

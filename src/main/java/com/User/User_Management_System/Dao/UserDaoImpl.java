@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
         }
         catch(Exception e)
         {
-        	System.out.println(e);
+        	log.fatal(e);
         }
         finally {
 			   try {
@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 		return status;
@@ -70,10 +70,11 @@ public class UserDaoImpl implements UserDao {
 	            ps.setString(9, user.getAnswer1());
 	            ps.setString(10, user.getAnswer2());
 	            ps.executeUpdate();
+	            log.info("User data added in Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -82,7 +83,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}
@@ -97,14 +98,14 @@ public class UserDaoImpl implements UserDao {
 		           ResultSet rs= ps.executeQuery();
 		           if(rs.next())
 		           {
-			           System.out.println("Query:"+rs);
 			           id=rs.getInt(1);
+			           log.info("Get UserID from Database");
 		           }
 		           rs.close();
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -113,7 +114,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 		}
 		return id;
@@ -150,11 +151,11 @@ public class UserDaoImpl implements UserDao {
             	user.setAnswer2(rs.getString(11));
             	user.setRole(rs.getString(12));
             }
-           
+            log.info("User data stored in bean");
         }
         catch(Exception e)
         {
-        	System.out.println(e);
+        	log.fatal(e);
         }
         finally {
 			   try {
@@ -163,7 +164,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
         return user;
@@ -200,11 +201,11 @@ public class UserDaoImpl implements UserDao {
             	user.setAnswer2(rs.getString(11));
             	user.setRole(rs.getString(12));
             }
-           
+            log.info("Get Users details from Database");
         }
         catch(Exception e)
         {
-        	System.out.println(e);
+        	log.fatal(e);
         }
         finally {
 			   try {
@@ -213,7 +214,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
         return user;
@@ -230,11 +231,12 @@ public class UserDaoImpl implements UserDao {
             if(rs.next())
             {
             	role=rs.getString(1);
+            	log.info("Check Role Successful");
             }
         }
 		catch(Exception e)
         {
-        	System.out.println(e);
+			log.fatal(e);
         }
         finally {
 			   try {
@@ -243,7 +245,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 		return role;
@@ -268,9 +270,10 @@ public class UserDaoImpl implements UserDao {
 	        	user.setLanguage(rs.getString(8));       	 
               list.add(user);  
           }
+          log.info("UsersList Updated");
           rs.close();
 		 } catch (Exception e) {
-				e.printStackTrace();
+			 log.fatal(e);
 			}
 		 finally {
 			   try {
@@ -279,7 +282,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 		return list;
@@ -293,10 +296,11 @@ public class UserDaoImpl implements UserDao {
 			 	ps.setString(1,pwd);
 			 	ps.setString(2,usermail);
 	            ps.executeUpdate();
+	            log.info("Password changed and stored in database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -305,7 +309,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }	
 	}
@@ -317,10 +321,11 @@ public class UserDaoImpl implements UserDao {
 				ps=((java.sql.Connection) con).prepareStatement("delete from UserDetails where UserID=?;");
 			 	ps.setInt(1,userid);
 	            ps.executeUpdate();
+	            log.info("User deleted from Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -329,7 +334,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}
@@ -349,10 +354,11 @@ public class UserDaoImpl implements UserDao {
 	            ps.setString(6, user.getLanguage());
 	            ps.setInt(7, userid);
 	            ps.executeUpdate();
+	            log.info("User data updated in Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -361,7 +367,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}

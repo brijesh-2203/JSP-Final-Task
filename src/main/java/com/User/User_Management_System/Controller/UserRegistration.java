@@ -45,11 +45,15 @@ public class UserRegistration extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 BasicConfigurator.configure(); 
-		response.setContentType("text/html");		
+		response.setContentType("text/html");
+		String email=request.getParameter("email"); 
+		if(userservice.userExist(email))
+		{
+			log.info("*Email already exist");
+		}
+		else
+		{
 		   try {
-			   	
-			   	String email=request.getParameter("email");
 				String pwd = (String) request.getAttribute("password");
 				String fname=request.getParameter("firstname");  
 				String lname=request.getParameter("lastname"); 
@@ -84,6 +88,7 @@ public class UserRegistration extends HttpServlet {
 				user.setLanguage(language);
 				
 				userservice.registerUser(user);
+				log.debug("User data Added");
 				int userid=userservice.getUser(email);
 				UserAddress useraddress;
 				for(int i=0;i<address1.length;i++)
@@ -98,6 +103,7 @@ public class UserRegistration extends HttpServlet {
 						useraddress.setCountry(country[i]);
 						userAddressService.addUserAddress(useraddress);
 				}
+				log.debug("User Addresses Added");
 				@SuppressWarnings("unchecked")
 				ArrayList<Part> fileParts = (ArrayList) request.getParts().stream().filter(new Predicate<Part>() {
 					public boolean test(Part part) {
@@ -115,7 +121,8 @@ public class UserRegistration extends HttpServlet {
 		                userImageService.addUserImg(userimg);
 		            }
 		        }
-		       log.info("registration successfully");
+		        log.debug("User Images Added");
+		        log.info("Registration Successfully");
 		        HttpSession session=request.getSession(false);
 		        if(session.getAttribute("USER") == null)
 		        {
@@ -129,10 +136,11 @@ public class UserRegistration extends HttpServlet {
 			 }
 			 catch(Exception e)
 			 {
-				 log.error(e);
-				 log.error("registration fails");
+				 log.fatal(e);
+				 log.error("Registration fails");
 			 }
 				
 			}
+	}
 
 }

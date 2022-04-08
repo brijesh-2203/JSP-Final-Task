@@ -17,6 +17,7 @@
 	  	<filter-name>Validation</filter-name>
 	  	<url-pattern>/UserRegistration</url-pattern>
 	  </filter-mapping>
+	 
 		<filter>
 	  	<filter-name>EncryptPwd</filter-name>
 	  	<display-name>EncryptPwd</display-name>
@@ -52,11 +53,20 @@
 	  </filter-mapping>
 	  <filter-mapping>
 	  	<filter-name>BackButton_Prevention</filter-name>
-	  	<url-pattern>/LogOutServlet</url-pattern>
+	  	<url-pattern>/AdminWork</url-pattern>
+	  </filter-mapping>
+	   <filter>
+	  	<filter-name>EditPageValidation</filter-name>
+	  	<display-name>EditPageValidation</display-name>
+	  	<filter-class>com.User.User_Management_System.Filter.EditPageValidation</filter-class>
+	  </filter>
+	  <filter-mapping>
+	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<url-pattern>/UserDetails</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
 	  	<filter-name>BackButton_Prevention</filter-name>
-	  	<url-pattern>/AdminWork</url-pattern>
+	  	<url-pattern>/userDashBoard.jsp</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
 	  	<filter-name>BackButton_Prevention</filter-name>
@@ -66,15 +76,10 @@
 	  	<filter-name>BackButton_Prevention</filter-name>
 	  	<url-pattern>/UserData</url-pattern>
 	  </filter-mapping>
-	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
-	  	<url-pattern>/UserDetails</url-pattern>
+	   <filter-mapping>
+	  	<filter-name>EditPageValidation</filter-name>
+	  	<url-pattern>/EditServlet</url-pattern>
 	  </filter-mapping>
-	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
-	  	<url-pattern>/userDashBoard.jsp</url-pattern>
-	  </filter-mapping>
-	
 	  <servlet>
 	  	<servlet-name>UserRegistration</servlet-name>
 	  	<display-name>UserRegistration</display-name>
@@ -134,12 +139,6 @@
 	 	<display-name>UserData</display-name>
 	 	<description></description>
 	 	<servlet-class>com.User.User_Management_System.Controller.UserData</servlet-class>
-	 </servlet> 
-	 <servlet>
-	 	<servlet-name>AdminEdit</servlet-name>
-	 	<display-name>AdminEdit</display-name>
-	 	<description></description>
-	 	<servlet-class>com.User.User_Management_System.Controller.AdminEdit</servlet-class>
 	 </servlet>
 	 <servlet>
 	 	<servlet-name>UserDetails</servlet-name>
@@ -152,6 +151,12 @@
 	 	<display-name>CheckUserExist</display-name>
 	 	<description></description>
 	 	<servlet-class>com.User.User_Management_System.Controller.CheckUserExist</servlet-class>
+	 </servlet>
+	 <servlet>
+	 	<servlet-name>EditPageValidation</servlet-name>
+	 	<display-name>EditPageValidation</display-name>
+	 	<description></description>
+	 	<servlet-class>com.User.User_Management_System.Controller.EditPageValidation</servlet-class>
 	 </servlet>
 	   <servlet-mapping>
 	   	<servlet-name>UserRegistration</servlet-name>
@@ -194,15 +199,15 @@
 	   	<url-pattern>/UserData</url-pattern>
 	   </servlet-mapping>
 	   <servlet-mapping>
-	   	<servlet-name>AdminEdit</servlet-name>
-	   	<url-pattern>/AdminEdit</url-pattern>
-	   </servlet-mapping>
-	   <servlet-mapping>
 	   	<servlet-name>UserDetails</servlet-name>
 	   	<url-pattern>/UserDetails</url-pattern>
 	   </servlet-mapping>
 	   <servlet-mapping>
 	   	<servlet-name>CheckUserExist</servlet-name>
 	   	<url-pattern>/CheckUserExist</url-pattern>
+	   </servlet-mapping>
+	   <servlet-mapping>
+	   	<servlet-name>EditPageValidation</servlet-name>
+	   	<url-pattern>/EditPageValidation</url-pattern>
 	   </servlet-mapping>
 </web-app>

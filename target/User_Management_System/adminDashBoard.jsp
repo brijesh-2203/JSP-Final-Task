@@ -16,7 +16,7 @@
 <body>
 <h3 class="title-name"><u>Welcome ${USER.firstname}</u></h3>
 <div class="table-design">
-	<table id="userdetails" class="display cell-border compact table-hover">
+	<table id="userdetails">
 		<thead>
 			<tr>
 			<th>UserID</th>
@@ -33,7 +33,7 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${UsersList}" var='user' >
-			<tr id="delete${user.userID}" class="row-dg">
+			<tr id="delete${user.userID}">
 			    <td>${user.userID}</td>
 			    <td>${user.firstname}</td>
 			    <td>${user.lastname}</td>
@@ -42,16 +42,16 @@
 			    <td>${user.dateofbirth}</td>
 			    <td>${user.gender}</td>
 			    <td>${user.language}</td>
-			    <td><a href="UserDetails?userid=${user.userID}"  class="btn btn-primary">Edit</a></td>
-			    <td><button type="button" id="${user.userID}" class="delete btn btn-danger">Delete</button></td>
+			    <td><a href="UserDetails?userid=${user.userID}" id="Edit-btn" class="btn">Edit</a></td>
+			    <td><button type="button" id="${user.userID}" class="btn delete">Delete</button></td>
 			 </tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
 <span class="admin-buttons">
-		<a href="registration.jsp" class="btn btn-info">Add New User</a>
-		<a href="LogOutServlet" class="btn btn-danger">LogOut</a>
+		<a href="registration.jsp" class="btn btn-info admin-btn">Add New User</a>
+		<a href="LogOutServlet" class="btn btn-danger admin-btn">LogOut</a>
 </span>
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="assets/library/DataTables/datatables.min.js"></script>

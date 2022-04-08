@@ -1,10 +1,8 @@
 $(document).ready(function() {
 	
-   var imageslength = $("#imageslength").val();
   		 $('#myform').on('click', '.delete-image', function(){
 			var answer = confirm("Are you want to delete image?");
-			imageslength--;
-				if(answer==true && imageslength>=1)
+				if(answer==true)
 				{
 						var imageid = +this.id; 
 						$.ajax({
@@ -18,10 +16,6 @@ $(document).ready(function() {
 						}
 					    });
 				 }
-				 else
-				 {
-					alert("One Image is Compulsory!");
-				}
       		});
       		
 			$("#firstname").keyup(function(e){
@@ -83,17 +77,11 @@ $(document).ready(function() {
 			$("#email").keyup(function(e){
 					$(".error").remove();
 					var mail = $("#email").val();
-					var message = $("#message").val();
-					console.log(message);
 					var mailFormat="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
 	        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	        
 					if(!mail.match(mailFormat)){
 						$('#email').after('<span class="error">*Please enter valid Email</span>');
-					}
-					else if(mail==message)
-					{
-						$('#email').after('<span class="error">*Email Exist</span>');
 					}
 			});
 			$("#phone").keyup(function(e){
@@ -104,6 +92,7 @@ $(document).ready(function() {
 					$('#phone').after('<span class="error">*Only Numbers are allowed</span>');
 				}
 			});
+			
 			$(".checked-radio").mouseover(function(){
 				$(".r-btn-error").remove();
 				if($("input[name='Gender']:checked").length == 0)
@@ -134,106 +123,20 @@ $(document).ready(function() {
 	                }
 			});
 			
-			$("#city_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var city = $('#city_0').val();
-			    for(let i=0;i < city.length;i++)
-			    {
-			     var ch = city.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#city_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
-			  $("#state_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var state = $('#state_0').val();
-			    for(let i=0;i < state.length;i++)
-			    {
-			     var ch = state.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#state_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
-			  $("#country_0").keyup(function(e){
-				e.preventDefault();
-				$(".error").remove();
-				var country = $('#country_0').val();
-			    for(let i=0;i < country.length;i++)
-			    {
-			     var ch = country.charAt(i);
-			     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-			     {
-					  $('#country_0').after('<span class="error">*Only Alphabet are Allowed</span>');
-					  break;
-			     }
-			    }
-			  });
-	     $("#pincode_0").keyup(function(){
-			$(".error").remove();
-							console.log("#pincode_0");
+			     $("#pincode_0").keyup(function(){
+					$(".error").remove();
 							var pincode = $("#pincode_0").val();
 							if(pincode.match("[^0-9]"))
 							{
 								$('#pincode_0').after('<span class="error">*Only Numbers are allowed</span>');
 							}
-	    })
-	    /*
+	   				 })
+	    
 			var count=0;
 			$(".add-btn").click(function(){
 					count++;
-					//console.log("c "+count);
 					for(let i=1;i<=count;i++)
 					{
-							$("#city_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var city = $('#city_'+i).val();
-							    for(let j=0;j < city.length;j++)
-							    {
-							     var ch = city.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#city_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
-							  $("#state_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var state = $('#state_'+i).val();
-							    for(let j=0;j < state.length;j++)
-							    {
-							     var ch = state.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#state_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
-							  $("#country_"+i).keyup(function(e){
-								e.preventDefault();
-								$(".error").remove();
-								var country = $('#country_'+i).val();
-							    for(let j=0;j < country.length;j++)
-							    {
-							     var ch = country.charAt(j);
-							     if (!(ch>='a'&&ch<='z') && !(ch>='A'&&ch<='Z')) 
-							     {
-									  $('#country_'+i).after('<span class="error">*Only Alphabet are Allowed</span>');
-									  break;
-							     }
-							    }
-							  });
 						$("#pincode_"+i).keyup(function(e){
 							$(".error").remove();
 							console.log("#pincode_"+i)
@@ -244,33 +147,5 @@ $(document).ready(function() {
 							}
 						})
 					}
-				});*/
-				/*
-			$(".add-btn").click(function()
-			{
-				var c = count++;
-				console.log("count:"+count);
-				for(var i=0;i<=count;i++)
-			{
-				console.log("#pincode_"+i);
-				$("#pincode_"+i).keyup(function(){
-					$(".error").remove();
-					var pincode = $("#pincode_"+i).val();
-					console.log(pincode);
-				if(pincode.match("[^0-9]"))
-				{
-					$('#pincode_'+i).after('<span class="error">*Only Numbers are allowed</span>');
-				}
-				})
-			}
-			});*/
-			
-			
-			/*
-			$(".remove-data").click(function()
-			{
-				console.log("clicked");
-				c--;
-				console.log("r count:"+c);
-			});*/
+				});
 });

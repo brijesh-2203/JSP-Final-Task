@@ -13,7 +13,7 @@ import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserAddressDaoImpl implements UserAddressDao {
-	static Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
+	static Logger log = LogManager.getLogger(UserAddressDaoImpl.class.getName());
 	Connection con = null;
 	PreparedStatement ps=null;
 	public void addUserAddress(UserAddress add)
@@ -30,10 +30,11 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	            ps.setString(6, add.getState());
 	            ps.setString(7, add.getCountry());
 	            ps.executeUpdate();
+	            log.info("Address added in Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -42,7 +43,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}
@@ -65,10 +66,11 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	        	user.setState(rs.getString(7));
 	        	user.setCountry(rs.getString(8));       	 
 	        	useradd.add(user);  
+	        	log.info("Get Addresses from Database");
          }
          rs.close();
 		 } catch (Exception e) {
-				e.printStackTrace();
+			 log.fatal(e);
 			}
 		 finally {
 			   try {
@@ -77,7 +79,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 		return useradd;
@@ -97,10 +99,11 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	            ps.setString(6, add.getCountry());
 	            ps.setInt(7, add.getAddressid());
 	            ps.executeUpdate();
+	            log.info("Address updated in Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -109,7 +112,7 @@ public class UserAddressDaoImpl implements UserAddressDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}
@@ -121,10 +124,11 @@ public class UserAddressDaoImpl implements UserAddressDao {
 				ps=((java.sql.Connection) con).prepareStatement("delete from AddressDetails where AddressID=?;");
 			 	ps.setInt(1,addid);
 	            ps.executeUpdate();
+	            log.info("Address deleted from Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -133,32 +137,8 @@ public class UserAddressDaoImpl implements UserAddressDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
-	}
-	public void changePwd(String pwd, String usermail) {
-		try
-		{
-				con=ConnectionSetup.getConnection();
-				ps=((java.sql.Connection) con).prepareStatement("update UserDetails set Password=? where Email=?;");
-			 	ps.setString(1,pwd);
-			 	ps.setString(2,usermail);
-	            ps.executeUpdate();
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-		finally {
-			   try {
-					   if(ps!=null)
-					   {
-					       ps.close();
-				       }
-			   }catch (Exception e) {
-					e.printStackTrace();
-				}
-			   }	
 	}
 }

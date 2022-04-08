@@ -25,13 +25,12 @@ public class DeleteUser extends HttpServlet {
 		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicConfigurator.configure();
+		log.debug("Enter in Delete User servlet");
 		response.setContentType("text/html");
 		String uid=request.getParameter("userid"); 
-		log.info(uid);
 		int userid = Integer.parseInt(uid);
 		userservice.deleteUser(userid);
-		log.info("User deleted of userid:"+userid);
+		log.debug("User deleted");
 	}
 
 }

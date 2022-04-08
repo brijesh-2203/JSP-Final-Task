@@ -29,7 +29,6 @@ public class AdminWork extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicConfigurator.configure();
 		List<User> users = new ArrayList<User>();
 		users = userservice.getUsers();
 	 	request.setAttribute("UsersList",users);

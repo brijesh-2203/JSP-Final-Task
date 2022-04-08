@@ -10,14 +10,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.MultipartConfig;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 @MultipartConfig
 public class EncryptPwd implements Filter {
+	static Logger log = LogManager.getLogger(EncryptPwd.class.getName());
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		  
+		  log.debug("Password Encrypted filter");
 		 String password=request.getParameter("password");
 	        String encryptedpassword = null;  
 	        try   

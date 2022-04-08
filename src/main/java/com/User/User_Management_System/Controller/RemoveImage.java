@@ -34,7 +34,7 @@ public class RemoveImage extends HttpServlet {
 		String imgid=request.getParameter("imgId"); 
 		int imageid = Integer.parseInt(imgid);
 		userImageService.deleteImage(imageid);
-		log.info("image-deleted of id:"+imgid);
+		log.debug("image-deleted of id:"+imgid);
 	}
 }
 

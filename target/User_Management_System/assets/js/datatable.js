@@ -7,7 +7,6 @@ $('#userdetails').on('click', '.delete', function(){
 	if(answer==true)
 	{
 			var userid = +this.id; 
-			//table.row($(this).parents('tr')).remove().draw();
 				$.ajax({
 				url: "DeleteUser",
 				type: "GET",

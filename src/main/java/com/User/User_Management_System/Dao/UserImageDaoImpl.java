@@ -16,7 +16,7 @@ import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserImageDaoImpl implements UserImageDao{
-	static Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
+	static Logger log = LogManager.getLogger(UserImageDaoImpl.class.getName());
 	Connection con = null;
 	PreparedStatement ps=null;
 	public void addUserImage(UserImage img)
@@ -28,10 +28,11 @@ public class UserImageDaoImpl implements UserImageDao{
 			 	ps.setInt(1, img.getUserid());
 	            ps.setBlob(2, img.getImage());
 	            ps.executeUpdate();
+	            log.info("Images added in Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -40,7 +41,7 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}
@@ -70,11 +71,12 @@ public class UserImageDaoImpl implements UserImageDao{
         	 UserImage user=new UserImage();
         	 user.setBase64Image(base64Image);
         	 user.setImgid(rs.getInt(2));
-	        	userimg.add(user);  
+	        	userimg.add(user); 
+	        	log.info("Images retrieve from Database");
          }
          rs.close();
 		 } catch (Exception e) {
-				e.printStackTrace();
+			 log.fatal(e);
 			}
 		 finally {
 			   try {
@@ -83,7 +85,7 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 		return userimg;
@@ -96,10 +98,11 @@ public class UserImageDaoImpl implements UserImageDao{
 				ps=((java.sql.Connection) con).prepareStatement("delete from UserImages where ImageID=?;");
 			 	ps.setInt(1,imgid);
 	            ps.executeUpdate();
+	            log.info("Images deleted from Database");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			log.fatal(e);
 		}
 		finally {
 			   try {
@@ -108,7 +111,7 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-					e.printStackTrace();
+				   log.fatal(e);
 				}
 			   }
 	}

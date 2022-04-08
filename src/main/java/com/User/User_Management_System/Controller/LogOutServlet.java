@@ -28,7 +28,7 @@ public class LogOutServlet extends HttpServlet {
         {
 	         session.invalidate(); 
         }   
-        log.info("logged out");
+        log.debug("Successfully logged out");
         response.sendRedirect("index.jsp");
         out.close(); 
 	}

@@ -22,7 +22,7 @@
 					<form action="LoginServlet" method="POST">
 					    <span style='color:red'>${requestScope.message}</span>
 						<div class="form-group label-name">
-						Email :<input type="text" placeholder="Enter Email-ID"  class="form-control" name="email" required>
+						Email :<input type="email" placeholder="Enter Email-ID"  class="form-control" name="email" required>
 						</div>
 						<div class="form-group label-name">
 						Password:<input type="password" placeholder="Enter Password"  class="form-control" name="password" required>

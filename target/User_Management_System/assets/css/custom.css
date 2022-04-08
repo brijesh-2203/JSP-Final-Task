@@ -1,7 +1,7 @@
 html,body{
 	margin: 0;
 	padding: 0;
-	 background-color: #50E5FC;	
+	 background-color: #2f4f4f;	
 }
 .login{
 	margin-top:180px;
@@ -17,9 +17,8 @@ background-color: white;
 }
 .login-btn{
 	border:2px solid white;
-	border-radius:8px;
 	font-size:20px;
-	background-color: #50E5FC;
+	background-color:#2f4f4f;
 	color:white;
 	height:40px;
 }
@@ -30,7 +29,7 @@ background-color: white;
 }
 .header{
    font-size:40px;
-   margin-left:300px;
+   margin-left:380px;
    margin-bottom:30px;
 }
 .Form-Section{
@@ -104,7 +103,8 @@ background-color: white;
 	font-size:10px;
 }
 div.default-header{
-	background-color: #00DEFF;
+	background-color:  #2a3439;
+	color:white;
 	font-size:25px;
 	height:68px;
 	width:100%;
@@ -123,14 +123,37 @@ div.row{
 div.footer-position{
 	height:30px;
   width: 100%;
-background-color: #00DEFF;
+background-color:  #2a3439;
   text-align: center;
+  color:white;
 }
 .buttons{
-	margin-left:550px;
+	margin-left:620px;
+}
+.button-dg{
+	background-color:  #2a3439;
+	color:white;
+}
+ .logout-button-dg{
+ margin-left:30px;
+	background-color:  #2a3439;
+	color:white;
+}
+.button-dg:hover{
+	background-color:  #5bc0de;
+	color:white;
+}
+.logout-button-dg:hover{
+	background-color:  #d9534f;
+	color:white;
 }
 .title-name{
 	margin-left:470px;
 	font-size:46px;
 	margin-bottom:60px;
+	color:white;
+	margin-top:100px;
+}
+a.header-tag{
+	color:white;
 }
