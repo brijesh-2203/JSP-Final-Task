@@ -3,7 +3,6 @@ package com.User.User_Management_System.Controller;
 import java.io.IOException;
 
 import java.io.*;
-import java.io.PrintWriter;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -34,7 +32,7 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 @MultipartConfig
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(UserRegistration.class.getName());  
+	static final Logger LOG = LogManager.getLogger(UserRegistration.class.getName());  
 	UserService userservice;
 	UserAddressService userAddressService;
 	UserImageService userImageService;
@@ -49,7 +47,7 @@ public class UserRegistration extends HttpServlet {
 		String email=request.getParameter("email"); 
 		if(userservice.userExist(email))
 		{
-			log.info("*Email already exist");
+			LOG.info("*Email already exist");
 		}
 		else
 		{
@@ -87,9 +85,9 @@ public class UserRegistration extends HttpServlet {
 				user.setGender(gender);
 				user.setLanguage(language);
 				
-				userservice.registerUser(user);
-				log.debug("User data Added");
-				int userid=userservice.getUser(email);
+				userservice.registerUser(user);    //Register user data in user database
+				LOG.debug("User data Added");
+				int userid=userservice.getUser(email);    //get user id which was just added into database
 				UserAddress useraddress;
 				for(int i=0;i<address1.length;i++)
 				{
@@ -101,13 +99,13 @@ public class UserRegistration extends HttpServlet {
 						useraddress.setCity(city[i]);
 						useraddress.setState(state[i]);
 						useraddress.setCountry(country[i]);
-						userAddressService.addUserAddress(useraddress);
+						userAddressService.addUserAddress(useraddress);      //Add the user multiple address in address table
 				}
-				log.debug("User Addresses Added");
-				@SuppressWarnings("unchecked")
+				LOG.debug("User Addresses Added");
+				@SuppressWarnings({ "unchecked", "rawtypes" })
 				ArrayList<Part> fileParts = (ArrayList) request.getParts().stream().filter(new Predicate<Part>() {
 					public boolean test(Part part) {
-					return "image[]".equals(part.getName()) && part.getSize() > 0;
+					return "image[]".equals(part.getName()) && part.getSize() > 0;       //it scan all the fields of form but only return the images added into the uploader
 				}
 				}).collect(Collectors.toList()); 
 			    InputStream inputStream = null;
@@ -118,26 +116,26 @@ public class UserRegistration extends HttpServlet {
 		                inputStream = filePart.getInputStream();
 		                userimg.setUserid(userid);
 		                userimg.setImage(inputStream);
-		                userImageService.addUserImg(userimg);
+		                userImageService.addUserImg(userimg);      //Add the user multiple Images in image table
 		            }
 		        }
-		        log.debug("User Images Added");
-		        log.info("Registration Successfully");
+		        LOG.debug("User Images Added");
+		        LOG.info("Registration Successfully");
 		        HttpSession session=request.getSession(false);
-		        if(session.getAttribute("USER") == null)
+		        if(session.getAttribute("USER") == null)           //Check if session has no attribute the redirect it to login page
 		        {
 		        	RequestDispatcher rf=request.getRequestDispatcher("index.jsp");
 		        	rf.include(request, response);
 		        }
 		        else
 		        {
-		        	response.sendRedirect("AdminWork");
+		        	response.sendRedirect("AdminWork");       //else if admin add new user from its login side then redirect it to admin panel
 		        }
 			 }
 			 catch(Exception e)
 			 {
-				 log.fatal(e);
-				 log.error("Registration fails");
+				 LOG.fatal(e);
+				 LOG.error("Registration fails");
 			 }
 				
 			}

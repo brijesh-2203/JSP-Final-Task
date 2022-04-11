@@ -1,15 +1,11 @@
 package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,18 +15,19 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 
 public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(DeleteUser.class.getName());
+	static final Logger LOG = LogManager.getLogger(DeleteUser.class.getName());
     UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.debug("Enter in Delete User servlet");
+		LOG.debug("Enter in Delete User servlet");
 		response.setContentType("text/html");
-		String uid=request.getParameter("userid"); 
+		String uid=request.getParameter("userid");     //Parsing the String into integer  the userid 
 		int userid = Integer.parseInt(uid);
-		userservice.deleteUser(userid);
-		log.debug("User deleted");
+		userservice.deleteUser(userid);               //Calling a method to delete the user from the database
+		response.sendRedirect("AdminWork");
+		LOG.debug("User deleted");
 	}
 
 }

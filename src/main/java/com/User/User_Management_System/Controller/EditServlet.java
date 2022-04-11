@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -32,7 +28,7 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 @MultipartConfig
 public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(EditServlet.class.getName());
+	static final Logger LOG = LogManager.getLogger(EditServlet.class.getName());
 	UserService userservice;
 	UserAddressService userAddressService;
 	UserImageService userImageService;
@@ -79,29 +75,29 @@ public class EditServlet extends HttpServlet {
 		
 		List<UserAddress> useraddresses =userAddressService.getUserAddress(userid);
 		int index=0;
-		int old_Addressid[] = new int[useraddresses.size()];
-		int address_id_length= addressid.length;
+		int oldAddressid[] = new int[useraddresses.size()];
+		int addressIdLength= addressid.length;
 		int count=0;
 		for(UserAddress ud:useraddresses)
 		{	
-			old_Addressid[index]=ud.getAddressid();
-			if(count<address_id_length && addressid[count].length()!=0)
+			oldAddressid[index]=ud.getAddressid();
+			if(count<addressIdLength && addressid[count].length()!=0)
 			{
 				int addrssid=Integer.parseInt(addressid[count]);
-				if(old_Addressid[index]==addrssid)
+				if(oldAddressid[index]==addrssid)
 				{
 					count++;
 				}
 				else
 				{
-					log.debug("Address deleted");
-					userAddressService.deleteAddress(old_Addressid[index]);
+					LOG.debug("Address deleted");
+					userAddressService.deleteAddress(oldAddressid[index]);     //user Address deleted
 				}
 			}
 			else
 			{
-				log.debug("Address deleted");
-				userAddressService.deleteAddress(old_Addressid[index]);
+				LOG.debug("Address deleted");
+				userAddressService.deleteAddress(oldAddressid[index]);   //user Address deleted
 			}
 			index++;
 		}
@@ -119,7 +115,7 @@ public class EditServlet extends HttpServlet {
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
 				userAddressService.addUserAddress(useraddress);
-				log.debug("New Address added");
+				LOG.debug("New Address added");
 			}
 			else
 			{
@@ -134,11 +130,11 @@ public class EditServlet extends HttpServlet {
 				useraddress.setState(state[i]);
 				useraddress.setCountry(country[i]);
 				userAddressService.updateUserAddress(useraddress);
-				log.debug("Address Updated");
+				LOG.debug("Address Updated");
 			}
 		}
 		//Image Addition to the user
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		ArrayList<Part> fileParts = (ArrayList) request.getParts().stream().filter(new Predicate<Part>() {
 			public boolean test(Part part) {
 			return "image[]".equals(part.getName()) && part.getSize() > 0;
@@ -153,7 +149,7 @@ public class EditServlet extends HttpServlet {
                 userimg.setUserid(userid);
                 userimg.setImage(inputStream);
                 userImageService.addUserImg(userimg);
-                log.debug("New Images added");
+                LOG.debug("New Images added");
             }
         }
        response.sendRedirect("UserData");   

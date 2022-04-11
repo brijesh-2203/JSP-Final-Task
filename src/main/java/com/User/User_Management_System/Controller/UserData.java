@@ -2,7 +2,6 @@ package com.User.User_Management_System.Controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -20,26 +18,26 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 
 public class UserData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(UserData.class.getName());
+	static final Logger LOG = LogManager.getLogger(UserData.class.getName());
 
 	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.debug("Enter in userdata servlet");
-		HttpSession session=request.getSession(false);
-		User user = (User) session.getAttribute("USER");
-		if(user.getRole().equals("admin"))
+		LOG.debug("Enter in userdata servlet");
+		HttpSession session=request.getSession(false);             //Getting session
+		User user = (User) session.getAttribute("USER"); 			 //Getting session attribute
+		if(user.getRole().equals("admin"))							//Check the role of the user if admin then redirect to his Servlet
 		{
-			log.info("Admin is in Session");
+			LOG.info("Admin is in Session");
 			response.sendRedirect("AdminWork");
 		}
-		else
+		else														//If the  role of the user is user then update the user details in the database and then stored that updated user in session  
 		{
 			user = userservice.checkUser(user.getEmail());
 			session.setAttribute("USER", user);
-			log.info("Updated User - stored in session");
+			LOG.info("Updated User - stored in session");
 			response.sendRedirect("userDashBoard.jsp");
 		}
 	}

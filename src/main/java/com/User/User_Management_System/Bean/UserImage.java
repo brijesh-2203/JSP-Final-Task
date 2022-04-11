@@ -1,7 +1,7 @@
 package com.User.User_Management_System.Bean;
 
 import java.io.InputStream;
-
+/* UserImage Bean Class*/
 public class UserImage {
 	private int userid;
 	private int imgid;

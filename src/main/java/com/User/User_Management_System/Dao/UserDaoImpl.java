@@ -12,11 +12,12 @@ import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserDaoImpl implements UserDao {
-	static Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
+	static final Logger LOG = LogManager.getLogger(UserDaoImpl.class.getName());
 	Connection con = null;
 	PreparedStatement ps=null;
 	UserAddressDao addressdao = new UserAddressDaoImpl();
 	UserImageDao userImageDao = new UserImageDaoImpl();
+	/*Check user already exist or not at registration time*/
 	public boolean userExist(String mail)
 	{
 		boolean status=false;
@@ -38,7 +39,7 @@ public class UserDaoImpl implements UserDao {
         }
         catch(Exception e)
         {
-        	log.fatal(e);
+        	LOG.fatal(e);
         }
         finally {
 			   try {
@@ -47,11 +48,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 		return status;
 	}
+	/*Register user into the database*/
 	public void registerUser(User user)
 	{
 		try
@@ -70,11 +72,11 @@ public class UserDaoImpl implements UserDao {
 	            ps.setString(9, user.getAnswer1());
 	            ps.setString(10, user.getAnswer2());
 	            ps.executeUpdate();
-	            log.info("User data added in Database");
+	            LOG.info("User data added in Database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -83,10 +85,11 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 	}
+	/*Get User id which is auto generated bt the database*/
 	public int getUserId(String mail)
 	{
 		int id=0;
@@ -99,13 +102,13 @@ public class UserDaoImpl implements UserDao {
 		           if(rs.next())
 		           {
 			           id=rs.getInt(1);
-			           log.info("Get UserID from Database");
+			           LOG.info("Get UserID from Database");
 		           }
 		           rs.close();
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -114,11 +117,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 		}
 		return id;
 	}
+	/*Check The login user is valid or not*/
 	public User validUser(String email)
 	{
 		User user = null;
@@ -151,11 +155,11 @@ public class UserDaoImpl implements UserDao {
             	user.setAnswer2(rs.getString(11));
             	user.setRole(rs.getString(12));
             }
-            log.info("User data stored in bean");
+            LOG.info("User data stored in bean");
         }
         catch(Exception e)
         {
-        	log.fatal(e);
+        	LOG.fatal(e);
         }
         finally {
 			   try {
@@ -164,11 +168,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
         return user;
 	}
+	/*Get user all details*/
 	public User getUserDetails(int userid)
 	{
 		User user = null;
@@ -201,11 +206,11 @@ public class UserDaoImpl implements UserDao {
             	user.setAnswer2(rs.getString(11));
             	user.setRole(rs.getString(12));
             }
-            log.info("Get Users details from Database");
+            LOG.info("Get Users details from Database");
         }
         catch(Exception e)
         {
-        	log.fatal(e);
+        	LOG.fatal(e);
         }
         finally {
 			   try {
@@ -214,11 +219,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
         return user;
 	}
+	/*Get user role*/
 	public String getRole(String mail)
 	{
 		String role="";
@@ -231,12 +237,12 @@ public class UserDaoImpl implements UserDao {
             if(rs.next())
             {
             	role=rs.getString(1);
-            	log.info("Check Role Successful");
+            	LOG.info("Check Role Successful");
             }
         }
 		catch(Exception e)
         {
-			log.fatal(e);
+			LOG.fatal(e);
         }
         finally {
 			   try {
@@ -245,11 +251,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 		return role;
 	}
+	/* get All Users list from the database*/
 	public List<User> getUserList()
 	{
 		List<User> list = new ArrayList<User>();
@@ -270,10 +277,10 @@ public class UserDaoImpl implements UserDao {
 	        	user.setLanguage(rs.getString(8));       	 
               list.add(user);  
           }
-          log.info("UsersList Updated");
+          LOG.info("UsersList Updated");
           rs.close();
 		 } catch (Exception e) {
-			 log.fatal(e);
+			 LOG.fatal(e);
 			}
 		 finally {
 			   try {
@@ -282,12 +289,12 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 		return list;
 	}
-	
+	/*Change password an added to database*/
 	public void changePwd(String pwd, String usermail) {
 		try
 		{
@@ -296,11 +303,11 @@ public class UserDaoImpl implements UserDao {
 			 	ps.setString(1,pwd);
 			 	ps.setString(2,usermail);
 	            ps.executeUpdate();
-	            log.info("Password changed and stored in database");
+	            LOG.info("Password changed and stored in database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -309,10 +316,11 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }	
 	}
+	/*Deleting the user*/
 	public void deleteUser(int userid)
 	{
 		try
@@ -321,11 +329,11 @@ public class UserDaoImpl implements UserDao {
 				ps=((java.sql.Connection) con).prepareStatement("delete from UserDetails where UserID=?;");
 			 	ps.setInt(1,userid);
 	            ps.executeUpdate();
-	            log.info("User deleted from Database");
+	            LOG.info("User deleted from Database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -334,11 +342,11 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 	}
-	
+	/*Updating user profile*/
 	public void updateUserProfile(User user,int userid)
 	{
 		try
@@ -354,11 +362,11 @@ public class UserDaoImpl implements UserDao {
 	            ps.setString(6, user.getLanguage());
 	            ps.setInt(7, userid);
 	            ps.executeUpdate();
-	            log.info("User data updated in Database");
+	            LOG.info("User data updated in Database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -367,7 +375,7 @@ public class UserDaoImpl implements UserDao {
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 	}

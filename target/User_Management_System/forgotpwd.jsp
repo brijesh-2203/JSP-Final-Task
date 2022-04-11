@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-3 "></div>
 			<div class="col-sm-5 col-md-5 forgot-section">
-				<h1 class="heading"><u>Find Your Account</u></h1>
+				<h1 class="heading" style="text-decoration: underline">Find Your Account</h1>
 					<form action="ForgotPwd" method="POST">
 						<span style='color:red'>${requestScope.message}</span>
 						<div class="form-group">

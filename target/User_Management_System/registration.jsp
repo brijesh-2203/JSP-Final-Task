@@ -21,22 +21,16 @@
 <section>
 	<div class="container Form-Section">
 		<c:choose> 
-			<c:when test="${user != null}">
-				<h2 class="edit-header"><u>Edit Page</u></h2>
-			</c:when>
-			<c:otherwise> 
-			<h2 class="header"><u>Registration Page</u></h2>
-			</c:otherwise>
-		</c:choose>
-		<span style='color:red'>${requestScope.message}</span>
-		<c:choose> 
 		<c:when test="${user != null}">
+				<h2 class="edit-header" style="text-decoration: underline">Edit Page</h2>
 				<form action="EditServlet" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
 		</c:when>
 		<c:otherwise>
+				<h2 class="header" style="text-decoration: underline">Registration Page</h2>
 				<form action="UserRegistration" method="POST" class="form-horizontal" id="myform" enctype="multipart/form-data">
 		</c:otherwise>
 		</c:choose>
+		<span style='color:red'>${requestScope.message}</span>
 		<div class="row left-gap">
 			<input type="hidden" name="userid" id="userid" value="${user.userID}">
 			 <div class="col-md-5">

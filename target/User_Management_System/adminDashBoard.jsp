@@ -14,7 +14,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h3 class="title-name"><u>Welcome ${USER.firstname}</u></h3>
+<h3 class="title-name" style="text-decoration: underline">Welcome ${USER.firstname}</h3>
 <div class="table-design">
 	<table id="userdetails">
 		<thead>

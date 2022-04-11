@@ -16,7 +16,7 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 
 public class ResetPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(ResetPassword.class.getName());
+	static final Logger LOG = LogManager.getLogger(ResetPassword.class.getName());
  
 	UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
@@ -27,8 +27,8 @@ public class ResetPassword extends HttpServlet {
 		BasicConfigurator.configure();
 		String pwd = (String) request.getAttribute("password");
 		String usermail = request.getParameter("usermail");
-		log.info("Password is changed");
-		userservice.changePwd(pwd,usermail);
+		LOG.info("Password is changed");
+		userservice.changePwd(pwd,usermail);      //Calling method who change the password and reset to the database
 		response.sendRedirect("index.jsp");
 	}
 

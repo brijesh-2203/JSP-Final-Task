@@ -1,5 +1,6 @@
 package com.User.User_Management_System.Bean;
 
+/*UserAddress Bean Class*/
 public class UserAddress {
 	private int userid;
 	public int getUserid() {

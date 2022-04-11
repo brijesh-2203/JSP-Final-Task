@@ -1,11 +1,7 @@
 package com.User.User_Management_System.Filter;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,8 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -34,15 +28,15 @@ public class EditPageValidation implements Filter {
 	 CheckValidation  val;
 	 UserImageService userImageService;
 	 UserAddressService userAddressService;
-	 static Logger log = LogManager.getLogger(EditPageValidation.class.getName());
+	 static final Logger LOG = LogManager.getLogger(EditPageValidation.class.getName());
 		public void init(FilterConfig fConfig) throws ServletException {
 			val = new CheckValidation();
 			userImageService = new UserImageServiceImpl();
 			userAddressService = new UserAddressServiceImpl();
 		}
-	@SuppressWarnings("unused")
+		
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.info("Edit page validation filter");
+		LOG.info("Edit page validation filter");
 		response.setContentType("text/html");
 		String fname=request.getParameter("firstname");  
 		String lname=request.getParameter("lastname");
@@ -163,13 +157,11 @@ public class EditPageValidation implements Filter {
 		
 		if(validate==true)
 		{
-			log.info("Validation Successful");
+			LOG.info("Validation Successful");
 			chain.doFilter(request, response);
 		}
 	}
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	public void destroy() {}
 
 }

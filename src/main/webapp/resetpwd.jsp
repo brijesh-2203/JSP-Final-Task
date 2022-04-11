@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-3 col-sm-3"></div>
 			<div class="col-md-4 col-sm-4 login">
-				<h1 class="heading"><u>Reset Password</u></h1>
+				<h1 class="heading" style="text-decoration: underline">Reset Password</h1>
 				<form action="ResetPassword" method="POST">
 					<div class="form-group">
 					Password:<input type="password" placeholder="Enter Password" id="pwd" class="form-control" name="password" required>

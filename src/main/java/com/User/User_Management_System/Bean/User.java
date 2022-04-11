@@ -1,12 +1,14 @@
 package com.User.User_Management_System.Bean;
 import java.util.*;
+
+//User Bean Class
 public class User {
-	private int UserID;
+	private int userID;
 	public int getUserID() {
-		return UserID;
+		return userID;
 	}
 	public void setUserID(int userID) {
-		UserID = userID;
+		this.userID = userID;
 	}
 	private String firstname;
 	private String lastname;

@@ -1,9 +1,8 @@
 package com.User.User_Management_System.Filter;
 
 import java.io.IOException;
-import java.util.*;
-import java.io.PrintWriter;
 
+import java.util.*;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -21,16 +20,15 @@ import com.User.User_Management_System.Bean.UserAddress;
 import com.User.User_Management_System.UtilityClass.CheckValidation;
 @MultipartConfig
 public class Validation implements Filter {
-	static Logger log = LogManager.getLogger(Validation.class.getName());
+	static final Logger LOG = LogManager.getLogger(Validation.class.getName());
 	 CheckValidation  val;
 	public void init(FilterConfig fConfig) throws ServletException {
 		val = new CheckValidation();
 	}
-	@SuppressWarnings("unused")
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.info("Validation filter call");
+		LOG.info("Validation filter call");
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String fname=request.getParameter("firstname");  
 		String lname=request.getParameter("lastname");
 		String email=request.getParameter("email"); 
@@ -186,13 +184,11 @@ public class Validation implements Filter {
 		
 		if(validate==true)
 		{
-			log.info("Validation SuccessFull");
+			LOG.info("Validation SuccessFull");
 			chain.doFilter(request, response);
 		}
 	}
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	public void destroy() {}
 	
 
 }

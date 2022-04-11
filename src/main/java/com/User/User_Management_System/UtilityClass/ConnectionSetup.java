@@ -6,7 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class ConnectionSetup {
-	static Logger log = LogManager.getLogger(ConnectionSetup.class.getName());
+	static final Logger LOG = LogManager.getLogger(ConnectionSetup.class.getName());
 	public static Connection getConnection() throws SQLException,ClassNotFoundException
 	   {
 		   Connection connection=null; 
@@ -16,9 +16,9 @@ public class ConnectionSetup {
 	    } 
 	   catch(Exception e)
 	   {
-		   log.fatal(e);
+		   LOG.fatal(e);
 		} 
-	   log.info("Connection setup Successfull");
+	   LOG.info("Connection setup Successfull");
 	   return connection;
 	   }
 }

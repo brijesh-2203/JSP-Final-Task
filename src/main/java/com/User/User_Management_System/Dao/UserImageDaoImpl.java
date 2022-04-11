@@ -16,9 +16,10 @@ import com.User.User_Management_System.Bean.UserImage;
 import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserImageDaoImpl implements UserImageDao{
-	static Logger log = LogManager.getLogger(UserImageDaoImpl.class.getName());
+	static final Logger LOG = LogManager.getLogger(UserImageDaoImpl.class.getName());
 	Connection con = null;
 	PreparedStatement ps=null;
+	/* Add User's images into the database*/
 	public void addUserImage(UserImage img)
 	{
 		try
@@ -28,11 +29,11 @@ public class UserImageDaoImpl implements UserImageDao{
 			 	ps.setInt(1, img.getUserid());
 	            ps.setBlob(2, img.getImage());
 	            ps.executeUpdate();
-	            log.info("Images added in Database");
+	            LOG.info("Images added in Database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -41,10 +42,11 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 	}
+	/* Getting User's images from the database*/
 	public List<UserImage> getUserImg(int userid)
 	{
 		List<UserImage> userimg = new ArrayList<UserImage>();
@@ -72,11 +74,11 @@ public class UserImageDaoImpl implements UserImageDao{
         	 user.setBase64Image(base64Image);
         	 user.setImgid(rs.getInt(2));
 	        	userimg.add(user); 
-	        	log.info("Images retrieve from Database");
+	        	LOG.info("Images retrieve from Database");
          }
          rs.close();
 		 } catch (Exception e) {
-			 log.fatal(e);
+			 LOG.fatal(e);
 			}
 		 finally {
 			   try {
@@ -85,11 +87,12 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 		return userimg;
 	}
+	/*Delete Image*/
 	public void deleteImage(int imgid)
 	{
 		try
@@ -98,11 +101,11 @@ public class UserImageDaoImpl implements UserImageDao{
 				ps=((java.sql.Connection) con).prepareStatement("delete from UserImages where ImageID=?;");
 			 	ps.setInt(1,imgid);
 	            ps.executeUpdate();
-	            log.info("Images deleted from Database");
+	            LOG.info("Images deleted from Database");
 		}
 		catch(Exception e)
 		{
-			log.fatal(e);
+			LOG.fatal(e);
 		}
 		finally {
 			   try {
@@ -111,7 +114,7 @@ public class UserImageDaoImpl implements UserImageDao{
 					       ps.close();
 				       }
 			   }catch (Exception e) {
-				   log.fatal(e);
+				   LOG.fatal(e);
 				}
 			   }
 	}

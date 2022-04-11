@@ -16,16 +16,16 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 
 public class CheckUserExist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(CheckUserExist.class.getName());
+	static final Logger LOG = LogManager.getLogger(CheckUserExist.class.getName());
     UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email=request.getParameter("email"); 
-		if(userservice.userExist(email))
+		if(userservice.userExist(email))                          //Condition check at the registration time for new user that email exist or not
 		{
-			log.error("*Email already exist");
+			LOG.error("*Email already exist");
 			response.getWriter().print("*Email already exist");
 		}
 	}

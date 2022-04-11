@@ -2,11 +2,6 @@ package com.User.User_Management_System.Service;
 
 import com.User.User_Management_System.Bean.User;
 
-
-import com.User.User_Management_System.Bean.UserAddress;
-import com.User.User_Management_System.Bean.UserImage;
-import com.User.User_Management_System.Dao.*;
-
 import java.util.*;
 public interface UserService{
 	public boolean userExist(String mail);

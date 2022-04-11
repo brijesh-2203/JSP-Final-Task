@@ -14,14 +14,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class BackButton_Prevention implements Filter {
-	static Logger log = LogManager.getLogger(BackButton_Prevention.class.getName());
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+public class BackButtonPrevention implements Filter {
+	static final Logger LOG = LogManager.getLogger(BackButtonPrevention.class.getName());
+	public void destroy() {	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.info("Enter in BackButton_Prevention filter");
+		LOG.info("Enter in BackButton_Prevention filter");
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
 
@@ -38,8 +36,6 @@ public class BackButton_Prevention implements Filter {
 				chain.doFilter(request, response);
 		 }
 	}
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+	public void init(FilterConfig fConfig) throws ServletException {	}
 
 }

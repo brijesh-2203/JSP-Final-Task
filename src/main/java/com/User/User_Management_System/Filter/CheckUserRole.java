@@ -15,13 +15,13 @@ import org.apache.log4j.Logger;
 
 import com.User.User_Management_System.Bean.User;
 
-public class Check_UserRole implements Filter {
-	static Logger log = LogManager.getLogger(Check_UserRole.class.getName());
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		log.info("Check role of user Filter");
+public class CheckUserRole implements Filter {
+	static final Logger LOG = LogManager.getLogger(CheckUserRole.class.getName());
+	public void destroy() {	}
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
+	{
+		LOG.info("Check role of user Filter");
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 	    HttpSession session = httpReq.getSession(false);
 	    User user = (User) session.getAttribute("USER");
@@ -42,8 +42,6 @@ public class Check_UserRole implements Filter {
 	    }
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+	public void init(FilterConfig fConfig) throws ServletException {}
 
 }

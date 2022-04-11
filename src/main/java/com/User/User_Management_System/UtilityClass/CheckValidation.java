@@ -6,7 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class CheckValidation {
-	static Logger log = LogManager.getLogger(CheckValidation.class.getName());
+	static final Logger LOG = LogManager.getLogger(CheckValidation.class.getName());
 	String regex = "^(?=.*[0-9])"
             + "(?=.*[a-z])(?=.*[A-Z])"
             + "(?=.*[@#$%^&+=])"
@@ -17,12 +17,12 @@ public class CheckValidation {
 	{
 		if(Pattern.matches("[a-zA-Z]+",name))
 		{
-			log.debug("Character Validation Pass");
+			LOG.debug("Character Validation Pass");
 			return false;
 		}
 		else
 		{
-			log.debug("Character Validation Fail");
+			LOG.debug("Character Validation Fail");
 			return true;
 		}
 	}
@@ -30,12 +30,12 @@ public class CheckValidation {
 	{
 		if(Pattern.matches(regex,pwd))
 		{
-			log.debug("Password Validation Pass");
+			LOG.debug("Password Validation Pass");
 			return false;
 		}
 		else
 		{
-			log.debug("Password Validation Fails");
+			LOG.debug("Password Validation Fails");
 			return true;
 		}
 	}
@@ -43,12 +43,12 @@ public class CheckValidation {
 	{
 		if(Pattern.matches(mailFormat,mail))
 		{
-			log.debug("Mail Validation Pass");
+			LOG.debug("Mail Validation Pass");
 			return false;
 		}
 		else
 		{
-			log.debug("Mail Validation Fail");
+			LOG.debug("Mail Validation Fail");
 			return true;
 		}
 	}
@@ -57,12 +57,12 @@ public class CheckValidation {
 		 String numbers = "^[0-9]+$";
 		if(number.matches(numbers))
 		{
-			log.debug("Number Validation Pass");
+			LOG.debug("Number Validation Pass");
 			return false;
 		}
 		else
 		{
-			log.debug("Number Validation Fails");
+			LOG.debug("Number Validation Fails");
 			return true;
 		}
 	}

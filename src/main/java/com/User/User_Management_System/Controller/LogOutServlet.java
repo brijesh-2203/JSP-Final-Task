@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static Logger log = LogManager.getLogger(LogOutServlet.class.getName());
+	static final Logger LOG = LogManager.getLogger(LogOutServlet.class.getName());
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BasicConfigurator.configure();
@@ -26,9 +26,9 @@ public class LogOutServlet extends HttpServlet {
         HttpSession session=request.getSession(false); 
         if(session!=null)
         {
-	         session.invalidate(); 
+	         session.invalidate(); 								//Session close or Session Invalidate after logout user
         }   
-        log.debug("Successfully logged out");
+        LOG.debug("Successfully logged out");
         response.sendRedirect("index.jsp");
         out.close(); 
 	}

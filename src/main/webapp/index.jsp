@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3"></div>
 				<div class="col-md-4 col-sm-4 login">
-					<h1 class="heading"><u>Login Page</u></h1>
+					<h1 class="heading" style="text-decoration: underline">Login Page</h1>
 					<form action="LoginServlet" method="POST">
 					    <span style='color:red'>${requestScope.message}</span>
 						<div class="form-group label-name">
@@ -31,8 +31,8 @@
 						<input type="submit" class="form-control login-btn" value="Login">
 						</div>
 						<div class="a-tag">
-							<a href="forgotpwd.jsp" class="label-name"><u>Forgot Password</u></a>
-							<a href="registration.jsp" class="user-gap label-name"><u>New User?SignUp</u></a>
+							<a href="forgotpwd.jsp" class="label-name" style="text-decoration: underline">Forgot Password</a>
+							<a href="registration.jsp" class="user-gap label-name" style="text-decoration: underline">New User?SignUp</a>
 						</div>
 					</form>
 				 </div>

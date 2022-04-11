@@ -15,13 +15,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 @MultipartConfig
 public class EncryptPwd implements Filter {
-	static Logger log = LogManager.getLogger(EncryptPwd.class.getName());
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	static final Logger LOG = LogManager.getLogger(EncryptPwd.class.getName());
+	public void destroy() {}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		  log.debug("Password Encrypted filter");
+		LOG.debug("Password Encrypted filter");
 		 String password=request.getParameter("password");
 	        String encryptedpassword = null;  
 	        try   
@@ -51,8 +49,6 @@ public class EncryptPwd implements Filter {
 	        }  
 	}
 
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+	public void init(FilterConfig fConfig) throws ServletException {}
 
 }
