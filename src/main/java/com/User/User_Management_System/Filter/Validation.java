@@ -21,7 +21,7 @@ import com.User.User_Management_System.UtilityClass.CheckValidation;
 @MultipartConfig
 public class Validation implements Filter {
 	static final Logger LOG = LogManager.getLogger(Validation.class.getName());
-	 CheckValidation  val;
+	private transient CheckValidation  val;
 	public void init(FilterConfig fConfig) throws ServletException {
 		val = new CheckValidation();
 	}
@@ -66,9 +66,11 @@ public class Validation implements Filter {
 		String lang="";
 		if(language!=null)
 		{
+			StringBuffer buf = new StringBuffer();
 			for(int i=0;i< language.length;i++){
-				lang+=language[i]+" ";
+				buf.append(language[i]);
 			}
+			lang=buf.toString();
 		}
 		user.setLanguage(lang);
 		UserAddress useraddress;

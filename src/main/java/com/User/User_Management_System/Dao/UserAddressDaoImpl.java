@@ -1,6 +1,6 @@
 package com.User.User_Management_System.Dao;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserAddressDaoImpl implements UserAddressDao {
 	static final Logger LOG = LogManager.getLogger(UserAddressDaoImpl.class.getName());
-	Connection con = null;
-	PreparedStatement ps=null;
+	private transient  Connection con = null;
+	private transient   PreparedStatement ps=null;
 	/* AddUser's addresses into the database*/
 	public void addUserAddress(UserAddress add)
 	{ 
@@ -52,14 +52,16 @@ public class UserAddressDaoImpl implements UserAddressDao {
 	public List<UserAddress> getUserAddress(int userid)
 	{
 		List<UserAddress> useradd = new ArrayList<UserAddress>();
+		UserAddress user;
 		try
 		 {
 			con=ConnectionSetup.getConnection();
 		  ps=((java.sql.Connection) con).prepareStatement("select * from AddressDetails where UserID=?;"); 
 		  ps.setInt(1,userid);
          ResultSet rs=ps.executeQuery();  
-         while(rs.next()){  
-       	  UserAddress user=new UserAddress();
+         while(rs.next())
+         {  
+        	 	user=new UserAddress();
        	  		user.setAddressid(rs.getInt(2));
 	        	user.setAdd1(rs.getString(3));
 	        	user.setAdd2(rs.getString(4));

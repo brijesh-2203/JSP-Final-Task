@@ -18,7 +18,7 @@ public class RemoveImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(RemoveImage.class.getName());
 
-	UserImageService userImageService;
+	private transient  UserImageService userImageService;
 	public void init(ServletConfig config) throws ServletException {
 		userImageService = new UserImageServiceImpl();
 	}

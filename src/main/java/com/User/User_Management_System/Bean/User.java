@@ -91,16 +91,16 @@ public class User {
 		this.role = role;
 	}
 	public ArrayList<UserAddress> getAddress() {
-		return address;
+		return new ArrayList<UserAddress>(this.address);
 	}
 	public void setAddress(ArrayList<UserAddress> address) {
-		this.address = address;
+		this.address = new ArrayList<UserAddress>(address);
 	}
 	public ArrayList<UserImage> getImage() {
-		return image;
+		return new ArrayList<UserImage> (this.image);
 	}
 	public void setImage(ArrayList<UserImage> image) {
-		this.image = image;
+		this.image =  new ArrayList<UserImage>(image);
 	}
 
 }

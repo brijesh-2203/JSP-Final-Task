@@ -21,14 +21,14 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 public class AdminWork extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(AdminWork.class.getName());
-	
-	UserService userservice;
+	//UserService Object creation
+	private transient UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<User> users = new ArrayList<User>();
+		List<User> users;
 		users = userservice.getUsers();                     //Calling a method who returns the all users list 
 	 	request.setAttribute("UsersList",users);			//Storing users list into request Attribute
 	 	LOG.info("userlist updated");

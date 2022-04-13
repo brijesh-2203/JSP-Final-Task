@@ -11,7 +11,7 @@ import com.User.User_Management_System.Dao.*;
 
 public class UserServiceImpl implements UserService{
 	static final Logger LOG = LogManager.getLogger(UserServiceImpl.class.getName());
-	UserDao userdao = new UserDaoImpl();
+	private transient UserDao userdao = new UserDaoImpl();
 		public boolean userExist(String mail)
 		{
 			LOG.info("User service,userExist methods call");
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 		public List<User> getUsers()
 		{
 			LOG.info("User service,getUsers methods call");
-			List<User> userlist = new ArrayList<User>();
+			List<User> userlist;
 			userlist = userdao.getUserList();
 			return userlist;
 		}

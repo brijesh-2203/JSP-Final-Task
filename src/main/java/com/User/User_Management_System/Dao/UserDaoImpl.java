@@ -13,10 +13,10 @@ import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserDaoImpl implements UserDao {
 	static final Logger LOG = LogManager.getLogger(UserDaoImpl.class.getName());
-	Connection con = null;
-	PreparedStatement ps=null;
-	UserAddressDao addressdao = new UserAddressDaoImpl();
-	UserImageDao userImageDao = new UserImageDaoImpl();
+	private transient  Connection con = null;
+	private transient PreparedStatement ps=null;
+	private transient UserAddressDao addressdao = new UserAddressDaoImpl();
+	private transient UserImageDao userImageDao = new UserImageDaoImpl();
 	/*Check user already exist or not at registration time*/
 	public boolean userExist(String mail)
 	{
@@ -126,8 +126,8 @@ public class UserDaoImpl implements UserDao {
 	public User validUser(String email)
 	{
 		User user = null;
-		ArrayList<UserAddress> useradd = new ArrayList<UserAddress>();
-		ArrayList<UserImage> userimg = new ArrayList<UserImage>();
+		ArrayList<UserAddress> useradd;
+		ArrayList<UserImage> userimg;
 		
         try 
         {
@@ -177,8 +177,8 @@ public class UserDaoImpl implements UserDao {
 	public User getUserDetails(int userid)
 	{
 		User user = null;
-		ArrayList<UserAddress> useradd = new ArrayList<UserAddress>();
-		ArrayList<UserImage> userimg = new ArrayList<UserImage>();
+		ArrayList<UserAddress> useradd;
+		ArrayList<UserImage> userimg;
 		
         try 
         {
@@ -260,13 +260,14 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getUserList()
 	{
 		List<User> list = new ArrayList<User>();
+		 User user;
 		 try
 		 {
 			con=ConnectionSetup.getConnection();
 		  ps=((java.sql.Connection) con).prepareStatement("select UserID,FirstName,LastName,Email,Phone,DateOfBirth,Gender,LanguageKnown from UserDetails where Role='user';"); 
           ResultSet rs=ps.executeQuery();  
           while(rs.next()){  
-        	  User user=new User();  
+        	   user=new User();  
 	          	user.setUserID(rs.getInt(1));
 	        	user.setFirstname(rs.getString(2));
 	        	user.setLastname(rs.getString(3));

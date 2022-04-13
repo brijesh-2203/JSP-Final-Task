@@ -11,7 +11,7 @@ import com.User.User_Management_System.Dao.UserAddressDaoImpl;
 
 public class UserAddressServiceImpl implements UserAddressService{
 	static final Logger LOG = LogManager.getLogger(UserAddressServiceImpl.class.getName());
-	UserAddressDao userAddressDao = new UserAddressDaoImpl();
+	private transient  UserAddressDao userAddressDao = new UserAddressDaoImpl();
 	public void addUserAddress(UserAddress useradd)
 	{
 		LOG.info("User Address service,addUserAddress methods call");

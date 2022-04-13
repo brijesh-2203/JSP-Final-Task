@@ -27,7 +27,7 @@ public class EncryptPwd implements Filter {
 	            MessageDigest m = MessageDigest.getInstance("MD5");  
 	              
 	            /* Add plain-text password bytes to digest using MD5 update() method. */  
-	            m.update(password.getBytes());  
+	           m.update(password.getBytes("UTF-8"));  
 	              
 	            /* Convert the hash value into bytes */   
 	            byte[] bytes = m.digest();  
@@ -45,7 +45,7 @@ public class EncryptPwd implements Filter {
 	        }   
 	        catch (Exception e)   
 	        {  
-	            e.printStackTrace();  
+	        	LOG.fatal(e);
 	        }  
 	}
 

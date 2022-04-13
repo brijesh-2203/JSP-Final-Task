@@ -21,7 +21,7 @@ public class UserDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(UserDetails.class.getName());
 
-	UserService userservice;
+	private transient UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}

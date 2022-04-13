@@ -33,9 +33,9 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(UserRegistration.class.getName());  
-	UserService userservice;
-	UserAddressService userAddressService;
-	UserImageService userImageService;
+	private transient UserService userservice;
+	private transient UserAddressService userAddressService;
+	private transient UserImageService userImageService;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 		userAddressService = new UserAddressServiceImpl();
@@ -69,9 +69,11 @@ public class UserRegistration extends HttpServlet {
 				String lang[]=request.getParameterValues("lang");
 				
 				String language="";
+				StringBuffer buf = new StringBuffer();
 				for(int i=0;i< lang.length;i++){
-					language+=lang[i]+" ";
+					buf.append(" "+lang[i]);
 				}
+				language=buf.toString();
 				long number = Long.parseLong(phone);
 				User user = new User();
 				user.setFirstname(fname);

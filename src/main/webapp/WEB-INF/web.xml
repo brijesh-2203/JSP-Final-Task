@@ -51,6 +51,10 @@
 	  	<url-pattern>/AdminWork</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
+	  	<filter-name>CheckUserRole</filter-name>
+	  	<url-pattern>/adminDashBoard.jsp</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
 	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/AdminWork</url-pattern>
 	  </filter-mapping>

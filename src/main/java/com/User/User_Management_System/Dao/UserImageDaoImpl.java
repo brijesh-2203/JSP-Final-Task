@@ -17,8 +17,8 @@ import com.User.User_Management_System.UtilityClass.ConnectionSetup;
 
 public class UserImageDaoImpl implements UserImageDao{
 	static final Logger LOG = LogManager.getLogger(UserImageDaoImpl.class.getName());
-	Connection con = null;
-	PreparedStatement ps=null;
+	private transient Connection con = null;
+	private transient PreparedStatement ps=null;
 	/* Add User's images into the database*/
 	public void addUserImage(UserImage img)
 	{
@@ -50,6 +50,9 @@ public class UserImageDaoImpl implements UserImageDao{
 	public List<UserImage> getUserImg(int userid)
 	{
 		List<UserImage> userimg = new ArrayList<UserImage>();
+		ByteArrayOutputStream outputStream;
+		UserImage user;
+		byte[] buffer ;
 		try
 		 {
 			java.sql.Blob image=null;
@@ -60,8 +63,8 @@ public class UserImageDaoImpl implements UserImageDao{
          while(rs.next()){  
         	 image=rs.getBlob(3);
         	 InputStream inputStream = image.getBinaryStream();
-        	 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        	 byte[] buffer = new byte[4096];
+        	  outputStream = new ByteArrayOutputStream();
+        	  buffer = new byte[4096];
         	 int bytesRead = -1;
         	  
         	 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -70,7 +73,7 @@ public class UserImageDaoImpl implements UserImageDao{
         	 byte[] imageBytes = outputStream.toByteArray();
         	  
         	 String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        	 UserImage user=new UserImage();
+        	 user=new UserImage();
         	 user.setBase64Image(base64Image);
         	 user.setImgid(rs.getInt(2));
 	        	userimg.add(user); 

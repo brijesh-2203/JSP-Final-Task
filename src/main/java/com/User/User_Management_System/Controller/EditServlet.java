@@ -29,9 +29,9 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(EditServlet.class.getName());
-	UserService userservice;
-	UserAddressService userAddressService;
-	UserImageService userImageService;
+	private transient  UserService userservice;
+	private transient  UserAddressService userAddressService;
+	private transient  UserImageService userImageService;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 		userAddressService = new UserAddressServiceImpl();
@@ -54,11 +54,13 @@ public class EditServlet extends HttpServlet {
 		String addressid[]=request.getParameterValues("addid");
 		
 		String language="";
+		StringBuffer buf = new StringBuffer();
 		if(lang!=null)
 		{
 			for(int i=0;i< lang.length;i++){
-				language+=lang[i]+" ";
+				buf.append(" "+lang[i]);
 			}
+			language=buf.toString();
 		}
 		long number = Long.parseLong(phone); 
 		
@@ -101,9 +103,10 @@ public class EditServlet extends HttpServlet {
 			}
 			index++;
 		}
+		UserAddress useraddress;
 		for(int i=0;i<addressid.length;i++)
 		{	
-			UserAddress useraddress = new UserAddress();
+			useraddress = new UserAddress();
 			if(addressid[i].length()==0)     
 			{
 				//add new address of the user in address table
@@ -140,8 +143,8 @@ public class EditServlet extends HttpServlet {
 			return "image[]".equals(part.getName()) && part.getSize() > 0;
 		}
 		}).collect(Collectors.toList()); 
-	    InputStream inputStream = null;
-		UserImage userimg=null;
+	    InputStream inputStream;
+		UserImage userimg;
         for (Part filePart : fileParts) {
             if (filePart != null && filePart.getSize() != 0) {
             	 userimg = new UserImage();

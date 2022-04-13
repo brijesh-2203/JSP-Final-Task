@@ -12,7 +12,7 @@ import com.User.User_Management_System.Dao.UserImageDaoImpl;
 
 public class UserImageServiceImpl implements UserImageService{
 	static final Logger LOG = LogManager.getLogger(UserImageServiceImpl.class.getName());
-	UserImageDao userImageDao = new UserImageDaoImpl();
+	private transient UserImageDao userImageDao = new UserImageDaoImpl();
 	public void addUserImg(UserImage userimg)
 	{
 		LOG.info("User Image service,addUserImg methods call");

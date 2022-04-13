@@ -7,11 +7,11 @@ import org.apache.log4j.Logger;
 
 public class CheckValidation {
 	static final Logger LOG = LogManager.getLogger(CheckValidation.class.getName());
-	String regex = "^(?=.*[0-9])"
+	private  transient  String regex = "^(?=.*[0-9])"
             + "(?=.*[a-z])(?=.*[A-Z])"
             + "(?=.*[@#$%^&+=])"
             + "(?=\\S+$).{8,20}$";
-	String mailFormat="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
+	private transient  String mailFormat="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
 	        + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	public boolean validatename(String name)
 	{

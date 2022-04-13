@@ -23,16 +23,16 @@
 	  	<filter-class>com.User.User_Management_System.Filter.EncryptPwd</filter-class>
 	  </filter>
 		<filter>
-			<filter-name>Check_UserRole</filter-name>
-			<display-name>Check_UserRole</display-name>
+			<filter-name>CheckUserRole</filter-name>
+			<display-name>CheckUserRole</display-name>
 			<description></description>
-			<filter-class>com.User.User_Management_System.Filter.Check_UserRole</filter-class>
+			<filter-class>com.User.User_Management_System.Filter.CheckUserRole</filter-class>
 		</filter>
 		<filter>
-			<filter-name>BackButton_Prevention</filter-name>
-			<display-name>BackButton_Prevention</display-name>
+			<filter-name>BackButtonPrevention</filter-name>
+			<display-name>BackButtonPrevention</display-name>
 			<description></description>
-			<filter-class>com.User.User_Management_System.Filter.BackButton_Prevention</filter-class>
+			<filter-class>com.User.User_Management_System.Filter.BackButtonPrevention</filter-class>
 		</filter>
 	  <filter-mapping>
 	  	<filter-name>EncryptPwd</filter-name>
@@ -47,11 +47,15 @@
 	  	<url-pattern>/ResetPassword</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
-	  	<filter-name>Check_UserRole</filter-name>
+	  	<filter-name>CheckUserRole</filter-name>
 	  	<url-pattern>/AdminWork</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<filter-name>CheckUserRole</filter-name>
+	  	<url-pattern>/adminDashBoard.jsp</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
+	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/AdminWork</url-pattern>
 	  </filter-mapping>
 	   <filter>
@@ -60,19 +64,19 @@
 	  	<filter-class>com.User.User_Management_System.Filter.EditPageValidation</filter-class>
 	  </filter>
 	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/UserDetails</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/userDashBoard.jsp</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/EditServlet</url-pattern>
 	  </filter-mapping>
 	  <filter-mapping>
-	  	<filter-name>BackButton_Prevention</filter-name>
+	  	<filter-name>BackButtonPrevention</filter-name>
 	  	<url-pattern>/UserData</url-pattern>
 	  </filter-mapping>
 	   <filter-mapping>

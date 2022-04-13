@@ -19,7 +19,7 @@ import com.User.User_Management_System.Service.UserServiceImpl;
 public class ForgotPwd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static final Logger LOG = LogManager.getLogger(ForgotPwd.class.getName());
-	UserService userservice;
+	private  transient  UserService userservice;
 	public void init(ServletConfig config) throws ServletException {
 		userservice = new UserServiceImpl();
 	}
